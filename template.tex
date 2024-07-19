@@ -119,6 +119,9 @@
 \usepackage{scrextend}
 \usepackage{pslatex}
 \usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{url}
+\usepackage{xspace}
 
 %% CAPTION
 % This overrides some of the ugliness in ucsd.cls and
@@ -197,9 +200,15 @@
 \usepackage{array}  % Enables "m" tabular environment http://ctan.org/pkg/array
 \usepackage{booktabs}  % Enables \toprule  http://ctan.org/pkg/array
 
-
-
 \begin{document}
+
+\definecolor{tealgreen}{rgb}{0.0, 0.51, 0.5}
+\definecolor{cadmiumgreen}{rgb}{0.0, 0.42, 0.24}
+\definecolor{darkolivegreen}{rgb}{0.33, 0.42, 0.18}
+
+\newcommand{\stingw}[1]{{\color{tealgreen}[\textbf{\sc shuting}: \textit{#1}]}}
+\newcommand{\TODO}[1]{{\color{blue}\textbf{\sc TODO}: \textit{#1}}}
+\newcommand{\aurelia}[0]{\textsc{Aurelia}\xspace}
 
 %% FRONT MATTER
 %
@@ -223,35 +232,42 @@
 %
 % Of course, if you prefer, you can just start with
 %   \chapter{My First Chapter Name}
-% and start typing away.  
-\chapter{Just a Test}
-This is only a test.
-\section{A section}
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nulla odio
-sem, bibendum ut, aliquam ac, facilisis id, tellus. Nam posuere pede
-sit amet ipsum. Etiam dolor. In sodales eros quis pede.  Quisque sed
-nulla et ligula vulputate lacinia. In venenatis, ligula id semper
-feugiat, ligula odio adipiscing libero, eget mollis nunc erat id orci.
-Nullam ante dolor, rutrum eget, vestibulum euismod, pulvinar at, nibh.
-In sapien. Quisque ut arcu. Suspendisse potenti. Cras consequat cursus
-nulla.
+% and start typing away.
 
-\subsection{A Figure Example}
-\label{ssec:figure_example}
+\include{chapter1-intro}
+\include{chapter2-related-work}
+\include{chapter3-daronpon}
+\include{chapter4-fianchetto}
+\include{chapter5-aurelia}
 
-This subsection shows a sample figure.
+% \chapter{Just a Test}
+% This is only a test.
+% \section{A section}
+% Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nulla odio
+% sem, bibendum ut, aliquam ac, facilisis id, tellus. Nam posuere pede
+% sit amet ipsum. Etiam dolor. In sodales eros quis pede.  Quisque sed
+% nulla et ligula vulputate lacinia. In venenatis, ligula id semper
+% feugiat, ligula odio adipiscing libero, eget mollis nunc erat id orci.
+% Nullam ante dolor, rutrum eget, vestibulum euismod, pulvinar at, nibh.
+% In sapien. Quisque ut arcu. Suspendisse potenti. Cras consequat cursus
+% nulla.
 
-\begin{figure}[h] 
-  \centering
-  \includegraphics[width=0.5\textwidth]{sandiego}
-  \caption[A picture of San Diego. Short figure caption must be \protect{$< 4$} lines in the list of figures]
-{A picture of San Diego.  Short figure caption must be \protect{$< 4$} lines in the list of figures and match the start of the main figure caption verbatim. Note that figures must be on their own line (no neighboring text) and captions must be single-spaced and appear \protect\textit{below} the figure.  Captions can be as long as you want, but if they are longer than 4 lines in the list of figures, you must provide a short figure caption.\index{SanDiego}}
-  \label{fig:sandiego}
-\end{figure}
+% \subsection{A Figure Example}
+% \label{ssec:figure_example}
 
-\subsection{A Table Example}
+% This subsection shows a sample figure.
 
-While in Section \ref{ssec:figure_example} Figure \ref{fig:sandiego} we had a majestic figure, here we provide a crazy table example.
+% \begin{figure}[h] 
+%   \centering
+%   \includegraphics[width=0.5\textwidth]{sandiego.jpg}
+%   \caption[A picture of San Diego. Short figure caption must be \protect{$< 4$} lines in the list of figures]
+% {A picture of San Diego.  Short figure caption must be \protect{$< 4$} lines in the list of figures and match the start of the main figure caption verbatim. Note that figures must be on their own line (no neighboring text) and captions must be single-spaced and appear \protect\textit{below} the figure.  Captions can be as long as you want, but if they are longer than 4 lines in the list of figures, you must provide a short figure caption.\index{SanDiego}}
+%   \label{fig:sandiego}
+% \end{figure}
+
+% \subsection{A Table Example}
+
+% While in Section \ref{ssec:figure_example} Figure \ref{fig:sandiego} we had a majestic figure, here we provide a crazy table example.
 
 
 %%%% TABLE 1 %%%%
@@ -304,9 +320,10 @@ What to do about things \cite{Martin_1983}.  What did he say \cite{Rilling_Insel
 %\setlength{\bibindent}{-\bibleftmargin}  % unindent the first line
 %\def\baselinestretch{1.0}  % force single spacing
 %\setlength{\bibitemsep}{0.16in}  % add extra space between items
-\bibliography{template}  %% This looks for the bibliography in template.bib 
+\bibliography{template, daronpon, cxl, dmx}  %% This looks for the bibliography in template.bib 
 %                          which should be formatted as a bibtex file.
 %                          and needs to be separately compiled into a bbl file.
+%\bibliography{daronpon} 
 \singlespace  %to force bibilography environment to use single spacing for each entry 
               %double spacing between entries remains
 \end{document}

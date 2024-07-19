@@ -51,6 +51,12 @@ publication of doctoral theses.
 Let us know if you submit a thesis using this package.
 
 
+How to compile the dissertation
+-------------------------------
+`pdflatex template.tex`
+or 
+`latexmk template.tex`
+
 Known Issues
 ------------
 

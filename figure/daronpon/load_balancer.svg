@@ -1,0 +1,781 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="145.50609mm"
+   height="63.621613mm"
+   viewBox="0 0 145.50609 63.621615"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.4 (unknown)"
+   sodipodi:docname="load_balancer.svg"
+   inkscape:export-filename="/home/stew/replica-selection/papers/NSDI22/fig/load_balancer.png"
+   inkscape:export-xdpi="180"
+   inkscape:export-ydpi="180">
+  <defs
+     id="defs2">
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker10731"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:#0000ff;fill-opacity:1;fill-rule:evenodd;stroke:#0000ff;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path10729"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker9639"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:#0000ff;fill-opacity:1;fill-rule:evenodd;stroke:#0000ff;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path9637"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker7536"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:#0000ff;fill-opacity:1;fill-rule:evenodd;stroke:#0000ff;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path7534"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker6862"
+       style="overflow:visible"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         id="path6860"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker5611"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:collect="always">
+      <path
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path5609"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend"
+       style="overflow:visible"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         id="path5181"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-5"
+       style="overflow:visible"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5181-5"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-5-5"
+       style="overflow:visible"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         inkscape:connector-curvature="0"
+         id="path5181-5-6"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker6862-7"
+       style="overflow:visible"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         inkscape:connector-curvature="0"
+         id="path6860-4"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker6862-6"
+       style="overflow:visible"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         inkscape:connector-curvature="0"
+         id="path6860-8"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker6862-6-2"
+       style="overflow:visible"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         inkscape:connector-curvature="0"
+         id="path6860-8-0"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.979899"
+     inkscape:cx="326.74331"
+     inkscape:cy="19.054644"
+     inkscape:document-units="mm"
+     inkscape:current-layer="g11576"
+     showgrid="false"
+     inkscape:window-width="2560"
+     inkscape:window-height="1412"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <rect
+     style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.91904151;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="rect5174"
+     width="143.89381"
+     height="39.835369"
+     x="1.1527523"
+     y="14.75382"
+     inkscape:export-xdpi="180"
+     inkscape:export-ydpi="180" />
+  <rect
+     style="fill:#ffffff;fill-opacity:1;stroke:#041238;stroke-width:0.59532487;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="rect4802-5"
+     width="38.211742"
+     height="24.203138"
+     x="56.512836"
+     y="26.441444"
+     inkscape:export-xdpi="180"
+     inkscape:export-ydpi="180" />
+  <rect
+     style="fill:#ffffff;fill-opacity:1;stroke:#041238;stroke-width:0.56566101;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="rect4802"
+     width="34.416294"
+     height="24.261005"
+     x="4.133122"
+     y="26.311329"
+     inkscape:export-xdpi="180"
+     inkscape:export-ydpi="180" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-18.744079,-58.696571)">
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4766"
+       style="font-size:16px;line-height:1.25;font-family:'Noto Sans Ethiopic';-inkscape-font-specification:'Noto Sans Ethiopic';letter-spacing:0px;word-spacing:0px"
+       transform="matrix(0.26458333,0,0,0.26458333,12.662202,-0.56696429)"><flowRegion
+         id="flowRegion4768"><rect
+           id="rect4770"
+           width="446.48743"
+           height="124.24876"
+           x="58.588848"
+           y="335.61084" /></flowRegion><flowPara
+         id="flowPara4772">Admit()</flowPara></flowRoot>    <flowRoot
+       transform="matrix(0.26458333,0,0,0.26458333,12.459202,5.8340903)"
+       xml:space="preserve"
+       id="flowRoot4766-3"
+       style="font-size:16px;line-height:1.25;font-family:'Noto Sans Ethiopic';-inkscape-font-specification:'Noto Sans Ethiopic';letter-spacing:0px;word-spacing:0px"><flowRegion
+         id="flowRegion4768-6"><rect
+           id="rect4770-7"
+           width="446.48743"
+           height="124.24876"
+           x="58.588848"
+           y="335.61084" /></flowRegion><flowPara
+         id="flowPara4772-5">Redirect()</flowPara></flowRoot>    <text
+       xml:space="preserve"
+       style="font-size:4.23333311px;line-height:1.25;font-family:'Noto Sans Ethiopic';-inkscape-font-specification:'Noto Sans Ethiopic';letter-spacing:0px;word-spacing:0px;stroke-width:0.26458332"
+       x="27.629295"
+       y="105.06805"
+       id="text4800"><tspan
+         sodipodi:role="line"
+         id="tspan4798"
+         x="27.629295"
+         y="105.06805"
+         style="stroke-width:0.26458332">Piggyback()</tspan></text>
+  </g>
+  <flowRoot
+     xml:space="preserve"
+     id="flowRoot4805"
+     style="font-size:16px;line-height:1.25;font-family:'Noto Sans Ethiopic';-inkscape-font-specification:'Noto Sans Ethiopic';letter-spacing:0px;word-spacing:0px"
+     transform="matrix(0.26458333,0,0,0.26458333,-0.71748925,-53.051485)"
+     inkscape:export-xdpi="180"
+     inkscape:export-ydpi="180"><flowRegion
+       id="flowRegion4807"><rect
+         id="rect4809"
+         width="228.16835"
+         height="41.542389"
+         x="44.95179"
+         y="277.52707" /></flowRegion><flowPara
+       id="flowPara4811">Admission</flowPara></flowRoot>  <flowRoot
+     xml:space="preserve"
+     id="flowRoot4805-0"
+     style="font-size:16px;line-height:1.25;font-family:'Noto Sans Ethiopic';-inkscape-font-specification:'Noto Sans Ethiopic';letter-spacing:0px;word-spacing:0px"
+     transform="matrix(0.26458333,0,0,0.26458333,50.116723,-52.94814)"
+     inkscape:export-xdpi="180"
+     inkscape:export-ydpi="180"><flowRegion
+       id="flowRegion4807-6"><rect
+         id="rect4809-2"
+         width="228.16835"
+         height="41.542389"
+         x="44.95179"
+         y="277.52707" /></flowRegion><flowPara
+       id="flowPara4811-6">Load Tracker</flowPara></flowRoot>  <rect
+     style="fill:#cccccc;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="rect4870"
+     width="3.6081386"
+     height="3.3408689"
+     x="62.120693"
+     y="34.842529"
+     inkscape:export-xdpi="180"
+     inkscape:export-ydpi="180" />
+  <flowRoot
+     xml:space="preserve"
+     id="flowRoot4872"
+     style="font-size:16px;line-height:1.25;font-family:'Noto Sans Ethiopic';-inkscape-font-specification:'Noto Sans Ethiopic';letter-spacing:0px;word-spacing:0px"
+     transform="matrix(0.26458333,0,0,0.26458333,-24.474639,-54.489043)"
+     inkscape:export-xdpi="180"
+     inkscape:export-ydpi="180"><flowRegion
+       id="flowRegion4874"><rect
+         id="rect4876"
+         width="44.95179"
+         height="21.718279"
+         x="317.1879"
+         y="312.37735" /></flowRegion><flowPara
+       id="flowPara4878">local</flowPara></flowRoot>  <rect
+     style="fill:#cccccc;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="rect4870-1"
+     width="3.6081386"
+     height="3.3408689"
+     x="62.120693"
+     y="39.648056"
+     inkscape:export-xdpi="180"
+     inkscape:export-ydpi="180" />
+  <rect
+     style="fill:#cccccc;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="rect4870-1-8"
+     width="3.6081386"
+     height="3.3408689"
+     x="62.086895"
+     y="44.290352"
+     inkscape:export-xdpi="180"
+     inkscape:export-ydpi="180" />
+  <flowRoot
+     xml:space="preserve"
+     id="flowRoot4872-7"
+     style="font-size:16px;line-height:1.25;font-family:'Noto Sans Ethiopic';-inkscape-font-specification:'Noto Sans Ethiopic';letter-spacing:0px;word-spacing:0px"
+     transform="matrix(0.26458333,0,0,0.26458333,-7.7204593,-54.648558)"
+     inkscape:export-xdpi="180"
+     inkscape:export-ydpi="180"><flowRegion
+       id="flowRegion4874-9"><rect
+         id="rect4876-2"
+         width="126.91607"
+         height="31.182579"
+         x="317.1879"
+         y="312.37735" /></flowRegion><flowPara
+       id="flowPara4878-0">Remote</flowPara></flowRoot>  <rect
+     style="fill:#cccccc;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="rect4870-1-8-2"
+     width="3.6081386"
+     height="3.3408689"
+     x="77.489426"
+     y="44.006882"
+     inkscape:export-xdpi="180"
+     inkscape:export-ydpi="180" />
+  <rect
+     style="fill:#cccccc;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="rect4870-1-8-3"
+     width="3.6081386"
+     height="3.3408689"
+     x="87.883751"
+     y="43.817902"
+     inkscape:export-xdpi="180"
+     inkscape:export-ydpi="180" />
+  <rect
+     style="fill:#cccccc;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="rect4870-1-8-7"
+     width="3.6081386"
+     height="3.3408689"
+     x="87.883774"
+     y="38.998695"
+     inkscape:export-xdpi="180"
+     inkscape:export-ydpi="180" />
+  <path
+     style="fill:none;stroke:#000000;stroke-width:0.26458332;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.26458332, 0.52916663;stroke-dashoffset:0;stroke-opacity:1"
+     d="M 72.915143,27.959678 V 48.134159"
+     id="path4969"
+     inkscape:connector-curvature="0"
+     inkscape:export-xdpi="180"
+     inkscape:export-ydpi="180" />
+  <path
+     style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend)"
+     d="M 38.518417,32.572708 H 56.158206"
+     id="path5523"
+     inkscape:connector-curvature="0"
+     inkscape:export-xdpi="180"
+     inkscape:export-ydpi="180" />
+  <text
+     xml:space="preserve"
+     style="font-size:4.23333311px;line-height:1.25;font-family:'Noto Sans Ethiopic';-inkscape-font-specification:'Noto Sans Ethiopic';letter-spacing:0px;word-spacing:0px;stroke-width:0.26458332"
+     x="39.119778"
+     y="30.434555"
+     id="text5567"
+     inkscape:export-xdpi="180"
+     inkscape:export-ydpi="180"><tspan
+       sodipodi:role="line"
+       id="tspan5565"
+       x="39.119778"
+       y="30.434555"
+       style="font-size:3.52777767px;stroke-width:0.26458332">Admit +1</tspan></text>
+  <path
+     style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker5611)"
+     d="m 56.35866,43.463939 -17.506156,0.13364"
+     id="path5569"
+     inkscape:connector-curvature="0"
+     inkscape:export-xdpi="180"
+     inkscape:export-ydpi="180" />
+  <text
+     xml:space="preserve"
+     style="font-size:3.52777767px;line-height:1.25;font-family:'Noto Sans Ethiopic';-inkscape-font-specification:'Noto Sans Ethiopic';letter-spacing:0px;word-spacing:0px;stroke-width:0.26458332"
+     x="43.796989"
+     y="42.595306"
+     id="text5639"
+     inkscape:export-xdpi="180"
+     inkscape:export-ydpi="180"><tspan
+       sodipodi:role="line"
+       id="tspan5637"
+       x="43.796989"
+       y="42.595306"
+       style="font-size:3.52777767px;stroke-width:0.26458332">Load</tspan></text>
+  <path
+     style="fill:none;stroke:#000000;stroke-width:0.17893115px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend-5)"
+     d="m 94.918002,33.256596 h 7.995238"
+     id="path5523-4"
+     inkscape:connector-curvature="0"
+     inkscape:export-xdpi="180"
+     inkscape:export-ydpi="180" />
+  <text
+     xml:space="preserve"
+     style="font-size:3.98766494px;line-height:1.25;font-family:'Noto Sans Ethiopic';-inkscape-font-specification:'Noto Sans Ethiopic';letter-spacing:0px;word-spacing:0px;stroke-width:0.24922906"
+     x="102.10014"
+     y="30.029856"
+     id="text5567-7"
+     transform="scale(0.93352638,1.071207)"
+     inkscape:export-xdpi="180"
+     inkscape:export-ydpi="180"><tspan
+       sodipodi:role="line"
+       id="tspan5565-6"
+       x="102.10014"
+       y="30.029856"
+       style="font-size:3.32305408px;stroke-width:0.24922906"> +1</tspan></text>
+  <path
+     style="fill:none;stroke:#000000;stroke-width:0.18103382px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend-5-5)"
+     d="m 94.665392,44.572609 h 8.184248"
+     id="path5523-4-9"
+     inkscape:connector-curvature="0"
+     inkscape:export-xdpi="180"
+     inkscape:export-ydpi="180" />
+  <text
+     xml:space="preserve"
+     style="font-size:3.98766494px;line-height:1.25;font-family:'Noto Sans Ethiopic';-inkscape-font-specification:'Noto Sans Ethiopic';letter-spacing:0px;word-spacing:0px;stroke-width:0.24922906"
+     x="103.26103"
+     y="40.344147"
+     id="text5567-7-3"
+     transform="scale(0.93352638,1.071207)"
+     inkscape:export-xdpi="180"
+     inkscape:export-ydpi="180"><tspan
+       sodipodi:role="line"
+       id="tspan5565-6-7"
+       x="103.26103"
+       y="40.344147"
+       style="font-size:3.32305408px;stroke-width:0.24922906"> -1</tspan></text>
+  <path
+     style="fill:none;stroke:#000000;stroke-width:0.29082093px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker6862)"
+     d="M 8.1833257,5.3920979 V 26.05807"
+     id="path6894"
+     inkscape:connector-curvature="0"
+     inkscape:export-xdpi="180"
+     inkscape:export-ydpi="180" />
+  <flowRoot
+     xml:space="preserve"
+     id="flowRoot4805-4"
+     style="font-size:16px;line-height:1.25;font-family:'Noto Sans Ethiopic';-inkscape-font-specification:'Noto Sans Ethiopic';letter-spacing:0px;word-spacing:0px"
+     transform="matrix(0.26458333,0,0,0.26458333,-12.308809,-73.39828)"
+     inkscape:export-xdpi="180"
+     inkscape:export-ydpi="180"><flowRegion
+       id="flowRegion4807-5"><rect
+         id="rect4809-25"
+         width="228.16835"
+         height="41.542389"
+         x="44.95179"
+         y="277.52707" /></flowRegion><flowPara
+       id="flowPara4811-4">Requests</flowPara></flowRoot>  <flowRoot
+     xml:space="preserve"
+     id="flowRoot7814"
+     style="font-size:4.23333311px;line-height:1.25;font-family:'Noto Sans Ethiopic';-inkscape-font-specification:'Noto Sans Ethiopic';letter-spacing:0px;word-spacing:0px;stroke-width:0.26458332"
+     transform="translate(-10.635189,-60.10055)"
+     inkscape:export-xdpi="180"
+     inkscape:export-ydpi="180"><flowRegion
+       id="flowRegion7816"
+       style="stroke-width:0.26458332"><rect
+         id="rect7818"
+         width="37.2841"
+         height="22.317005"
+         x="55.324791"
+         y="59.664658"
+         style="stroke-width:0.07000434" /></flowRegion><flowPara
+       id="flowPara7822"
+       style="stroke-width:0.26458332">Piggyback Redirection</flowPara><flowPara
+       id="flowPara7824"
+       style="stroke-width:0.26458332" /></flowRoot>  <path
+     style="fill:none;stroke:#000000;stroke-width:0.18737622px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker6862-7)"
+     d="M 20.14364,50.337215 V 58.91615"
+     id="path6894-4"
+     inkscape:connector-curvature="0"
+     inkscape:export-xdpi="180"
+     inkscape:export-ydpi="180" />
+  <flowRoot
+     xml:space="preserve"
+     id="flowRoot4805-4-3"
+     style="font-size:16px;line-height:1.25;font-family:'Noto Sans Ethiopic';-inkscape-font-specification:'Noto Sans Ethiopic';letter-spacing:0px;word-spacing:0px"
+     transform="matrix(0.26458333,0,0,0.26458333,-10.914379,-14.539868)"
+     inkscape:export-xdpi="180"
+     inkscape:export-ydpi="180"><flowRegion
+       id="flowRegion4807-5-0"><rect
+         id="rect4809-25-7"
+         width="228.16835"
+         height="41.542389"
+         x="44.95179"
+         y="277.52707" /></flowRegion><flowPara
+       id="flowPara8179">Admitted Requests</flowPara></flowRoot>  <path
+     style="fill:none;stroke:#000000;stroke-width:0.16698726px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker6862-6)"
+     d="M 75.468431,57.56925 V 50.755739"
+     id="path6894-8"
+     inkscape:connector-curvature="0"
+     inkscape:export-xdpi="180"
+     inkscape:export-ydpi="180" />
+  <flowRoot
+     xml:space="preserve"
+     id="flowRoot4805-4-3-4"
+     style="font-size:16px;line-height:1.25;font-family:'Noto Sans Ethiopic';-inkscape-font-specification:'Noto Sans Ethiopic';letter-spacing:0px;word-spacing:0px"
+     transform="matrix(0.26458333,0,0,0.26458333,68.522238,-73.433975)"
+     inkscape:export-xdpi="180"
+     inkscape:export-ydpi="180"><flowRegion
+       id="flowRegion4807-5-0-3"><rect
+         id="rect4809-25-7-1"
+         width="228.16835"
+         height="41.542389"
+         x="44.95179"
+         y="277.52707" /></flowRegion><flowPara
+       id="flowPara8179-9">Response</flowPara></flowRoot>  <path
+     style="fill:none;stroke:#000000;stroke-width:0.28926191px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker6862-6-2)"
+     d="M 91.116442,26.30781 V 5.8628249"
+     id="path6894-8-6"
+     inkscape:connector-curvature="0"
+     inkscape:export-xdpi="180"
+     inkscape:export-ydpi="180" />
+  <flowRoot
+     xml:space="preserve"
+     id="flowRoot4805-4-3-4-8"
+     style="font-size:16px;line-height:1.25;font-family:'Noto Sans Ethiopic';-inkscape-font-specification:'Noto Sans Ethiopic';letter-spacing:0px;word-spacing:0px"
+     transform="matrix(0.26458333,0,0,0.26458333,52.775555,-15.074407)"
+     inkscape:export-xdpi="180"
+     inkscape:export-ydpi="180"><flowRegion
+       id="flowRegion4807-5-0-3-9"><rect
+         id="rect4809-25-7-1-2"
+         width="228.16835"
+         height="41.542389"
+         x="44.95179"
+         y="277.52707" /></flowRegion><flowPara
+       id="flowPara8179-9-6">Response</flowPara></flowRoot>  <g
+     id="g11576"
+     transform="translate(-8.0557493,-4.1802457)"
+     inkscape:export-xdpi="180"
+     inkscape:export-ydpi="180">
+    <rect
+       y="30.528458"
+       x="111.51388"
+       height="24.208841"
+       width="32.842632"
+       id="rect4802-5-6"
+       style="fill:#ffffff;fill-opacity:1;stroke:#041238;stroke-width:0.55198306;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <flowRoot
+       transform="matrix(0.26458333,0,0,0.26458333,100.58429,-49.363774)"
+       style="font-size:16px;line-height:1.25;font-family:'Noto Sans Ethiopic';-inkscape-font-specification:'Noto Sans Ethiopic';letter-spacing:0px;word-spacing:0px"
+       id="flowRoot4805-0-9"
+       xml:space="preserve"><flowRegion
+         id="flowRegion4807-6-2"><rect
+           y="277.52707"
+           x="44.95179"
+           height="41.542389"
+           width="228.16835"
+           id="rect4809-2-2" /></flowRegion><flowPara
+         id="flowPara4811-6-8">Gossip Moniter</flowPara></flowRoot>    <g
+       id="g11533">
+      <g
+         id="g11510">
+        <path
+           inkscape:connector-curvature="0"
+           id="path5010"
+           d="m 114.92272,47.850902 c 0,0 2.95164,-13.880667 4.22802,-11.008805 1.27638,2.871867 2.07412,10.929035 3.43028,8.37627 1.35616,-2.552773 2.71231,-8.21672 3.74938,-6.780793 1.03706,1.43593 1.8348,16.672768 2.63254,12.763838 0.79774,-3.90893 4.86621,-22.097389 5.18531,-19.544622 0.31909,2.552767 -0.6382,17.310952 0.71796,15.396382 1.35616,-1.914575 1.27639,-2.472995 2.31345,-1.755035 1.03706,0.717965 3.3505,-1.116833 3.3505,-1.116833"
+           style="fill:none;stroke:#000000;stroke-width:0.15794441px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+        <path
+           inkscape:connector-curvature="0"
+           id="path5012"
+           d="m 114.7076,52.187762 h 25.25697"
+           style="fill:#808080;stroke:#808080;stroke-width:0.26458332;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.26458332, 0.79374995;stroke-dashoffset:0;stroke-opacity:1" />
+        <path
+           inkscape:connector-curvature="0"
+           id="path5012-9"
+           d="m 114.7076,51.051872 h 25.25697"
+           style="fill:#808080;stroke:#808080;stroke-width:0.26458332;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.26458332, 0.79374996;stroke-dashoffset:0;stroke-opacity:1" />
+        <path
+           inkscape:connector-curvature="0"
+           id="path5012-9-7"
+           d="m 114.70761,48.880302 h 25.25697"
+           style="fill:#808080;stroke:#808080;stroke-width:0.26458332;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.26458332, 0.79374997;stroke-dashoffset:0;stroke-opacity:1" />
+        <path
+           inkscape:connector-curvature="0"
+           id="path5012-9-7-3"
+           d="m 114.60739,44.537187 h 25.25697"
+           style="fill:#808080;stroke:#808080;stroke-width:0.26458332;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.26458332, 0.79374998;stroke-dashoffset:0;stroke-opacity:1" />
+        <path
+           inkscape:connector-curvature="0"
+           id="path5012-9-7-3-1"
+           d="m 114.77442,35.683879 h 25.25697"
+           style="fill:#808080;stroke:#808080;stroke-width:0.26458332;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:0.26458332, 0.79374999;stroke-dashoffset:0;stroke-opacity:1" />
+        <text
+           transform="scale(1.1198324,0.89299077)"
+           id="text5091"
+           y="50.878407"
+           x="102.48168"
+           style="font-size:2.5633204px;line-height:1.25;font-family:'Noto Sans Ethiopic';-inkscape-font-specification:'Noto Sans Ethiopic';letter-spacing:0px;word-spacing:0px;fill:#ff0000;stroke-width:0.16020752"
+           xml:space="preserve"><tspan
+             style="fill:#ff0000;stroke-width:0.16020752"
+             y="50.878407"
+             x="102.48168"
+             id="tspan5089"
+             sodipodi:role="line">X</tspan></text>
+      </g>
+      <text
+         xml:space="preserve"
+         style="font-size:2.5633204px;line-height:1.25;font-family:'Noto Sans Ethiopic';-inkscape-font-specification:'Noto Sans Ethiopic';letter-spacing:0px;word-spacing:0px;fill:#ff0000;stroke-width:0.16020752"
+         x="113.38281"
+         y="55.622166"
+         id="text5091-2"
+         transform="scale(1.1198324,0.89299077)"><tspan
+           sodipodi:role="line"
+           id="tspan5089-9"
+           x="113.38281"
+           y="55.622166"
+           style="fill:#ff0000;stroke-width:0.16020752">X</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:2.5633204px;line-height:1.25;font-family:'Noto Sans Ethiopic';-inkscape-font-specification:'Noto Sans Ethiopic';letter-spacing:0px;word-spacing:0px;fill:#ff0000;stroke-width:0.16020752"
+         x="113.72035"
+         y="58.003063"
+         id="text5091-3"
+         transform="scale(1.1198324,0.89299077)"><tspan
+           sodipodi:role="line"
+           id="tspan5089-1"
+           x="113.72035"
+           y="58.003063"
+           style="fill:#ff0000;stroke-width:0.16020752">X</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:2.5633204px;line-height:1.25;font-family:'Noto Sans Ethiopic';-inkscape-font-specification:'Noto Sans Ethiopic';letter-spacing:0px;word-spacing:0px;fill:#ff0000;stroke-width:0.16020752"
+         x="114.85953"
+         y="55.648624"
+         id="text5091-7"
+         transform="scale(1.1198324,0.89299077)"><tspan
+           sodipodi:role="line"
+           id="tspan5089-8"
+           x="114.85953"
+           y="55.648624"
+           style="fill:#ff0000;stroke-width:0.16020752">X</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:2.5633204px;line-height:1.25;font-family:'Noto Sans Ethiopic';-inkscape-font-specification:'Noto Sans Ethiopic';letter-spacing:0px;word-spacing:0px;fill:#ff0000;stroke-width:0.16020752"
+         x="115.70334"
+         y="50.886829"
+         id="text5091-4"
+         transform="scale(1.1198324,0.89299077)"><tspan
+           sodipodi:role="line"
+           id="tspan5089-5"
+           x="115.70334"
+           y="50.886829"
+           style="fill:#ff0000;stroke-width:0.16020752">X</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:2.5633204px;line-height:1.25;font-family:'Noto Sans Ethiopic';-inkscape-font-specification:'Noto Sans Ethiopic';letter-spacing:0px;word-spacing:0px;fill:#ff0000;stroke-width:0.16020752"
+         x="117.55975"
+         y="40.834179"
+         id="text5091-0"
+         transform="scale(1.1198324,0.89299077)"><tspan
+           sodipodi:role="line"
+           id="tspan5089-3"
+           x="117.55975"
+           y="40.834179"
+           style="fill:#ff0000;stroke-width:0.16020752">X</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-size:2.5633204px;line-height:1.25;font-family:'Noto Sans Ethiopic';-inkscape-font-specification:'Noto Sans Ethiopic';letter-spacing:0px;word-spacing:0px;fill:#ff0000;stroke-width:0.16020752"
+         x="118.88876"
+         y="50.728107"
+         id="text5091-6"
+         transform="scale(1.1198324,0.89299077)"><tspan
+           sodipodi:role="line"
+           id="tspan5089-10"
+           x="118.88876"
+           y="50.728107"
+           style="fill:#ff0000;stroke-width:0.16020752">X</tspan></text>
+    </g>
+    <path
+       sodipodi:nodetypes="csc"
+       inkscape:connector-curvature="0"
+       id="path9512"
+       d="m 144.64768,43.118394 c 0,0 8.1647,-21.741642 6.86901,-31.327557 -0.14961,-1.106909 -1.88172,-4.0146967 -2.33858,-4.7353105"
+       style="fill:none;stroke:#0000ff;stroke-width:0.27164963px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker7536)" />
+    <path
+       sodipodi:nodetypes="csc"
+       inkscape:connector-curvature="0"
+       id="path9541"
+       d="m 144.52845,33.27845 c 0,0 2.71815,-14.977422 1.94744,-21.522756 -0.17202,-1.460905 -3.09281,-2.856098 -3.68146,-3.216583"
+       style="fill:none;stroke:#0000ff;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker9639)" />
+  </g>
+  <path
+     sodipodi:nodetypes="csc"
+     inkscape:connector-curvature="0"
+     id="path10727"
+     d="m 34.849395,26.064075 c 0,0 -0.716127,-16.2980963 5.719225,-21.4482623 0.593764,-0.4751862 2.700841,-0.8554684 3.422546,-1.1192916"
+     style="fill:none;stroke:#0000ff;stroke-width:0.25977629px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker10731)"
+     inkscape:export-xdpi="180"
+     inkscape:export-ydpi="180" />
+  <flowRoot
+     xml:space="preserve"
+     id="flowRoot10823"
+     style="font-size:16px;line-height:1.25;font-family:'Noto Sans Ethiopic';-inkscape-font-specification:'Noto Sans Ethiopic';letter-spacing:0px;word-spacing:0px"
+     transform="matrix(0.26458333,0,0,0.26458333,-22.084949,-58.897023)"
+     inkscape:export-xdpi="180"
+     inkscape:export-ydpi="180"><flowRegion
+       id="flowRegion10825"><rect
+         id="rect10827"
+         width="89.90358"
+         height="47.477165"
+         x="517.45062"
+         y="220.20093" /></flowRegion><flowPara
+       id="flowPara10829">Gossip</flowPara><flowPara
+       id="flowPara10831">Messages</flowPara></flowRoot>  <flowRoot
+     xml:space="preserve"
+     id="flowRoot10833"
+     style="font-size:4.23333311px;line-height:1.25;font-family:'Noto Sans Ethiopic';-inkscape-font-specification:'Noto Sans Ethiopic';letter-spacing:0px;word-spacing:0px;stroke-width:0.26458332"
+     transform="translate(-18.744079,-58.696571)"
+     inkscape:export-xdpi="180"
+     inkscape:export-ydpi="180"><flowRegion
+       id="flowRegion10835"
+       style="stroke-width:0.26458332"><rect
+         id="rect10837"
+         width="2.1381562"
+         height="5.9467473"
+         x="158.95854"
+         y="64.47551"
+         style="stroke-width:0.07000434" /></flowRegion><flowPara
+       id="flowPara10839"
+       style="stroke-width:0.26458332" /></flowRoot></svg>

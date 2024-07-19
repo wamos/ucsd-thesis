@@ -1,0 +1,20 @@
+\begin{figure}[t]
+\centering
+\begin{subfigure}[b]{\columnwidth}
+\includegraphics[width=\textwidth]{ASPLOS23/figures-resubmit/cpu-overview.pdf}
+\caption{Current multi-accelerator systems.}
+\label{fig:overview:current}
+\end{subfigure}
+%
+\hspace{0.5in}
+\begin{subfigure}[b]{\columnwidth}
+\includegraphics[width=\textwidth]{ASPLOS23/figures-resubmit/dmx-overview.pdf}
+\caption{Multi-accelerator systems with \dmx.}
+\label{fig:overview:dmx}
+\end{subfigure}
+%
+\caption{Current multi-acceleration systems rely on CPU for accelerator chaining. (a) shows a system with four heterogeneous accelerator cards. The CPU needs to intervene in the communication between accelerator cards. This involves data copies from system memory to accelerator memory and non-trivial data transformations. (b) The proposed \dmx framework removes the CPU from the data path of multi-acceleration. \dmx delivers the performance of a monolithic accelerator while offering the composability and programmablity of the baseline system.}
+\vspace{-3ex}
+
+\label{fig:overview}
+\end{figure}

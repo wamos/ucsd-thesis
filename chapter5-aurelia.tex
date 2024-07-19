@@ -1,0 +1,1086 @@
+\chapter{Aurelia: CXL fabric in making}
+\label{chap:aurelia}
+
+\section{Introduction}
+%\stingw{the idea is to use CXL fabric as the next-gen rack-scale fabric for disaggregation/composable systems.}
+%\stingw{why do we need CXL at the first place? disaggregation and composable system}
+The datacenters move towards disaggregated and composable infrastructure, in which different resources are taken from a logical pool to satisfy the demand from applications.
+%
+%Existing effort of disaggregation relies on RDMA over Ethernet, a fabric not designed with disaggregation in mind. 
+Existing effort retrofits the current Ethernet fabric for disaggregation by running RDMA over Ethernet~\cite{legoos:osdi:2018, far-memory:eurosys:2020, leap:atc:2020,aifm:osdi:2020,carbink:osdi:2022,hydra:fast:2022,canvas:nsdi:2023}.
+%
+However, retrofitting existing hardware prevents applications from reaching their optimal performance under disaggregation and sometimes demonstrates inferior performance than its counterpart with server-based setups.
+
+Recent works look toward co-designing hardware with software to realize disaggregation~\cite{kona:asplos:2021, intel-cxl:ieee-micro:2023, tpp:asplos:2023, pond:asplos:2023}.
+%
+These works are focused on externalizing the hardware interconnect to become a fabric connecting many devices in a disaggregated setting.
+%
+Fabrics directly connect all the devices allowing accessing remote devices to be similar to accessing a local device on a server's PCIe slots.  
+%
+PCIe is an example of this kind of fabric, but it only connects local devices within a server right now.
+%
+% For inter-server communication, PCIe is mainly used to pass data to NIC that further passes the data over Ethernet. 
+%
+%\stingw{PCIe can go across servers with non-transparent bridge but it's hardly used.}
+%
+An ideal fabric for disaggregation offers direct connections between devices while providing low latency and high bandwidth on a specific scale, e.g. a single rack or a few neighboring racks.
+%rich semantics beyond PCIe's I/O semantics 
+
+Compute Express Link (CXL) emerges as a viable candidate supported by a converged industry standard after its absorption of OpenCAPI and Gen-Z. 
+%
+CXL is built on top of PCIe with the addition of memory accessing semantics (CXL.mem), caching semantics (CXL.cache), and peer-to-peer memory access between devices (Unordered I/O in CXL.io). 
+%
+% \stingw{CXL-capable devices use load/store to access everything without any software layering}
+%
+More importantly, CXL can be a fabric through its support of multi-level switching.
+
+Experimental CXL fabric demonstrates on-par performance with lower cost in the case of machine learning model training on 10s of GPUs~\cite{fabric-saving}. 
+%
+CXL fabric offers bandwidth as high as 63 GB/s with PCIe 5.0 now and 121 GB/s PCIe 6.0 on the horizon of the next two years~\cite{pcie-6-7}.
+% https://www.xda-developers.com/pcie-6-to-launch-in-2024-pcie-7-in-2027/
+%
+%CXL fabric is able to offer performance benefit from the fabric adoption atop of proper right-sizing of hardware due to disaggregation.
+%
+CXL fabric offers low latency because it operates on a device-attached interface using direct load/store instructions.
+%to avoid additional interface transition. 
+%(CXL $\rightarrow$ CXL). 
+%
+It avoids the network software stack overhead and the PCIe transition between device and NIC on the sending (Device $\rightarrow$ PCIe $\rightarrow$ NIC) and receiving (NIC $\rightarrow$ PCIe $\rightarrow$ Device) path.
+%
+Network stack and PCIe transition create latency overhead and throughput bottleneck.
+%
+First, the network stack using kernel bypassing still incurs microseconds of latency overhead~\cite{shinjuku:nsdi:2019, shenango:nsdi:2019, eRPC:nsdi:2019,snap:sosp:2019}.
+%
+Second, the PCIe latency overhead of 1500 B packets reaching the wire can be as high as 77\%~\cite{pcie-bench:sigcomm:2018}.
+%
+Third, the PCIe link to NIC is a potential throughput bottleneck when multiple devices share the NIC.
+%
+Dedicating a NIC for each device circumvents the throughput bottleneck but with the increased cost on more NICs and switches.
+
+%\vspace{-1ex}
+\section{Motivation and Background}
+\label{sec:motivation}
+
+\subsection{What is CXL?}
+Compute Express Link (CXL) emerges as an enhancement of PCIe providing cache coherency (CXL.cache), host-managed or fabric-attached memory (CXL.mem), peer-to-peer memory access between I/O devices (CXL.io).
+%
+CXL.mem provides host-managed memory that CPU and accelerators are able to read/write into each other's memory directly. This avoids redundant DMA operations moving data back and forth~\cite{fulcrum:hpca:2020, beacon:micro:2022, intel-cxl:ieee-micro:2023}.
+%
+CXL.mem enables fabric-attached memory providing a shared memory pool for applications with different demands~\cite{cxl-ssd:hotstorage:2022, directcxl:atc:2022, pond:asplos:2023}.
+%
+CXL.cache supports a fully coherent cache on devices with their hosts. These devices, however, do not open their local, private memory to CXL. 
+%
+CXL.io uses unordered I/O for peer-to-peer memory accesses between non-coherent devices over its fabric.
+%
+%CXL.io supports non-coherent data movement with I/O devices like PCIe does.
+
+\noindent \textbf{Fabric Routing.}
+CXL routes packets with a per-device ID called Port ID on the fabric. 
+%
+The Port ID-based routing (PBR) addresses each device with a 12-bit ID. 
+%
+A packet with PBR contains a specific source port ID and destination port ID before it leaves an edge CXL switch that connects directly with devices.
+%
+Each CXL fabric has a single fabric manager to initialize, bind/unbind devices to ports, and handle event notifications, such as the removal or failure of devices, from the switch.   
+%
+This fabric manager is very close to a centralized network controller because it controls the per-port forwarding and is aware of all the route changes. 
+
+\noindent \textbf{Flow control.}
+CXL inherits point-to-point flow control from PCIe that was designed for the communication between the device and CPU rather than a fabric. 
+%
+The flow control operates between two directly connected endpoints. 
+%
+They exchange credit tokens to evaluate the available buffer space on each side. 
+
+\noindent \textbf{QoS Telemetry:.}
+CXL fabric offers rate throttling mechanism for hosts called QoS Telemetry. 
+%
+It is used for devices with its local memory including memory expansion devices and accelerators with device memory, e.g. GPU, FPGA, and ASIC.
+%
+QoS telemetry enables memory devices to indicate their current internal load with 2 bits for CXL.mem response packets.  
+%
+The senders use the reported internal load to monitor and throttle their request rate to avoid device overload and possible fabric congestion. 
+%
+The rate throttling targets specifically for devices, mainly memory devices, that are associated with a host in the current design. 
+%
+In addition, QoS telemetry devises a mechanism called Egress Port Backpressure (EP Backpressure).
+%
+It monitors the flow control backpressure situation on each CXL switch egress port. 
+%
+If the port cannot transmit packets for a period of time due to the lack of credits, the port marks EP Backpressure value in 2 bits on the device load field of the outgoing request. 
+%
+The overall load of a device is determined by the maxima of device internal load and EP Backpressure. 
+
+\subsection{What is Different with CXL Fabric?}
+% \stingw{1. latency (synchronous request) and scalability (cache coherence plague + routing + transport)}
+CXL fabric exposes memory traffic that used to be internal to a server to all endpoints connecting on the fabric. 
+%
+The memory traffic, such as cache coherence, memory access, and I/O style accesses, runs between processor and device endpoints on CXL fabric.
+%
+This is in contrast to standard data center traffic running with encapsulated packets from per-server NIC outside of the internal memory fabric of a server.
+%
+Processors and accelerators access remote devices with load/store instructions through CXL fabric.
+%
+They synchronously request data from remote devices, e.g. memory expansion modules, accelerators, and storage devices. 
+%
+However, these synchronously request data cannot tolerate significant latency, because the latency will 
+stall the execution of the requester hardware while awaiting the requested data.
+%
+This poses restricted latency requirements for the fabric and needs proper system-level support. 
+%
+Additionally, CXL fabric allows up to 4096 endpoints.
+%
+Given the scale of 1000s of endpoints and the mixture of memory traffic,
+this introduces a challenge on the scalability of the underlying protocol design.
+%
+%\stingw{
+A centralized scheduler is a possible solution for 10s or even 100s of endpoints on racks.
+%
+However, the scheduler is very likely to be the performance bottleneck because it needs to sustain and determines the order of every load/store instructions.
+%
+The scheduler can become a single point of failure for all memory traffic.
+%
+The scheduler with a centralized design in mind limits the scalability for CXL using longer distanced physical layer than PCIe.
+%}
+% \TODO{Why not just make it a scheduler instead of distributed protocols?}
+% \stingw{We try tot argue this qualitatively.}
+%
+To understand the practical challenges, use cases of CXL fabric from CXL specification and the literature are discussed next~\cite{cxl-3-0-spec, directcxl:atc:2022, pond:asplos:2023}. 
+%
+
+\subsection{Use Cases of CXL Fabric}
+
+The use cases of CXL fabrics demand high memory capacity, bandwidth, and low latency.
+%
+Emerging and existing workloads in data centers, such as training machine learning models, high-performance computing (HPC) applications, and large-scale key-value stores, can be benefited from CXL fabrics.   
+
+First, training machine learning models requires a large amount of memory on an accelerator, e.g. GPU or TPU, which is beyond the capacity of individual accelerators.
+%
+To make it even worse, the size of state-of-the-art machine learning models are ranged from 10s of GB to 10s of TB.~\cite{zero:arxiv:2020, zero-infinity:sc:2021, zionex:isca:2022} and keep growing every few months.
+%
+Model training thus requires multiple accelerators to jointly fit the model and training variables in their memory. 
+%
+% Previous works proposed to leave these out of accelerators onto main memory but with potential slowdown caused by explicit memory copying from memory to accelerators~\cite{zero-infinity:sc:2021, zero-offload:atc:2021, deepspeed-inference:sc:2022}.
+%
+CXL fabric expands accessible memory to accelerators by providing fabric-attached memory.
+%
+Fabric-attached memory increases the memory capacity and bandwidth to all available memory on the fabric~\cite{cxl-3-0-spec, samsung-memory-expander:hcs:2022, memory-scalability:microchip}.
+%
+%A topology of this model training use case is shown in Figure~\ref{fig:ml-acc-cxl}. 
+%
+A host is connected with an accelerator with CXL and they share a coherence domain (Shown in Figure~\ref{fig:ml-acc-cxl}).   
+%
+Accelerators access the fabric-attached memory and each other's memory in a producer-consumer fashion of I/O coherency.
+%
+% Moreover, CXL fabric provides an alternative to Nvidia's proprietary stack (NVLink + NVSwitch + Infiniband RDMA).
+% %
+% CXL fabric will enable future accelerators to connect and cooperate on applications on a shared, open-standard communication substrate
+% instead of using only GPUs.
+%
+
+Second, HPC workloads demonstrate high utilization (> 90\%) on memory bandwidth as well as capacity for representative applications~\cite{doe-miniapps, crossroad-benchmarks, exascale-apps}. 
+%
+Though each application stays with its peak memory usage for a different duration of time.
+%
+The cluster is required to be provisioned to the peak bandwidth and capacity to avoid significant slowdown~\cite{hpc-memory-requirement:upc:2019, memory-trend:snl:2020, hpc-disagg-mem:arxiv:2023}.
+%
+% \TODO{cite NERSC's Arxiv report to argue for the need of disagg with concrete numbers.}
+%
+%HPC uses a topology like model training but featuring different 
+% Host CPU cores are connected with accelerators and accessing fabric-attached memory for additional memory capacity and bandwidth~\cite{memory-trend:snl:2020, hpc-disagg-mem:arxiv:2023} (Shown in Figure~\ref{fig:ml-acc-cxl}).
+
+Third, the datacenter runs cloud services with key-value stores.
+%
+Key-value stores use RDMA inside datacenter to speed up the communication and operations~\cite{farm:nsdi:2014,herd:sigcomm:2014,eRPC:nsdi:2019, xstore:osdi:2020}
+%
+These operations are sensitive to latency and are on the performance critical path of applications. 
+%
+DirectCXL showed CXL to be 8.3x shorter latency than RDMA for 64B read and replacing RDMA with less overhead~\cite{directcxl:atc:2022}. 
+%CXL is able to replace RDMA with less overhead as DirectCXL suggested~\cite{directcxl:atc:2022}. 
+%
+DircetCXL provides a latency lower bound of CXL because its fabric has a single switch and is not under stress or congestion.
+%
+The hosts do not maintain cache coherence between themselves. Fabric-attached memory module maintains coherence between itself and the host address space it has mapped (Shown in Figure.~\ref{fig:kvs-cxl}).
+
+Model training and HPC workload both involve collective communication while key-value stores involve bursty non-structural communication.
+%
+Collective communication is structural and can be optimized with data prefetch to minimize the stall on pending memory accessing.
+%
+This relaxes their requirement on latency and reduces burstiness.
+%
+Model training uses all-reduce to update model weights to each accelerator after each training iteration. The size of state-of-the-art models are ranged from 10s of GB to 10s of TB.~\cite{zero:arxiv:2020, zero-infinity:sc:2021, zionex:isca:2022}.
+%
+HPC compared to model training has a more diverse communication pattern, such as sweeping or nearest-neighbors~\cite{mpi-usage:sc:2019, ember-comm, exascale-apps, doe-miniapps}. 
+%
+Key-value store and database, however, serve bursty requests and are sensitive to latency~\cite{scale-memcache:nsdi:2013, rocksdb-modeling:fast:2020}
+
+\begin{figure}[ht!]
+%%%%
+    \begin{subfigure}[ht]{0.8\columnwidth}
+    \centering{
+    \includegraphics[width=\columnwidth]{./figure/aurelia/ml-acc-cxl-fabric.pdf}
+    \caption{Model training and HPC. Hosts and their accelerators share a coherent domain.}
+    \label{fig:ml-acc-cxl}
+    }
+    \end{subfigure}
+%%%%
+    % \begin{subfigure}[ht]{0.9\columnwidth}
+    % \centering{
+    % \includegraphics[width=\columnwidth]{figures/hpc-cxl-fabric.pdf}
+    % \caption{HPC cores.}
+    % \label{fig:hpc-cxl}  
+    % }
+    % \end{subfigure}
+%%%%
+    \begin{subfigure}[ht]{0.8\columnwidth}
+    \centering{
+    \includegraphics[width=\columnwidth]{./figure/aurelia/kvs-cxl-fabric.pdf}
+    \caption{Key-value store for cloud services.}
+    \label{fig:kvs-cxl}  
+    }
+    \end{subfigure}
+
+\caption{CXL fabric abstractive topology.}
+\label{fig:cxl-topo}
+\end{figure}
+
+\begin{table}[ht!]
+\begin{tabular}{|l|l|l|l|}
+\hline
+            & Bandwidth & Latency & Burstiness         \\ \hline
+DL Training & +         & $\triangle$    & -           \\ \hline
+HPC         & +         & $\triangle$    & $\triangle$ \\ \hline
+KV Store    & -         & +              & +           \\ \hline
+\end{tabular}
+\caption{Traffic patterns for different workloads.}
+\label{tab:cxl-workload}
+\end{table}
+
+\section{Challenges}
+% \begin{comment}
+% list out the challenges related to scalability and latency
+% latency     -> congestion control, long stall
+% scalability -> routing, coherence traffic monitoring + restriction if possible     
+% \end{comment}
+%
+The current design of CXL fabric~\cite{cxl-3-0-spec} poses challenges on scalability and latency. 
+%
+First, its addressing and routing design limits the possibility of flexible and dynamic routing. 
+%
+Second, the lack of an end-to-end transport layer of the fabric makes the fabric prone to congestion and latency spikes. 
+%
+More importantly, with the usage of load/store instructions, the processor and accelerator that synchronously request data are very sensitive to latency because the latency determines how long they need to stall their execution.
+%
+The addressing, routing, and transport-level challenges are discussed in the following subsections.  
+
+\subsection{Addressing and Routing Challenges}
+\label{sec:motivation:routing}
+
+\noindent \textbf{Routing.}
+CXL routes packets with a per-device ID called Port ID on the fabric. 
+%
+The Port ID-based routing (PBR) addresses each device with a 12-bit ID. 
+%
+A packet with PBR contains a specific source port ID and destination port ID before it leaves an edge CXL switch that connects directly with devices.
+%
+Each CXL fabric has a single fabric manager to initialize, bind/unbind devices to ports, and handle event notifications, such as the removal or failure of devices, from the switch.   
+%
+The fabric manager is equivalent to a centralized software-defined network controller as it controls the per-port forwarding and is aware of all the route changes. 
+%
+However, CXL fabric has (1) a limiting addressing scheme to support multi-path and adaptive routing, %address devices under multi-level switching
+(2) single-path and inactive routing regardless of the traffic condition.
+
+%However, the current CXL routing falls short to achieve its own expectation because of the following reasons.
+\noindent \textbf{Challenge: Limited addressing support for multi-path and adaptive routing.}
+%
+% \stingw{ Yes multi-level routing is feasible with CXL 3.0.
+% But SPID and DPID are only used to describe devices.
+% The fabric routing is SDN-style, so all routing reconfiguration (with packet sparying or load aware) needs to go through Fabric Manager. This make FM a performance bottleneck.
+% }
+%
+The current PBR routing scheme assigns an ID to devices only. 
+%
+PBR routes packets to the destination device through multi-level switches with routing installed by the fabric manager. 
+%
+Any routing reconfiguration needs to go through the fabric manager and thus making load-aware, adaptive routing inefficient and infeasible on a large scale.
+%
+%PBR with routes controlled by the fabric manager 
+The centralized routing of PBR prevents the usage of classic multi-pathing techniques like packet spraying or ECMP because all the routes are pre-determined by the fabric manager.
+%
+Figure.~\ref{fig:cxl-fabric-overview} shows an example of multi-level CXL fabric.     
+%
+%if the fabric does not have inter-switch links with a single-level switching.
+%
+% PBR prevents CXL fabric to realize the multi-level switching that enables a larger topology with switches connected.
+%
+%PBR cannot route packets through this because it does not address the switches on the fabric.  
+
+\noindent \textbf{Challenge: inflexible routing over diverse topologies.}
+CXL fabric supports flexible topology and thus opens the possibility of having a wide range of topologies such as a fully connected graph, Fat-tree~\cite{fat-tree:sigcomm:2008} or Dragonfly~\cite{dragonfly:isca:2008}. 
+%
+These topologies provide multiple paths for a source and a destination, but CXL fabric cannot route packets over multiple possible paths given its current design.
+
+\subsection{Transport-level Challenges}
+\label{sec:motivation:transport}
+% The transport of CXL includes PCIe for point-to-point flow control and QoS Telemetry implementing ad hoc rate-throttling for CXL.mem traffic. These two mechanisms are not able to ensure a predictable fabric latency with minimal congestion.  
+
+CXL inherits point-to-point flow control from PCIe that was designed for the communication between the device and CPU rather than a fabric. 
+%
+The flow control operates between two directly connected endpoints. 
+%
+They exchange credit tokens to evaluate the available buffer space on each side. 
+%
+
+\begin{figure}[t!]  
+    \centering
+    \includegraphics[width=0.8\columnwidth]{figure/aurelia/pcie-congestion.eps}  
+    \caption{RDMA latency spikes almost 3 $\times$ by PCIe congestion.}
+    \label{fig:pcie-congestion}        
+\end{figure}
+
+\noindent \textbf{Challenges: Flow control cannot prevent congestion.}
+The point-to-point, credit-based flow control is focused on not overrunning the buffer only. 
+%
+It cannot deal with pairs of endpoints sharing a port on the switch because no information is exchanged between them. 
+
+
+\noindent \textbf{PCIe congestion experiment.}
+We design an experiment of multiple flows sharing a port on a switch and creating congestion.
+%
+Given no commercially available hardware for CXL, we use PCIe which shares the same flow control mechanism for our experiment. Interestingly, PCIe congestion has been identified and demonstrated under different setups~\cite{sbfc:ieee-micro:2005, pcie-congestion-model:sc:2016, invisible-probe:oaklnad:2021}. 
+
+We create artificial PCIe congestion on a PCIe switch port shared by two devices. The machine uses a SuperMicro X11SPA-TF motherboard with a Broadcom PEX8747 PCIe switch. The PCIe switch has one upstream port to the CPU, and two downstream ports connecting to the devices, An Nvidia 2080 Ti GPU and a ConnectX-5 RDMA NIC connected to the PCIe switch.
+%
+\begin{figure}[ht!]  
+    \centering
+    %includegraphics[width=1\columnwidth, cframe=red!5!red 0.5mm]{figures/pcie-exp.eps}  
+    \includegraphics[width=0.8\columnwidth]{figure/aurelia/pcie-exp.eps}  
+    %\vspace{-2ex}
+    \caption{Experimental setup for PCIe congestion.}
+    \label{fig:pcie-experiment}        
+\end{figure}
+%
+The PCIe switch connects with the host processor on one side and provides two ports connecting to GPU and RDMA NIC.
+%
+The experimental setup is shown in Figure~\ref{fig:pcie-experiment}.
+%
+During the experiment, the NIC periodically sends RDMA write requests to another machine every 100 microseconds. 
+%
+Each write request is sent from the CPU and travels through the PCIe switch to the NIC. 
+%
+After a second, a large integer array of 200 MB is moved from the main memory to the GPU. It causes heavy traffic on the upstream port and the downstream port to the GPU.
+%
+Their traffic collides on the upstream port of the PCIe switch %as they are both unaware of each other 
+because flow control does not consider congestion that is caused by an outgoing link. 
+
+We use PerfTest of Linux-RDMA library to measure the RDMA write request latency~\cite{ofed-perftest} shown in Figure~\ref{fig:pcie-congestion}. The latency spikes to almost 3x from 2.593 $\mu$s to 7.483 $\mu$s at the peak of PCIe congestion. 
+%
+PCIe's virtual channel is a feasible but not scalable solution because it provides only 7 channels. 
+%
+Traffic on the same channel still suffers from the same congestion as we have shown above. 
+ 
+%\noindent \textbf{QoS Telemetry insufficiency.}
+%QoS telemetry is still insufficient to address all potential congestion issues for the following reasons. 
+%
+%$First, QoS telemetry is focused on CXL.mem packets. 
+%
+\noindent \textbf{Challenge: Rate throttling between host CPU and devices only:}
+CXL fabric offers a rate throttling mechanism called QoS Telemetry to avoid device overload and possible fabric congestion. 
+%
+The current QoS telemetry is designed specifically for CXL.mem between the host and devices with its local memory.
+%
+QoS telemetry allows memory devices to indicate their current internal load with 2 bits for CXL.mem response packets.  
+%
+The sender on the host CPU uses the reported internal load to monitor and throttle its request rate. 
+%
+However, not every sender on CXL fabric is on the host CPU. 
+%
+Peer-to-peer memory accesses using Unordered I/O in CXL.io support devices accessing the memory of another device directly. 
+%
+These peer-to-peer accesses under CXL.io are not throttled in the current design because QoS telemetry is only for CXL.mem and does not consider the sender to be other than a host CPU.
+%
+Machine learning and HPC applications illustrated in Figure~\ref{fig:cxl-topo} have evolved into heavy use of accelerators. 
+Overlooking memory access from devices, especially accelerators, limits CXL fabric's ability to mitigate congestion and device overload.
+
+%The rate throttling targets specifically for devices, mainly memory devices, that are associated with a host in the current design. 
+
+%
+% Perform rate throttling on CXL.mem packets alone cannot mitigate possible congestion because packets using the other protocols share the fabric.
+%
+%It is used for devices with its local memory including memory expansion devices and accelerators with device memory, e.g. GPU, FPGA, and ASIC.
+
+
+%\TODO{merge this one with rate throttling}
+%\noindent \textbf{Limit usage of load & congestion information}
+%
+%QoS telemetry does not consider peer-to-peer memory access packets on CXL.io protocols just introduced in the CXL 3.0 specification.
+%
+
+% \noindent \textbf{Challenge: Host controlled rate throttling}
+% The request throttling of QoS telemetry is designed to be operated by the host.
+% %
+% It does not consider memory access can be initiated from devices, especially in a peer-to-peer fashion. 
+% %
+% These devices contain logic for a specific workload but do not have any general-purpose cores attached.
+% %
+% The current QoS telemetry design does not allow these accelerators to throttle themselves according to the device load. 
+% %
+% \stingw{I think we can still leave the rate throttling on host but it needs to be efficient like polling?}
+% Moreover, a device performing peer-to-peer memory access depends on the host to throttle its request rate. 
+% %
+% %This contradicts the promise of resource disggreattion on a CXL fabric.
+% This adds additional latency for throttling and thus risking more congestion on the fabric. 
+%\stingw{we'll need additional hardware logic on CXL device that will initiate memory request}
+
+\noindent \textbf{Challenge: Inaccurate load \& congestion information.}
+QoS telemetry devises a mechanism called Egress Port Backpressure (EP Backpressure) to indicate the load of CXL switch ports.
+%
+It monitors the flow control backpressure situation on each CXL switch egress port. 
+%
+If the port cannot transmit packets due to insufficient credits, the port marks a 2-bit EP Backpressure value on the device load field of the outgoing request. 
+% Omit the Temporary Throughput Reduction here
+%
+The overall load of a device is determined by the maxima of the device's internal load and EP Backpressure. 
+
+However, the overall device load subsumes EP Backpressure, which is valuable congestion information. 
+%
+By taking the max value of the separated piece of information, QoS telemetry provides neither accurate device internal load nor congestion on the fabric.
+%
+The inaccurate information prevents QoS telemetry from performing end-to-end flow control and congestion control for the transport protocol.
+%
+The aforementioned challenges motivate us to design \aurelia. 
+%
+%\TODO{find place to say switch and CXL device are both nodes on a CXL}
+\section{Design of \aurelia}
+\label{sec:design}
+% \stingw{Reduce specific details on routing, merge multi-path and alternative routing. the design rationale is more important. we don't want to be tied to a 
+% specific solution or design point.}
+
+\begin{figure}[t!]    
+    \centering
+    \includegraphics[width=0.9\columnwidth]{figure/aurelia/cxl-fat-tree-routing-table.eps}
+    \caption{CXL fabric as a Fat-tree using 12-bit FAN-ID address \emph{X:Y:Z}, which X, Y, and Z are hexadecimal values. Dash lines represent the routes from switch \emph{2:2:1}'s routing table.} 
+    %representing \emph{pod:switch:device}}
+    \label{fig:cxl-fabric-overview}
+\end{figure}
+
+We propose \aurelia, a network design involving devices and switches on CXL fabric. \aurelia provides addressing, routing, and congestion control protocol design by augmenting necessary functionalities on the fabric interface and switches.
+
+\subsection{Addressing \& Flow}
+%
+\aurelia proposes to generalize CXL's port ID scheme to assign a 12-bit fabric node ID (FAN-ID) to a node that is either a device or a switch on the fabric. 
+%
+This is analogous to the 32-bit IP address describing hosts in an IP network.
+%
+%
+FAN-ID assignment is agnostic to the underlying topology as long as a FAN-ID is unique for a node on a CXL fabric. 
+%
+Currently, \aurelia assigns FAN-ID to the physical interface of the device. It does not assign FAN-ID to logical interfaces sharing the same physical interface.
+%
+%\aurelia considers multi-tenancy a device-specific detail and do not provide additional FAN-ID to logical CXL interfaces
+%Multi-tenancy of devices is out of the scope of this work.
+
+
+With a similar analogy of "5-tuple" in the IP network, \aurelia defines a flow by a sequence of CXL packets that shares the same source device, destination device, protocol, and message classes.
+%
+Thus, routable CXL packets can be identified with a quadruple: \emph{(Source FAN-ID, Destination FAN-ID, CXL protocol, message classes)}. The CXL protocols include CXL.io, CXL.mem, and CXL.cache. The message classes are sub-type of packets within each protocol. For example, a CXL.mem packet writing to a device belongs to a class of \emph{M2S Request with Data} and a CXL.cache packet that carries responses from the device to the host belongs to a class of \emph{D2H Response with Data}.
+%
+Fat-tree with oversubscription is out of the scope of this preliminary study. 
+%
+For the rest of \aurelia's design, non-oversubscribed Fat-tree is assumed as the underlying topology. Different topology constructions and options are discussed in Sec.~\ref{sec:discussion}.
+%
+
+% \begin{comment}
+% %FAN-ID 
+% %because routing design can be based on per-node FAN-ID
+% %each device usually has a single CXL interface with potentially different number of lanes. 
+
+% Also, given the limit size of 12-bit address space, it is not efficient to assign multiple addressses to a single switch. 
+
+% Per port address design like MAC address is not necessary
+% because \aurelia's routing design is modeled after IP level routing on switches. 
+
+% dragonfly's routing
+% Minimal (MIN) : The minimal path is taken as described in
+% Section 4.1.
+% Valiant (VAL) [32] : Randomized non-minimal routing as
+% described in Section 4.1.
+% Universal Globally-Adaptive Load-balanced [29] (UGALG, UGAL-L) UGAL chooses between MIN and VAL on a
+% packet-by-packet basis to load-balance the network. The
+% choice is made by using queue length and hop count to estimate network delay and choosing the path with minimum
+% delay. We implement two versions of UGAL.
+% UGAL-L – uses local queue information at the current
+% router node
+% \end{comment}
+
+% \begin{figure}[htb]
+%     \centering
+%     \includegraphics[width=\columnwidth]{figures/cxl-fat-tree-clear.eps}
+%     \caption{\TODO{Routing example on Fat-tree.}} %representing \emph{pod:switch:device}}
+%     \label{fig:fat-tree-routing}
+% \end{figure}
+
+\subsection{Routing}
+% P Path selection, R Routing itself, and L Load balancing. 
+% Path selection determines which paths can be used for sending a given packet. Routing itself
+% Routing answers a question on how the packet finds a way to its destination.
+% Load balancing determines which path (out of identified alternatives) should be used for sending a packet to maximize performance and minimize congestion.
+
+\aurelia routes packets based on FAN-ID addresses like IP routing.
+%
+CXL switches route a packet based on its routing table that maps a group of FAN-ID destinations onto a port. 
+%
+CXL switches transmit the packet out of a specific port to another switch that knows the next hop of this packet. 
+%
+The forwarding keeps on until the packet reaches the FAN-ID destination.
+
+\noindent \textbf{Routing: Fat-tree as an example.}
+%
+Constructing a Fat-tree~\cite{fat-tree:sigcomm:2008} with 12-bit FAN-ID address shows a $k$-ary fat-tree with $k=4$ in Figure~\ref{fig:cxl-fabric-overview}.
+%
+Fat-tree uses a hierarchical scheme that assigns FAN-ID to nodes as \emph{pod:switch:device} with three segments.
+%
+Each segment is a 4-bit exact, hexadecimal value.  
+%
+For example, the leftmost CPU has FAN-ID \emph{2:0:2} representing it belongs to the third pod, the first switch, and the third node which is right after the switch itself.
+%
+Like IP routing, the routing on Fat-tree takes a single shortest path despite that the Fat-tree topology provides path diversity.
+%
+This creates bottlenecks even for trivial communication patterns because of the underutilization of available bandwidth.
+%
+Fat-tree implements a two-level routing table on each switch. One level of the table routes traffic down to the device and another one routes traffic toward the core of the fabric.
+%
+The table maps a set of destinations to a specific port. The routing lookup of destinations uses the address prefix for the traffic downward to the devices and the address suffix for the traffic going toward the cores.
+%
+The address suffix approach spreads traffic toward the fat-tree core across different switches based on FAN-ID.
+%
+The bottom of Figure~\ref{fig:cxl-fabric-overview} shows the routing table of CXL switch \emph{2:2:1} filled in gray. The prefix table routes packets toward its downstream switches \emph{2:0:1} and \emph{2:1:1}. The suffix table routes the packet upward to core switches \emph{4:1:1} and \emph{4:1:2}.  
+%\TODO{add a running example on to Figure~\ref{fig:fat-tree-routing} or a new one.}
+
+
+\noindent \textbf{Multi-path routing.}
+%
+The two-level routing table of Fat-tree is just an implementation of multi-path routing together with a specific topology. \aurelia imposes no restriction on how the fabric should be constructed. Instead, \aurelia requires routing tables to be able to map a destination to multiple next-hop FAN-ID and its corresponding metric. The metric can be distances in terms of hops or local congestion level on each switch port. 
+%
+\aurelia selects a next-hop with minimal metric and randomly selects one if there are multiple next-hop options with equal metric.  
+%
+Considering the number of hops for shortest path routing, \aurelia can perform a random selection for the next hop on flow granularity or on packet granularity. The former is similar to Equal-Cost Multipathing (ECMP) and the latter is similar to packet spraying. 
+%
+
+% \begin{comment}
+% After identifying the quadruple, the existing knowledge of using flow as a major abstraction of load balancing and optimization becomes applicable for CXL fabric flow~\cite{FlowBender, Hedera, MicroTE}. In the case of multi-tenant devices, the quadruple cannot distinguish traffic between different tenants. Thus, per-packet load balancing schemes are more applicable for multi-tenant scenarios~\cite{Fastpass, DeTail, MPTCP}. 
+
+% \weitao{Since we already assume next-generation connection, do we want to mention that the fat-tree topology can be a baseline, and we could further optimize the topology based on the application traffic pattern, like adding more number of lanes between frequently communicated devices.} 
+% \stingw{I agree. topological optimization is a nice direction but it's hard to do it with current or near-future CXL technology. We can put it to the Discussion.}
+% \stingw{We'll need CXL with higher radix to have more exotic topology, e.g. Dragonfly, Jellyfish, Xpander}
+
+% \weitao{Active routing is another interesting type of routing. It is developed based on load-balancing routing. When one path is congested for a substantial amount of time, some flows will change the flow label to change the 5-tuple, so that the flow will pick a new path automatically. In your case, do you think you can also add a similar thing in "5-tuple" to make it "6-tuple" and enable active routing?} \stingw{introducing additional things on CXL's 256-byte packet is hard given the limited space. I don't agree with this one.}
+% \end{comment}
+
+% \TODO{we should talk about how the fabric manager will be implemented. GPU-SSD example is not a good one.}
+% \reviwer{B: I encourage you to be more explicit about what's in/out of scope for the fabric manager}
+\noindent \textbf{Adaptive routing.}
+%
+ECMP and packet spraying are oblivious to the workload. 
+%
+\aurelia can further exploit local per-port information on the switches or the fabric manager manipulating the routing table to achieve adaptive routing.
+%
+\aurelia uses per-port EP Backpressure as a measure of local congestion indication. 
+%
+For selecting an egress port with minimal congestion on the switch, \aurelia uses power-of-2 choice~\cite{power-of-two:tpds:2001} to avoid congestion on ports based on possibly delayed congestion information.
+%
+Additionally, \aurelia allows the fabric manager to insert routes and has the sole authority to modify the routing table at any time.
+%
+This is useful for the workload that requires non-trivial routes tailored to specific workloads~\cite{gullfoss:tech-report:2015, fractos:eurosys:2022}. 
+%mirador:fast:2017, 
+%uses multiple devices together~\cite{gullfoss:tech-report:2015, fractos:eurosys:2022}.
+%
+% \stingw{take out the GPU example!}
+% The GPU-SSD example in Sec~\ref{sec:motivation:routing} is exactly one of these workloads.
+% %
+% The detouring of peer-to-peer memory access to an additional hop of memory buffer is not trivial to be specified as routing rules. 
+% %
+% The fabric manager first determines a fabric-attached memory device as the destination, then redirect the routing between the producer and the consumer devices to the memory device instead.  
+% %
+% The fabric manager then asks the consumer to read from the specific memory device instead of directly communicating with the producer.
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[width=0.9\columnwidth]{figure/aurelia/congestion-control-flow.eps}
+    \caption{\aurelia has a congestion control loop for the fabric, a flow-control loop for the device.}
+    \label{fig:congestion-control}
+\end{figure}
+
+\subsection{End-to-end Congestion Control}
+% \stingw{More on pointing out the unique challenge, don't argue against delay based approach too much. Stay neutral before we have strong evidence.}
+% \balance
+% \begin{comment}
+% These devices have shallow buffer space and different rate of producing/consuming data. %and are allocated with different bandwidth on the fabric.
+% %
+% With strictly peer-to-peer communication, the producer matches consumer's rate to not overwhelm the consumer. 
+% %
+% The slow-down on faster producer leads to under-utilization of the device. 
+% %
+% To improve resource utilization, fabric attached memory pool can serve as the buffer and an alternative routing destination between devices. 
+% %
+% This decouples the producer and the consumer and allows faster producer to be utilized by other workload.
+% %
+% The switch identifies CXL.io packets performing peer-to-peer memory access, and notifies the fabric manager when it sees EP Backpressure on its port with CXL.io.
+% %
+% The fabric manager modifies the routing table between the producer and consumer, and routes the packets to a specific fabric attached memory pool attached to the either side of the CXL switch. 
+% %
+% The fabric manager then asks the consumer to read from the specific fabric attached memory pool instead of directly communicating with the producer.
+
+% \weitao{One suggestion about the signals: the internal load and the EP backpressure could be represented in a uniform format. Both of them suggest the congestion level, but for end-point devices and switches respectively.}\stingw{this sounds about right!}
+
+% \weitao{Another wild idea is that, if switches and end-point devices could provide more quantitative signals (like 8 bits) to represent congestion level, rather than a single bit to provide a binary signal about congestion, the performance of the congestion control algorithms could be largely improved. As a supporting fact, many commodity switches can support reporting and piggybacking telemetry information for each packet, including per-hop queueing delay and per-hop utilization.}\stingw{the problem with CXL is the packet is 256-byte. we could argue for using more bits in the discussion section. I tried to do the minimal modification to CXL to achieve something useful.}    
+% \end{comment}
+
+\aurelia implements end-to-end congestion control with overload avoidance by extending existing mechanisms of CXL. 
+%
+The existing mechanisms are EP Backpressure, rate throttling, and internal load reported by devices.
+%
+EP Backpressure describes the queuing situation in a similar way as Explicit Congestion Notification (ECN) does on Ethernet and Infiniband.
+%
+EP Backpressure and ECN both indicate congestion explicitly to the receiving endpoints and need packets to convoy the congestion signal back to the sender.
+%
+Rate throttling controls the data injection rate into the fabric and thus avoids congestion. 
+%
+%On top of these mechanisms, CXL fabric is a lossless fabric by its point-to-point flow control design.
+%
+Internal load is used to avoid overloading device that is likely to cause additional device-side delay or loss of CXL packets.
+%
+These factors determine \aurelia to implement a rate-based congestion control with overload avoidance for the devices. 
+
+
+\aurelia separates EP Backpressure and the device's internal load for congestion control and overload avoidance.
+%as two different metrics as they represent device and fabric information.
+%
+EP Backpressure as a 2-bit congestion signal on the fabric is piggybacked to the sender if its value is larger than a threshold.
+%
+The 2-bit device internal load serves a quantized credit for the sender not exceeding the receiver's processing rate.
+%
+Using credit to regulate sending rate effectively achieves end-to-end flow control to avoid overloading. 
+%
+Flow control preventing buffer-overrun is handled by the link and physical layer of CXL and thus not a concern for the transport layer. 
+%
+Also, \aurelia generalizes the reporting of device internal load for all memory access, including peer-to-peer memory access between devices.
+
+Peer-to-peer memory access between devices without embedded CPU motivates the need of implementing rate throttling logic on CXL interface hardware.   
+%
+Also, rate throttling has a tight latency requirement of sub-$\mu$s on CXL fabric.
+%
+Pond measured end-to-end CXL.mem latency and obtained latency ranging to 270 ns on CXL system with a single switch~\cite{cxl:hoti:2022, pond:asplos:2023}. Using Pond's latency assumption, the latency of CXL packet traveling through a two-level fat-tree takes around 680 ns.
+
+
+Combining sub-$\mu$s latency and peer-to-peer memory access requirements, \aurelia relies on hardware to throttle rate for congestion control. 
+%
+The configuration of these hardware is kept on the host CPU, but the actual rate throttling is on hardware to meet these requirements.  
+%
+Implementing rate throttling logic on hardware has been used on RDMA over Infiniband and Ethernet with RoCEv2 support.
+%
+Hardware-based rate throttling ensures all devices on the CXL fabric are able to control their injection rate and further regulate the congestion.   
+%
+Before throttling, \aurelia sets the rate as the target rate for later recovery.
+%
+\aurelia throttles the rate of the sender, when the receiver notifies it of the congestion signal and generates EP Backpressure. 
+%
+After rate throttling, \aurelia enters the recovery phase and then performs additive increase when approaching the target rate~\cite{dcqcn:sigcomm:2015}.   
+
+
+
+%%
+% Congestion control on existing lossless fabric, such as Infiniband, DCQCN for RoCEv2, implemented a rate-based congestion control algorithm requireing Explicit Congestion Notification (ECN) on switch to indicate congestion.
+%
+% Infiniband switches mark packets with a Forward ECN (FECN) bit when congestion is detected~\cite{infiniband-spec}. 
+% %
+% The destination node receives the FECN-marked packets and sends a Backward ECN (BECN) marked packet to the source node.
+% % 
+% The source node throttles its injection rate when it gets packets with BECN. The throttling over time reduces congestion and the fabric returns to a state without any congestion. 
+% %
+% Thee FECN marking of packets requires switch support and the implementation of BECN and rate throttling requires additional logic in CXL interface hardware.
+%
+% DCQCN, a congestion control protocol designed for RoCEv2, relies on the ECN of Ethernet to notify the source so the the source adjusts their injection rate similar to Infiniband~\cite{dcqcn:sigcomm:2015}.
+
+% Another category of congestion control protocols is based on delay~\cite{timely:sigcomm:2015, swift:sigcomm:2020}. They make sense on Ethernet/IP networks because NICs are equipped with hardware timestamping. 
+% %
+% Also, the PTP protocol enables high-precision time synchronization over the network. 
+% %
+% Both of these requirements are infeasible for the CXL interface. 
+% %
+% First, measuring accurate delay requires every CXL interface to support hardware timestamping.
+% %
+% Second, PTP time synchronization does not run over CXL protocol and it needs a high-precision time source on every instance of CXL fabric. 
+% %
+% These two requirements add expensive costs to hardware and thus make it infeasible.  
+
+% \aurelia implements a transport layer with rate-based congestion control with hardware-based rate throttling, and ECN-like usage of EP Backpressure.
+%
+
+
+
+%1. rate throttling 
+%
+% This sub-$\mu$s latnecy makes rate throttling hard on host CPU because state-of-the-art low-latency networking stacks on CPU react in 5 or more $\mu$s~\cite{shenango:nsdi:2019, shinjuku:nsdi:2019, caladan:osdi:2020}. The $\mu$s-level reaction time makes them only possible to be used as a fallback option.
+
+%
+% As EP Backpressure sets the device load on the request packet, the destination sends a memory response with devload indicating the port congestion alone. This response is not a piggyback like the device reporting the internal load. This egress port backpressure notification should trigger rate throttling on the source side (which can be a host or an autonomous device).    
+% \stingw{we should be more specific about the term memory request and response}.   
+
+%
+% Previous study of congestion control on lossless fabric, such as Infiniband, DCQCN for RoCEv2, follows a very similar approach.  
+% Both of them implemented a rate based congestion control algorithm in hardware and requires Explicit Congestion Notification (ECN) on switch to indicate congestion. 
+%
+%To prevent packet loss, Infiniband implements credit based flow control on its link layer and RoCEv2 implements PFC on Ethernet. 
+%
+% Infiniband switches mark packets with a Forward ECN (FECN) bit when congestion is detected. 
+% %
+% The destination node gets the packets with FECN-marked and sends the source node a packet marked with Backward ECN (BECN) bit.
+% % 
+% The source node throttles its injection rate when it gets packets with BECN. The throttling over time reduces congestion and the fabric returns to a state without any congestion. 
+% %
+% Thee FECN marking of packets requires switch support and the implementation of BECN and rate throttling requires additional logic in CXL hardware interface IP.
+% %
+% DCQCN, a congestion control protocol designed for RoCEv2, relies on ECN of Ethernet to notify the source node so the the source node could adjust their injection rate in a similar manner as Infiniband.
+
+
+
+%\subsection{Programmability: Active Networking revisit}
+
+%\TODO{what's active network and what does it matter to CXL}
+%Outline of the design 
+% \begin{itemize}
+% \item Making CXL a proper network, adding L3 and L4
+% \item If we have a system with the refined CXL fabrics with proper L3 and L4, then what kind of abstraction should we use to program this kind of disaggregated system? -> active network
+% \end{itemize}
+% \stingw{Topology-aware congest:}
+%\noindent \textbf{Overview:}
+
+%--------------------------%--------------------------%--------------------------%--------------------------%--------------------------%
+%
+% Also, these devices usually have limited buffer space to store incoming data from the fabric. 
+% %
+% Shallow buffer has smaller headroom to absorb bursts of data before pausing and congesting the link
+% %
+% This motivates exploring multiple paths to route around links with lower bandwidth or other undesirable property. 
+
+% how routing can take congestion and multi-path into consideration.
+% \stingw{Topology-aware multi-path routing:}
+% -> Multiple paths can be found on Dragonfly in ~\cite{aquila:nsdi:2022} and some other HPC used topology.
+% -> From the datacenter literature, ECMP spraying packet to alleviate possible congestion on Clos based topology. (indirect topology)
+% -> Dragonfly topology with more direct node-to-node links. 
+
+% What's the difference and shortcoming of CXL fabrics compared to exitsing network?
+% 1. CXL fabric is different from the current network like Ethernet or Infiniband as its end points/pass-through points are devices may have none to little power of general purpose compute. The entire stack of this network is hardware based. The congestion control algorithm needs to be implemented with little hardware addition on top of PCIe.
+% 2. CPU is still needed here but it does not need to be an endpoint but for setting up/tearing down the flow.
+
+% After establishing CXL after refinement could be a good network, we should argue about how we should program it. we should consider active network.
+% \begin{itemize}
+% \item why are we using active network as the inspiration? Active network has the idea of embedding compute into the fabric if the compute is better to be performed on the fabric rather than on end-host CPU.
+% \item Accelerator and device as the major residents on the fabric instead of a large amount of powerful general-purpose CPU cores.
+% \item Accelerator and device like network switches are programmable but not general-purpose. They don't have the control structure to hold or terminate a flow or connection in anyway.
+% \item We want an abstraction capturing data movement and related compute with it.
+% \item If we want to implement ActiveCXL, what are the missing pieces from CXL spec and current supported hardware?
+% \item $\rightarrow$
+% (1) flow as an abstraction for applications to reason about,
+% (2) capability as a way for distributed control flow?
+% (3) Discrete switch style to load large program on accelerators and capsule style for smaller programs and loaded large programs,
+% (4) packet framing on top of CXL packets for meaningful execution,
+% (5) capsules for data transformation and loaded kernels on accelerators,
+% (6) CPU cores still hold the control information for the setup and tear-down of the flows but they are completely off the data path to avoid becoming bottlenecks.
+% \end{itemize}
+
+% CXL presents a lossless fabric with its point-to-point flow control. 
+% %
+% CXL requires a hardware implementation as devices do not always have general purpose CPU core to run the congestion control algorithm. 
+% %
+% Some of CXL devices do not have the ability to determine its injection rate as they are directed by the CPU as a subordinate.
+% %
+% Also, CXL interface has small buffer to store its  
+
+
+%
+% \stingw{dragonfly just leave it in the discussion, saying we need higher radix}
+% Path diversity!
+% \stingw{first, ECMP}
+% On the inter-switch level:
+% \stingw{topological specific solution -> ECMP if in the case of Clos}
+% "An equal-cost multipath (ECMP) set is formed when the routing table contains multiple next-hop addresses for the same destination with equal cost. (Routes of equal cost have the same preference and metric values.) If there is an ECMP set for the active route, Junos OS uses a hash algorithm to choose one of the next-hop addresses in the ECMP set to install in the forwarding table."
+
+%"The PBR Edge request port shall decode the request HPA to determine the DPID of the target GFD, using the Fabric Address Segment Table (FAST) and the Interleave DPID Table (IDT)"
+
+% end-to-end level consideration
+% Explain the control plane overhead: 
+% 1. storing more routes on the switch -> maintain a cache and swap the route in when it's not available
+% 2. The routes are only needed to be re-populated when switch failure or device removal on a fabric manager
+% 3. maintain link congestion level in a table when multiple routes are presented 
+% %
+% explain data plane overhead:
+% 1. lookup queuing situation on outgoing inter-switch links
+% %
+% Usually the fabric manager populates the routes in a SDN-style.
+% in the case of performance reroute, device   
+% (1) switch maintains additional fabric based memory buffer as alternative destination 
+% (2) when reroute happens, 
+% slow path: switch notify the fabric manager, the fabric manager asks the destination to pull/read from the fabric buffer
+
+%\stingw{how do we use rate throttling?}
+% \stingw{define autonomous device somewhere earlier?}
+% Rate throttling ideally will be implemented as hardware on CXL interface for "autonomous" devices that are able to initiate CXL requests.
+% Compared to solely doing on host, this improves the control responsiveness and make these device autonomous.  
+
+
+\section{Evaluation of \aurelia's Design}
+\label{sec:cc-design}
+%
+We simulate the design of \aurelia because CXL hardware supporting CXL fabric is not available to the author at the time of writing.
+% 
+The simulation setup and parameters are cross-checked with public available reports~\cite{pond:asplos:2023, demystifying-cxl:micro:2023,h3platform-cxl-memory}. 
+%
+Our reported numbers are calibrated with H3 platform's CXL memory expansion chassis~\cite{h3platform-cxl-memory}. The difference between our simulation and the reported numbers are within 5\%.
+
+\subsection{Packet-level Simulation with ns-3}
+We use NS3~\cite{ns-3} to simulate packet level behavior on a CXL fabric.
+%  
+NS3 is a discrete-event network simulator that is open-sourced and well-established in the research community. 
+%
+Previous implementations of lossless fabric using ns-3 are focused on RDMA over Converged Ethernet (RoCE)~\cite{dcqcn:sigcomm:2015, hpcc:sigcomm:2019,pint:sigcomm:2020}.
+%
+These implementations are not usable for CXL fabrics. 
+%
+They assume the usage of Ethernet, IP, and the RDMA interface cards.
+%
+CXL fabrics assumes none of those as the devices on the fabric issue load/store instructions directly.  
+%  
+Our implementation uses the primitive, built-in NS3 classes and starts from scratch. 
+%
+It simulates CXL's transaction layer and link layer in 256B filt mode.
+%
+This assumes an underlying PCIe 6.0 physical layer with its forward error correction are fully controlled by the hardware.     
+%
+All channels of CXL.mem and CXL.cache are supported.
+%
+\stingw{Maybe we need more description of CXL layers}
+Packing of CXL.mem and CXL.cache messages are implemented to ensure the number of packets on the fabric are accurate.  
+%
+CXL.io functionalities are partially supported as needed.       
+%
+It enables multi-level switching by extending CXL's port-based routing with~\aurelia's additional mechanism.  
+
+\subsection{Simulation Results on YCSB Benchmarks}
+\TODO{CC results with ns-3 simulation}
+
+%\section{Additional Fabric Enhancement Consideration}
+\section{Discussion}
+\label{sec:discussion}
+%\TODO{extending discussion for 6-page HotNets}
+% \noindent \textbf{The scale and economic of CXL fabric}
+% how large should we scale CXL fabric to be still cost-effective~\cite{pond:asplos:2023}?
+% Pond dem
+\noindent \textbf{Alternatives: NVLink and PCIe fabric.}
+%\TODO{Clean up the text here!}
+% \stingw{Here to add NVLink + GH-200 discussion. 
+% NVLink is propriety and has a narrower usage even with GH-200.
+% GH-200 with NVLink is at most a CXL type-2 usage.
+% }
+%\stingw{All these alternatives are not designed to be as general as CXL}
+%
+% Alternative interconnects are designed for specific use cases, and they lack of the generality of CXL. 
+% 
+NVLink is an interconnect by Nvidia for high throughput between GPUs~\cite{nvlink}. NVLink supports GPU-CPU interconnect with cache coherency on the recent Grace-Hopper 200 hardware~\cite{dgx-gh200}. 
+%
+NVLink presents an interesting alternative to CXL but has three limitations. 
+%
+First, NVLink with its cache coherent extension in fact supports GPUs as CXL type 2 devices. However, it does not support CXL type 3 devices that expand memory independent of the main memory capacity. The capability to scale memory capacity is attractive for memory-hungry large language models~\cite{gpt3:neurips:2020,llama:arxiv:2023}. 
+%%NVLink with its cache coherent extension presents an alternative of CXL Type2 interconnect.   
+%
+Second, NVLink scales to 256 endpoints though connects only GPUs as endpoints~\cite{dgx-superpod}. 
+%\stingw{Third, NVLink itself does not scale beyond 8 or 16 GPUs on a server.}
+Third, NVLink as a propriety interconnect limits its usage beyond Nvidia's hardware.
+%
+PCIe using Non-Transparent Bridge (NTB) expands beyond a single root complex to multiple hosts as a fabric with many more connected devices~\cite{pcie-spec}. 
+%
+%PCIe transactions mapped to NTB’s specific memory range are forwarded
+%with address translation to the destination host.   
+%
+% Using NTB with a shared address space spanning all hosts and their devices enables devices to directly communicate with point-to-point DMA over PCIe fabric~\cite{gigaio-fabrex}.
+%
+However, PCIe, included in CXL as CXL.io, lacks the memory and caching semantics that are much needed in the face of accelerator and memory expansion. 
+%
+This is exactly the reason that motivates the creation of CXL.
+%
+Both NVLink and PCIe fabric show a fabric supporting a subset of CXL's use cases but not all of it.    
+%
+%\stingw{why not hooking Ethernet directly to each device?}
+
+\noindent \textbf{Co-existence of CXL and Ethernet.}
+Given the scaling discussion, CXL is still unlikely to completely replace Ethernet in the datacenter due to its current PCIe based physical layer design. 
+%
+We speculate CXL fabric is beneficial on rack-scale because of the signal integrity and CXL switch hardware cost. 
+%
+CXL fabric is not intended to replace existing Ethernet completely but as a cost-effective alternative on the rack level. 
+%
+CXL packets are converted to Ethernet frames at a location equivalent to a top-of-rack switch for cross-rack traffic.
+%
+Previous work investigating the co-existence of Ethernet and a memory fabric follows a similar approach~\cite{aquila:nsdi:2022}.
+
+%\stingw{Interconnect comparison: NVLink + C2C, other inter core interconnect, PCIe, CXL}
+\noindent \textbf{Cost-effective scales of CXL fabric:}
+%\noindent \textbf{Co-existence of CXL and Ethernet.}
+% \stingw{how large should we scale CXL fabric to be still cost-effective~\cite{pond:asplos:2023}?}
+%
+CXL is an exciting technology but it comes with its limitations.
+%
+First, CXL requires retimer to maintain its signal integrity after 500 mm distance~\cite{microchip-cxl-retimer,asteralabs-pcie-retimer}. The retimer raises the hardware cost and incurs extra 20 ns latency every 500 ~\cite{pond:asplos:2023}.
+%
+Second, to scale CXL supporting multi-level switching, multiple CXL switches are used. They cause an estimated 70 ns latency for each hop over a switch.
+%
+Considering the combined cost of switches, retimers and additional memory controllers, Pond~\cite{pond-saving:ieee-micro:2023} suggests a
+scale smaller than 32-socket for their memory expansion usage (Shown in Figure~\ref{fig:kvs-cxl}).
+%
+However, the exact scale of cost-effective CXL fabric for model training and HPC usage (Shown in Figure~\ref{fig:ml-acc-cxl}) remains to be determined in future works. 
+%
+%Pond also suggests the exact scale of a cost-effective CXL fabric depends highly on the workload, e.g. Pond's memory expansion usage for VM on public cloud.
+
+% \stingw{CXL is not a solution for everything. It has signal integrity limits that making it scale beyond not cost-effective and with bloated latency by these intermediate retimers and switches.}
+%
+% \stingw{Pond suggest 8-socket for the use case is shown as Figure 1-(b). Pond also said that the exact scale depends on the workload. If the workload can tolerate higher latency or has a clear and predictable memory access pattern, then the scale of CXL can be larger if it's cost-effective.}
+%    
+
+\noindent \textbf{Topologies and multipathing.}
+The flexible topology of CXL fabric empowers the fabric operator to optimize their topology based on the traffic pattern. 
+%
+The to-be-released CXL 3.1 will support native multipathing. Topologies with high path diversity such as Dragonfly can be easily implemented with CXL's multipathing. 
+%
+Packet spraying and ECMP on Fat-tree related topologies can be benefited from this as well.
+%
+With CXL switch prototype supporting 32-port ~\cite{xconn-cxl2-switch}, we expect these higher radix switches to enable us to explore different design options.
+%
+For example, the fabric operator can assign a high over-subscription ratio if the traffic pattern demonstrates high localities under a CXL switch. 
+%
+As another example, the fabric operator can add or reduce the bandwidth of certain CXL to better match the bandwidth to the actual demand between particular nodes. 
+
+\noindent \textbf{Security implication: Delay based side channel.}
+CXL fabric exposes the server interconnect to a shared fabric that may contain malicious devices.
+%
+The fabric exposes a delay-based side channel caused by interconnect congestion.
+%
+This side channel enables attackers to recover information from different delay patterns. 
+%
+Previous works~\cite{invisible-probe:oaklnad:2021} investigate the same issue with PCIe on a server. 
+%
+CXL fabric enlarges the attack interface by leaving all devices vulnerable to delay probing.
+%
+Delay probing requires accurate timing measurement.
+%
+CXL's usage of direct load/store makes it easy for attacker to acquire accurate timing of every memory load/store. 
+%
+Defense against this specific type of side channel attack is interesting for future security research. 
+%
+% [23] M. Kurth, B. Gras, D. Andriesse, C. Giuffrida, H. Bos, and K. Razavi, “Netcat: Practical cache attacks from the network,” in Proceedings of IEEE Security & Privacy 2020. IEEE, 2020.
+% [24] S.-Y. Tsai, M. Payer, and Y. Zhang, “Pythia: remote oracles for the masses,” in 28th USENIX Security Symposium (USENIX Security 19), 2019,
+% Irazoqui et al. also conducted cross-CPU attacks on the CPU interconnect [89]
+
+% \noindent \textbf{Topologies and multipathing with CXL 3.1.}
+% The to-be-released CXL 3.1 will support native multipathing. Topologies with high path diversity such as Dragonfly~\cite{} can be easily implemented with CXL's multipathing. 
+% %
+% Packet spraying and ECMP on Fat-tree related topologies can be benefited from this as well.
+%
+% \stingw{Yes CXL 3.1 is pending to have native multi-path support. But how could that be useful? it could be useful for dragonfly that is useful for HPC communication patterns. 
+% cite "High-Performance Routing with Multipathing and Path Diversity in Supercomputers and Data Centers" for their non-minimal multipath
+%
+% It could be another way to implement 
+% 5. higher radix -> different topology dragonfly  % -> VLB in the case direct connected topology 
+%}
+
+% \begin{comment}
+% The biggest challenge and our focus in building LegoOS is the separation of processor and memory and
+% their management. Modern processors and OSes assume
+% all hardware memory units including main memory, page
+% tables, and TLB are local. Simply moving all memory
+% hardware and memory management software to across
+% the network will not work
+% \end{comment}
+
+% \noindent \textbf{Interconnect Integration.}
+% %
+% %PCIe, as the wildly adopted option, supports fabric switching for expandability as an ideal interconnect. 
+% %
+% %The limitation of PCIe is that a single fabric can only have a single root except when using Non-Transparent Bridge (NTB).
+% %
+% PCIe's Non-Transparent Bridge (NTB) enables PCIe to expand to multiple hosts with more than one PCIe root complex. 
+% %
+% %NTB is not a bridge but an end-point device with its PCIe BAR address range. 
+% %
+% Operations mapped to NTB's specific memory range are forwarded with address translation
+% %through the NTB along with address translation as the other host uses a different address space
+% ~\cite{hou:hpca:2013,smartio:tocs:2021}. 
+% %
+% %The address translation of NTB can be further integrated into a PCIe fabric switch.
+% %
+% Using a shared address space across all devices 
+% %with address translation 
+% enables devices to directly communicate with point-to-point DMA over PCIe fabric~\cite{gigaio-pcie-swtich}.
+% %
+% CXL 3.0 introduces fabric switching 
+% %and further cache coherency 
+% to connect racks of devices and accelerators~\cite{cxl-3-0-spec}. This allows CXL to seamlessly connect accelerators on different servers.    
+% %
+% DUA~\cite{dua:nsdi:2019} provides an overlay fabric on top of the existing physical communication stacks, e.g., PCIe, Ethernet, DDR, etc.
+
+
+
+% \stingw{fabric is exposed instead of having a confined interconnect. do we have higher risk of getting side channel attack and other secruity risks?}
+% \begin{enumerate}                
+%     \item how large should we scale CXL fabric to be still cost-effective~\cite{pond:asplos:2023}.    
+%     -> CXL offers higher bandwidth than Ethernet as accelerators drive large throughput
+%     -> it doesn't need the PCIe-Ethernet conversion through NIC. cutting cost and removing potential bottleneck.
+%     \item What's the use of Ethernet and its compatibility CXL fabric in datacenter~\cite{aquila:nsdi:2022}. 
+%     -> Swtich deisgn can be discussed like Aquila's TiN.    
+%     \item Swapping fat-tree direct-connected tooplogy like Dragonfly if we have higher radix switches. memory access latency advantage shown in~\cite{aquila:nsdi:2022}. 
+%     \item Native support of collective operations, it'll be useful for accelertator and HPC.
+%     \item Programmability
+%     a. we have programmable dataplane on the regular network for processing on the packets that needs to happen on the line rate
+%     b. can we reproduce that here? 
+%     c. possible use cases: load balancing, fine grain memory protection, data manipulation  
+%     \item some security~\cite{invisible-probe:oaklnad:2021}
+%     %\item Fat-tree with oversubscription % is out of the scope of this preliminary study.
+%     %\item software stack compatibility?    
+%     %\item multi-casting
+
+%     %\item traffic pattern of memory and cache invalidation is pretty unknown
+%     %\item accelerators are everywhere, what's the benefit of sticking them onto CXL fabric?
+%     %\item other abstraction other than active network that still makes sense?
+%     %\item memory fabric or a general purpose rack-scale fabric
+% \end{enumerate}
+
+%CXL controlled random graph -> optimization graph workload  
+
+% \begin{comment}
+% cite Understanding Host Interconnect Congestion?
+
+% CXL-fabric+
+% 1. deadlock avoidance
+% 2. Native support of collective operations, it'll be useful for accelertator and HPC. (multi-casting)
+% 3. Programmability
+%     a. we have programmable dataplane on the regular network for processing on the packets that needs to happen on the line rate
+%     b. can we reproduce that here? 
+%     c. possible use cases: load balancing, fine grain memory protection, data manipulation  
+% 4. Monitoring
+% 5. higher radix -> different topology dragonfly  % -> VLB in the case direct connected topology 
+% cite "High-Performance Routing with Multipathing and Path Diversity in Supercomputers and Data Centers" for their non-minimal multipath
+% \end{comment}
+
+%
+% 1. CXL can have any topology, what kind of topology can provide good multi-path with low cost?
+% Multiple paths can be found on Dragonfly in ~\cite{aquila:nsdi:2022} and some other HPC used topology.
+% %
+% 2. Dragonfly tried to reduce long optical links to save cost. The same rationale actually applies to CXL fabric too.
+% This is because CXL is based on PCIe physical layer, long links can be problematic as it’ll need additional retimers or redrivers to improve signal integrity. These retimers or redrivers will drive up latency and most importantly cost of CXL deployment.
+% %
+% 3. Clos-topology (indirect) has many hops and longer cables which may need  retimers or redrivers too.
+% %
+% 4. so prefer direct topology like Dragonfly (at least for now). This remains room for optimization.
+
+% \stingw{any topology variant that is more tailor-made to CXL fabric's workload characteristics? 
+%     -> high radix or low radix CXL switch in the future?}

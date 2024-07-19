@@ -1,0 +1,812 @@
+@inproceedings{pint:sigcomm:2020,
+author = {Ben Basat, Ran and Ramanathan, Sivaramakrishnan and Li, Yuliang and Antichi, Gianni and Yu, Minian and Mitzenmacher, Michael},
+title = {PINT: Probabilistic In-band Network Telemetry},
+year = {2020},
+optabstract = {Commodity network devices support adding in-band telemetry measurements into data packets, enabling a wide range of applications, including network troubleshooting, congestion control, and path tracing. However, including such information on packets adds significant overhead that impacts both flow completion times and application-level performance.We introduce PINT, an in-band network telemetry framework that bounds the amount of information added to each packet. PINT encodes the requested data on multiple packets, allowing per-packet overhead limits that can be as low as one bit. We analyze PINT and prove performance bounds, including cases when multiple queries are running simultaneously. PINT is implemented in P4 and can be deployed on network devices.Using real topologies and traffic characteristics, we show that PINT concurrently enables applications such as congestion control, path tracing, and computing tail latencies, using only sixteen bits per packet, with performance comparable to the state of the art.},
+booktitle = {Proceedings of the Annual Conference of the ACM Special Interest Group on Data Communication on the Applications, Technologies, Architectures, and Protocols for Computer Communication},
+optseries = {SIGCOMM '20}
+}
+
+@inproceedings{hpcc:sigcomm:2019,
+author = {Li, Yuliang and Miao, Rui and Liu, Hongqiang Harry and Zhuang, Yan and Feng, Fei and Tang, Lingbo and Cao, Zheng and Zhang, Ming and Kelly, Frank and Alizadeh, Mohammad and Yu, Minlan},
+title = {HPCC: high precision congestion control},
+year = {2019},
+optabstract = {Congestion control (CC) is the key to achieving ultra-low latency, high bandwidth and network stability in high-speed networks. From years of experience operating large-scale and high-speed RDMA networks, we find the existing high-speed CC schemes have inherent limitations for reaching these goals. In this paper, we present HPCC (High Precision Congestion Control), a new high-speed CC mechanism which achieves the three goals simultaneously. HPCC leverages in-network telemetry (INT) to obtain precise link load information and controls traffic precisely. By addressing challenges such as delayed INT information during congestion and overreac-tion to INT information, HPCC can quickly converge to utilize free bandwidth while avoiding congestion, and can maintain near-zero in-network queues for ultra-low latency. HPCC is also fair and easy to deploy in hardware. We implement HPCC with commodity programmable NICs and switches. In our evaluation, compared to DCQCN and TIMELY, HPCC shortens flow completion times by up to 95\%, causing little congestion even under large-scale incasts.},
+booktitle = {Proceedings of the ACM Special Interest Group on Data Communication},
+optseries = {SIGCOMM '19}
+}
+
+@inproceedings{megatron-lm-training:sc:2021,
+  title={Efficient large-scale language model training on gpu clusters using megatron-lm},
+  author={Narayanan, Deepak and Shoeybi, Mohammad and Casper, Jared and LeGresley, Patrick and Patwary, Mostofa and Korthikanti, Vijay and Vainbrand, Dmitri and Kashinkunti, Prethvi and Bernauer, Julie and Catanzaro, Bryan and others},
+  booktitle={Proceedings of the International Conference for High Performance Computing, Networking, Storage and Analysis},
+  year={2021}
+}
+
+@inproceedings{esti:mlsys:2023,
+author={Pope, Reiner and Douglas, Sholto and Chowdhery, Aakanksha and Devlin, Jacob and Bradbury, James and Heek, Jonathan and Xiao, Kefan and Agrawal, Shivani and Dean, Jeff},
+ booktitle = {Proceedings of Machine Learning and Systems},
+ title = {Efficiently Scaling Transformer Inference},
+ opturl = {https://proceedings.mlsys.org/paper_files/paper/2023/hash/523f87e9d08e6071a3bbd150e6da40fb-Abstract-mlsys2023.html},
+ volume = {4},
+ year = {2022}
+}
+
+@inproceedings{gpt3:neurips:2020,
+ author = {Brown, Tom and Mann, Benjamin and Ryder, Nick and Subbiah, Melanie and Kaplan, Jared D and Dhariwal, Prafulla and Neelakantan, Arvind and Shyam, Pranav and Sastry, Girish and Askell, Amanda and Agarwal, Sandhini and Herbert-Voss, Ariel and Krueger, Gretchen and Henighan, Tom and Child, Rewon and Ramesh, Aditya and Ziegler, Daniel and Wu, Jeffrey and Winter, Clemens and Hesse, Chris and Chen, Mark and Sigler, Eric and Litwin, Mateusz and Gray, Scott and Chess, Benjamin and Clark, Jack and Berner, Christopher and McCandlish, Sam and Radford, Alec and Sutskever, Ilya and Amodei, Dario},
+ booktitle = {Advances in Neural Information Processing Systems},
+ editor = {H. Larochelle and M. Ranzato and R. Hadsell and M.F. Balcan and H. Lin},
+ title = {Language Models are Few-Shot Learners},
+ opturl = {https://proceedings.neurips.cc/paper_files/paper/2020/file/1457c0d6bfcb4967418bfb8ac142f64a-Paper.pdf},
+ year = {2020}
+}
+
+@misc{llama:arxiv:2023,
+      title={LLaMA: Open and Efficient Foundation Language Models}, 
+      author={Hugo Touvron and Thibaut Lavril and Gautier Izacard and Xavier Martinet and Marie-Anne Lachaux and Timothée Lacroix and Baptiste Rozière and Naman Goyal and Eric Hambro and Faisal Azhar and Aurelien Rodriguez and Armand Joulin and Edouard Grave and Guillaume Lample},
+      year={2023},
+      eprint={2302.13971},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
+}
+
+@inproceedings{hou:hpca:2013,
+  author={Hou, Rui and Jiang, Tao and Zhang, Liuhang and Qi, Pengfei and Dong, Jianbo and Wang, Haibin and Gu, Xiongli and Zhang, Shujie},
+  booktitle={HPCA}, 
+  title={Cost Effective Data Center Servers}, 
+  year={2013}
+}
+
+@inproceedings{snap:sosp:2019,
+title	= {Snap: a Microkernel Approach to Host Networking},
+author	= {Michael Marty and Marc de Kruijf and Jacob Adriaens and Christopher Alfeld and Sean Bauer and Carlo Contavalli and Mike Dalton and Nandita Dukkipati and William C. Evans and Steve Gribble and Nicholas Kidd and Roman Kononov and Gautam Kumar and Carl Mauer and Emily Musick and Lena Olson and Mike Ryan and Erik Rubow and Kevin Springborn and Paul Turner and Valas Valancius and Xi Wang and Amin Vahdat},
+year	= {2019},
+booktitle	= {ACM SIGOPS 27th Symposium on Operating Systems Principles},
+}
+
+@inproceedings {canvas:nsdi:2023,
+author = {Chenxi Wang and Yifan Qiao and Haoran Ma and Shi Liu and Wenguang Chen and Ravi Netravali and Miryung Kim and Guoqing Harry Xu},
+title = {Canvas: Isolated and Adaptive Swapping for {Multi-Applications} on Remote Memory},
+booktitle = {20th USENIX Symposium on Networked Systems Design and Implementation (NSDI 23)},
+year = {2023},
+month = apr,
+}
+
+@inproceedings {leap:atc:2020,
+author = {Hasan Al Maruf and Mosharaf Chowdhury},
+title = {Effectively Prefetching Remote Memory with Leap},
+booktitle = {2020 USENIX Annual Technical Conference (USENIX ATC 20)},
+year = {2020},
+month = jul,
+}
+
+@inproceedings {remote-regions:atc:2018,
+author = {Marcos K. Aguilera and Nadav Amit and Irina Calciu and Xavier Deguillard and Jayneel Gandhi and Stanko Novakovi{\'c} and Arun Ramanathan and Pratap Subrahmanyam and Lalith Suresh and Kiran Tati and Rajesh Venkatasubramanian and Michael Wei},
+title = {Remote regions: a simple abstraction for remote memory},
+booktitle = {2018 USENIX Annual Technical Conference (USENIX ATC 18)},
+year = {2018},
+month = jul,
+}
+
+@inproceedings {hydra:fast:2022,
+author = {Youngmoon Lee and Hasan Al Maruf and Mosharaf Chowdhury and Asaf Cidon and Kang G. Shin},
+title = {Hydra : Resilient and Highly Available Remote Memory},
+booktitle = {20th USENIX Conference on File and Storage Technologies (FAST 22)},
+year = {2022},
+month = feb,
+}
+
+@inproceedings {carbink:osdi:2022,
+author = {Yang Zhou and Hassan M. G. Wassel and Sihang Liu and Jiaqi Gao and James Mickens and Minlan Yu and Chris Kennelly and Paul Turner and David E. Culler and Henry M. Levy and Amin Vahdat},
+title = {Carbink: {Fault-Tolerant} Far Memory},
+booktitle = {16th USENIX Symposium on Operating Systems Design and Implementation (OSDI 22)},
+year = {2022},
+month = jul,
+}
+
+@inproceedings {aifm:osdi:2020,
+author = {Zhenyuan Ruan and Malte Schwarzkopf and Marcos K. Aguilera and Adam Belay},
+title = {{AIFM}: {High-Performance}, {Application-Integrated} Far Memory},
+booktitle = {14th USENIX Symposium on Operating Systems Design and Implementation (OSDI 20)},
+year = {2020},
+}
+
+@inproceedings{far-memory:eurosys:2020,
+author = {Amaro, Emmanuel and Branner-Augmon, Christopher and Luo, Zhihong and Ousterhout, Amy and Aguilera, Marcos K. and Panda, Aurojit and Ratnasamy, Sylvia and Shenker, Scott},
+title = {Can Far Memory Improve Job Throughput?},
+year = {2020},
+optabstract = {As memory requirements grow, and advances in memory technology slow, the availability of sufficient main memory is increasingly the bottleneck in large compute clusters. One solution to this is memory disaggregation, where jobs can remotely access memory on other servers, or far memory. This paper first presents faster swapping mechanisms and a far memory-aware cluster scheduler that make it possible to support far memory at rack scale. Then, it examines the conditions under which this use of far memory can increase job throughput. We find that while far memory is not a panacea, for memory-intensive workloads it can provide performance improvements on the order of 10% or more even without changing the total amount of memory available.},
+booktitle = {Proceedings of the Fifteenth European Conference on Computer Systems},
+optlocation = {Heraklion, Greece},
+optseries = {EuroSys '20}
+}
+
+
+@inproceedings {xstore:osdi:2020,
+author = {Xingda Wei and Rong Chen and Haibo Chen},
+title = {Fast {RDMA-based} Ordered {Key-Value} Store using Remote Learned Cache},
+booktitle = {14th USENIX Symposium on Operating Systems Design and Implementation (OSDI 20)},
+year = {2020},
+month = nov,
+}
+
+@inproceedings {farm:nsdi:2014,
+author = {Aleksandar Dragojevi{\'c} and Dushyanth Narayanan and Miguel Castro and Orion Hodson},
+title = {{FaRM}: Fast Remote Memory},
+booktitle = {11th USENIX Symposium on Networked Systems Design and Implementation (NSDI 14)},
+year = {2014},
+month = apr,
+}
+
+@inproceedings{herd:sigcomm:2014,
+author = {Kalia, Anuj and Kaminsky, Michael and Andersen, David G.},
+title = {Using RDMA Efficiently for Key-Value Services},
+year = {2014},
+optabstract = {This paper describes the design and implementation of HERD, a key-value system designed to make the best use of an RDMA network. Unlike prior RDMA-based key-value systems, HERD focuses its design on reducing network round trips while using efficient RDMA primitives; the result is substantially lower latency, and throughput that saturates modern, commodity RDMA hardware.HERD has two unconventional decisions: First, it does not use RDMA reads, despite the allure of operations that bypass the remote CPU entirely. Second, it uses a mix of RDMA and messaging verbs, despite the conventional wisdom that the messaging primitives are slow. A HERD client writes its request into the server's memory; the server computes the reply. This design uses a single round trip for all requests and supports up to 26 million key-value operations per second with 5μs average latency. Notably, for small key-value items, our full system throughput is similar to native RDMA read throughput and is over 2X higher than recent RDMA-based key-value systems. We believe that HERD further serves as an effective template for the construction of RDMA-based datacenter services.},
+booktitle = {Proceedings of the 2014 ACM Conference on SIGCOMM},
+optkeywords = {key-value stores, RDMA, ROCE, infiniband},
+optlocation = {Chicago, Illinois, USA},
+optseries = {SIGCOMM '14}
+}
+
+@inproceedings {eRPC:nsdi:2019,
+author = {Anuj Kalia and Michael Kaminsky and David Andersen},
+title = {Datacenter {RPCs} can be General and Fast},
+booktitle = {16th USENIX Symposium on Networked Systems Design and Implementation (NSDI 19)},
+year = {2019},
+month = feb,
+}
+
+@misc{zero:arxiv:2020,
+      title={ZeRO: Memory Optimizations Toward Training Trillion Parameter Models}, 
+      author={Samyam Rajbhandari and Jeff Rasley and Olatunji Ruwase and Yuxiong He},
+      year={2020},
+      eprint={1910.02054},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG}
+}
+
+@misc{hpc-disagg-mem:arxiv:2023,
+      title={Evaluating the Potential of Disaggregated Memory Systems for HPC applications}, 
+      author={Nan Ding and Pieter Maris and Hai Ah Nam and Taylor Groves and Muaaz Gul Awan and LeAnn Lindsey and Christopher Daley and Oguz Selvitopi and Leonid Oliker and Nicholas Wright and Samuel Williams},
+      year={2023},
+      eprint={2306.04014},
+      archivePrefix={arXiv},
+}
+
+@inproceedings{mpi-usage:sc:2019,
+author = {Laguna, Ignacio and Marshall, Ryan and Mohror, Kathryn and Ruefenacht, Martin and Skjellum, Anthony and Sultana, Nawrin},
+title = {A Large-Scale Study of MPI Usage in Open-Source HPC Applications},
+year = {2019},
+optabstract = {Understanding the state-of-the-practice in MPI usage is paramount for many aspects of supercomputing, including optimizing the communication of HPC applications and informing standardization bodies and HPC systems procurements regarding the most important MPI features. Unfortunately, no previous study has characterized the use of MPI on applications at a significant scale; previous surveys focus either on small data samples or on MPI jobs of specific HPC centers. This paper presents the first comprehensive study of MPI usage in applications. We survey more than one hundred distinct MPI programs covering a significantly large space of the population of MPI applications. We focus on understanding the characteristics of MPI usage with respect to the most used features, code complexity, and programming models and languages. Our study corroborates certain findings previously reported on smaller data samples and presents a number of interesting, previously un-reported insights.},
+booktitle = {Proceedings of the International Conference for High Performance Computing, Networking, Storage and Analysis},
+optlocation = {Denver, Colorado},
+optseries = {SC '19}
+}
+
+@article{double-tree-allreduce:parallel-computing:2009,
+  title={Two-tree algorithms for full bandwidth broadcast, reduction and scan},
+  author={Sanders, Peter and Speck, Jochen and Tr{\"a}ff, Jesper Larsson},
+  journal={Parallel Computing},
+  volume={35},
+  number={12},
+  pages={581--594},
+  year={2009},
+  publisher={Elsevier}
+}
+
+@inproceedings{scale-out:isca:2012,
+author = {Lotfi-Kamran, Pejman and Grot, Boris and Ferdman, Michael and Volos, Stavros and Kocberber, Onur and Picorel, Javier and Adileh, Almutaz and Jevdjic, Djordje and Idgunji, Sachin and Ozer, Emre and Falsafi, Babak},
+title = {Scale-out Processors},
+year = {2012},
+optabstract = {Scale-out datacenters mandate high per-server throughput to get the maximum benefit from the large TCO investment. Emerging applications (e.g., data serving and web search) that run in these datacenters operate on vast datasets that are not accommodated by on-die caches of existing server chips. Large caches reduce the die area available for cores and lower performance through long access latency when instructions are fetched. Performance on scale-out workloads is maximized through a modestly-sized last-level cache that captures the instruction footprint at the lowest possible access latency.In this work, we introduce a methodology for designing scalable and efficient scale-out server processors. Based on a metric of performance-density, we facilitate the design of optimal multi-core configurations, called pods. Each pod is a complete server that tightly couples a number of cores to a small last-level cache using a fast interconnect. Replicating the pod to fill the die area yields processors which have optimal performance density, leading to maximum per-chip throughput. Moreover, as each pod is a stand-alone server, scale-out processors avoid the expense of global (i.e., inter-pod) interconnect and coherence. These features synergistically maximize throughput, lower design complexity, and improve technology scalability. In 20nm technology, scale-out chips improve throughput by 5x-6.5x over conventional and by 1.6x-1.9x over emerging tiled organizations.},
+booktitle = {Proceedings of the 39th Annual International Symposium on Computer Architecture},
+optseries = {ISCA '12}
+}
+
+@inproceedings{cdr:micro:2015,
+author = {Fu, Yaosheng and Nguyen, Tri M. and Wentzlaff, David},
+title = {Coherence Domain Restriction on Large Scale Systems},
+year = {2015},
+optabstract = {Designing massive scale cache coherence systems has been an elusive goal. Whether it be on large-scale GPUs, future thousand-core chips, or across million-core warehouse scale computers, having shared memory, even to a limited extent, improves programmability. This work sidesteps the traditional challenges of creating massively scalable cache coherence by restricting coherence to flexible subsets (domains) of a system's total cores and home nodes. This paper proposes Coherence Domain Restriction (CDR), a novel coherence framework that enables the creation of thousand to million core systems that use shared memory while maintaining low storage and energy overhead. Inspired by the observation that the majority of cache lines are only shared by a subset of cores either due to limited application parallelism or limited page sharing, CDR restricts the coherence domain from global cache coherence to VM-level, application-level, or page-level. We explore two types of restriction, one which limits the total number of sharers that can access a coherence domain and one which limits the number and location of home nodes that partake in a coherence domain. Each independent coherence domain only tracks the cores in its domain instead of the whole system, thereby removing the need for a coherence scheme built on top of CDR to scale. Sharer Restriction achieves constant storage overhead as core count increases while Home Restriction provides localized communication enabling higher performance. Unlike previous systems, CDR is flexible and does not restrict the location of the home nodes or sharers within a domain. We evaluate CDR in the context of a 1024-core chip and in the novel application of shared memory to a 1,000,000-core warehouse scale computer. Sharer Restriction results in significant area savings, while Home Restriction in the 1024-core chip and 1,000,000-core system increases performance by 29\% and 23.04x respectively when comparing with global home placement. We implemented the entire CDR framework in a 25-core processor taped out in IBM's 32nm SOI process and present a detailed area characterization.},
+booktitle = {Proceedings of the 48th International Symposium on Microarchitecture},
+optseries = {MICRO-48}
+}
+
+@misc{ns-3,
+  title={ns-3},
+  howpublished = "\url{https://www.nsnam.org/}",
+}
+
+@inproceedings{demystifying-cxl:micro:2023,
+author = {Sun, Yan and Yuan, Yifan and Yu, Zeduo and Kuper, Reese and Song, Chihun and Huang, Jinghan and Ji, Houxiang and Agarwal, Siddharth and Lou, Jiaqi and Jeong, Ipoom and Wang, Ren and Ahn, Jung Ho and Xu, Tianyin and Kim, Nam Sung},
+title = {Demystifying CXL Memory with Genuine CXL-Ready Systems and Devices},
+year = {2023},
+optabstract = {The ever-growing demands for memory with larger capacity and higher bandwidth have driven recent innovations on memory expansion and disaggregation technologies based on Compute eXpress Link (CXL). Especially, CXL-based memory expansion technology has recently gained notable attention for its ability not only to economically expand memory capacity and bandwidth but also to decouple memory technologies from a specific memory interface of the CPU. However, since CXL memory devices have not been widely available, they have been emulated using DDR memory in a remote NUMA node. In this paper, for the first time, we comprehensively evaluate a true CXL-ready system based on the latest 4th-generation Intel Xeon CPU with three CXL memory devices from different manufacturers. Specifically, we run a set of microbenchmarks not only to compare the performance of true CXL memory with that of emulated CXL memory but also to analyze the complex interplay between the CPU and CXL memory in depth. This reveals important differences between emulated CXL memory and true CXL memory, some of which will compel researchers to revisit the analyses and proposals from recent work. Next, we identify opportunities for memory-bandwidth-intensive applications to benefit from the use of CXL memory. Lastly, we propose a CXL-memory-aware dynamic page allocation policy, Caption to more efficiently use CXL memory as a bandwidth expander. We demonstrate that Caption can automatically converge to an empirically favorable percentage of pages allocated to CXL memory, which improves the performance of memory-bandwidth-intensive applications by up to 24\% when compared to the default page allocation policy designed for traditional NUMA systems.},
+booktitle = {Proceedings of the 56th Annual IEEE/ACM International Symposium on Microarchitecture},
+optseries = {MICRO '23}
+}
+
+@misc{pcie-6-7,
+  title={PCIe 6.0 and 7.0},
+  howpublished = "\url{https://www.xda-developers.com/pcie-6-to-launch-in-2024-pcie-7-in-2027/}",
+}
+
+@misc{h3platform-cxl-memory,
+  title={Falcon C5022 of H3 Platform},
+  howpublished = "\url{https://www.h3platform.com/product-detail/overview/35}",
+}
+
+@misc{fabric-saving,
+  title={Fabric saving for GPU},
+  howpublished = "\url{https://gigaio.com/2023/01/gigaio-doubles-gpu-performance-at-a-30-cost-savings-with-intel-sapphire-rapids/}",
+}
+
+@misc{sdsc-nrp,
+  title={National Research Platform},
+  howpublished = "\url{https://www.sdsc.edu/support/user_guides/nrp.html}",
+}
+
+@misc{gigaio-pcie-swtich,
+	title = {GigaIO FabreX},
+	url={https://gigaio.com/wp-content/uploads/2022/01/GigaIO-FabreX-composability_v1-1.pdf},
+}
+
+@misc{gigaio-fabrex,
+  title={GigaIO Fabrex},
+  howpublished = "\url{https://gigaio.com/products/fabrex-system-overview/}",
+}
+
+@misc{intelliprop-omega,
+  title={Intelliprop Omega Fabric},
+  howpublished = "\url{https://www.intelliprop.com/products-page}",
+}
+
+@inproceedings{zionex:isca:2022,
+author = {Mudigere, Dheevatsa and Hao, Yuchen and Huang, Jianyu and Jia, Zhihao and Tulloch, Andrew and Sridharan, Srinivas and Liu, Xing and Ozdal, Mustafa and Nie, Jade and Park, Jongsoo and Luo, Liang and Yang, Jie (Amy) and Gao, Leon and Ivchenko, Dmytro and Basant, Aarti and Hu, Yuxi and Yang, Jiyan and Ardestani, Ehsan K. and Wang, Xiaodong and Komuravelli, Rakesh and Chu, Ching-Hsiang and Yilmaz, Serhat and Li, Huayu and Qian, Jiyuan and Feng, Zhuobo and Ma, Yinbin and Yang, Junjie and Wen, Ellie and Li, Hong and Yang, Lin and Sun, Chonglin and Zhao, Whitney and Melts, Dimitry and Dhulipala, Krishna and Kishore, KR and Graf, Tyler and Eisenman, Assaf and Matam, Kiran Kumar and Gangidi, Adi and Chen, Guoqiang Jerry and Krishnan, Manoj and Nayak, Avinash and Nair, Krishnakumar and Muthiah, Bharath and khorashadi, Mahmoud and Bhattacharya, Pallab and Lapukhov, Petr and Naumov, Maxim and Mathews, Ajit and Qiao, Lin and Smelyanskiy, Mikhail and Jia, Bill and Rao, Vijay},
+title = {Software-Hardware Co-Design for Fast and Scalable Training of Deep Learning Recommendation Models},
+year = {2022},
+optabstract = {Deep learning recommendation models (DLRMs) have been used across many business-critical services at Meta and are the single largest AI application in terms of infrastructure demand in its data-centers. In this paper, we present Neo, a software-hardware co-designed system for high-performance distributed training of large-scale DLRMs. Neo employs a novel 4D parallelism strategy that combines table-wise, row-wise, column-wise, and data parallelism for training massive embedding operators in DLRMs. In addition, Neo enables extremely high-performance and memory-efficient embedding computations using a variety of critical systems optimizations, including hybrid kernel fusion, software-managed caching, and quality-preserving compression. Finally, Neo is paired with ZionEX, a new hardware platform co-designed with Neo's 4D parallelism for optimizing communications for large-scale DLRM training. Our evaluation on 128 GPUs using 16 ZionEX nodes shows that Neo outperforms existing systems by up to 40\texttimes{} for training 12-trillion-parameter DLRM models deployed in production.},
+booktitle = {Proceedings of the 49th Annual International Symposium on Computer Architecture},
+optseries = {ISCA '22}
+}
+
+@inproceedings{pcie-bench:sigcomm:2018,
+author = {Neugebauer, Rolf and Antichi, Gianni and Zazo, Jos\'{e} Fernando and Audzevich, Yury and L\'{o}pez-Buedo, Sergio and Moore, Andrew W.},
+title = {Understanding PCIe Performance for End Host Networking},
+year = {2018},
+optabstract = {In recent years, spurred on by the development and availability of programmable NICs, end hosts have increasingly become the enforcement point for core network functions such as load balancing, congestion control, and application specific network offloads. However, implementing custom designs on programmable NICs is not easy: many potential bottlenecks can impact performance.This paper focuses on the performance implication of PCIe, the de-facto I/O interconnect in contemporary servers, when interacting with the host architecture and device drivers. We present a theoretical model for PCIe and pcie-bench, an open-source suite, that allows developers to gain an accurate and deep understanding of the PCIe substrate. Using pcie-bench, we characterize the PCIe subsystem in modern servers. We highlight surprising differences in PCIe implementations, evaluate the undesirable impact of PCIe features such as IOMMUs, and show the practical limits for common network cards operating at 40Gb/s and beyond. Furthermore, through pcie-bench we gained insights which guided software and future hardware architectures for both commercial and research oriented network cards and DMA engines.},
+booktitle = {Proceedings of the 2018 Conference of the ACM Special Interest Group on Data Communication},
+optseries = {SIGCOMM '18}
+}
+
+@article{pond-saving:ieee-micro:2023,
+  author={Berger, Daniel S. and Ernst, Daniel and Li, Huaicheng and Zardoshti, Pantea and Shah, Monish and Rajadnya, Samir and Lee, Scott and Hsu, Lisa and Agarwal, Ishwar and Hill, Mark D. and Bianchini, Ricardo},
+  journal={IEEE Micro}, 
+  title={Design Tradeoffs in CXL-Based Memory Pools for Public Cloud Platforms}, 
+  year={2023},
+}
+
+@inproceedings{zero-infinity:sc:2021,
+author = {Rajbhandari, Samyam and Ruwase, Olatunji and Rasley, Jeff and Smith, Shaden and He, Yuxiong},
+title = {ZeRO-Infinity: Breaking the GPU Memory Wall for Extreme Scale Deep Learning},
+year = {2021},
+optabstract = {In the last three years, the largest dense deep learning models have grown over 1000x to reach hundreds of billions of parameters, while the GPU memory has only grown by 5x (16 GB to 80 GB). Therefore, the growth in model scale has been supported primarily though system innovations that allow large models to fit in the aggregate GPU memory of multiple GPUs. However, we are getting close to the GPU memory wall. It requires 800 NVIDIA V100 GPUs just to fit a trillion parameter model for training, and such clusters are simply out of reach for most data scientists. In addition, training models at that scale requires complex combinations of parallelism techniques that puts a big burden on the data scientists to refactor their model.In this paper we present ZeRO-Infinity, a novel heterogeneous system technology that leverages GPU, CPU, and NVMe memory to allow for unprecedented model scale on limited resources without requiring model code refactoring. At the same time it achieves excellent training throughput and scalability, unencumbered by the limited CPU or NVMe bandwidth. ZeRO-Infinity can fit models with tens and even hundreds of trillions of parameters for training on current generation GPU clusters. It can be used to fine-tune trillion parameter models on a single NVIDIA DGX-2 node, making large models more accessible. In terms of training throughput and scalability, it sustains over 25 petaflops on 512 NVIDIA V100 GPUs (40\% of peak), while also demonstrating super linear scalability. An open source implementation of ZeRO-Infinity is available through DeepSpeed 1.},
+booktitle = {Proceedings of the International Conference for High Performance Computing, Networking, Storage and Analysis},
+optseries = {SC '21}
+}
+
+@inproceedings {zero-offload:atc:2021,
+author = {Jie Ren and Samyam Rajbhandari and Reza Yazdani Aminabadi and Olatunji Ruwase and Shuangyan Yang and Minjia Zhang and Dong Li and Yuxiong He},
+title = {{ZeRO-Offload}: Democratizing {Billion-Scale} Model Training},
+booktitle = {2021 USENIX Annual Technical Conference},
+year = {2021},
+}
+
+@inproceedings{deepspeed-inference:sc:2022,
+author = {Aminabadi, Reza Yazdani and Rajbhandari, Samyam and Awan, Ammar Ahmad and Li, Cheng and Li, Du and Zheng, Elton and Ruwase, Olatunji and Smith, Shaden and Zhang, Minjia and Rasley, Jeff and He, Yuxiong},
+title = {DeepSpeed-Inference: Enabling Efficient Inference of Transformer Models at Unprecedented Scale},
+year = {2022},
+optabstract = {The landscape of transformer model inference is increasingly diverse in model size, model characteristics, latency and throughput requirements, hardware requirements, etc. With such diversity, designing a versatile inference system is challenging. DeepSpeed-Inference addresses these challenges by (1) a multi-GPU inference solution to minimize latency while maximizing throughput for both dense and sparse transformers when the model fits in aggregate GPU memory, and (2) a heterogeneous inference solution that leverages CPU/NVMe/GPU memory to enable high-throughput inference for models larger than aggregate GPU memory. DeepSpeed-Inference reduces latency by 6.4\texttimes{} and increases throughput by 1.5\texttimes{} over the state-of-the-art. It enables trillion parameter scale inference under real-time latency constraints by leveraging hundreds of GPUs, an unprecedented scale for inference. It can inference 25\texttimes{} larger models than with GPU-only solutions, while delivering a high throughput of 84 TFLOPS (over 50\% of A6000 peak).},
+booktitle = {Proceedings of the International Conference on High Performance Computing, Networking, Storage and Analysis},
+optseries = {SC '22}
+}
+
+@misc{memory-scalability:microchip,
+  title={DRAM Resource Scalability Enabled by CXL},
+  howpublished = "\url{https://www.computeexpresslink.org/post/dram-resource-scalability-enabled-by-cxl}",
+}
+
+@misc{crossroad-benchmarks,
+  title={Crossroads Benchmarks},
+  howpublished = "\url{https://www.lanl.gov/projects/crossroads/benchmarks-performance-analysis.php}",
+}
+
+@misc{exascale-apps,
+  title={ECP Proxy Applications},
+  howpublished = "\url{https://proxyapps.exascaleproject.org/app/}",
+}
+
+@misc{pcie-spec,
+  title={PCI-SIG specifications},
+  howpublished = "\url{https://pcisig.com/specifications}",
+}
+
+@misc{ember-comm,
+  title={Ember},
+  howpublished = "\url{https://proxyapps.exascaleproject.org/app/ember-communication-patterns/}",
+}
+
+@misc{dgx-superpod,
+  title={{DGX SuperPOD}},
+  howpublished = "\url{https://www.nvidia.com/en-us/data-center/dgx-superpod/}",
+}
+
+@misc{dgx-gh200,
+  title={{DGX GH200}},
+  howpublished = "\url{https://www.nvidia.com/en-us/data-center/dgx-gh200/}",
+}
+
+@misc{nvlink,
+  title={{NVLink}},
+  howpublished = "\url{https://www.nvidia.com/en-us/data-center/nvlink/}",
+}
+
+@misc{doe-miniapps,
+  title={Characterization of the DOE Mini-apps},
+  howpublished = "\url{https://portal.nersc.gov/project/CAL/doe-miniapps.htm}",
+}
+
+@phdthesis{hpc-memory-requirement:upc:2019,
+  author       = {Milan Radulovic},
+  title        = {Memory bandwidth and latency in {HPC:} system requirements and performance
+                  impact},
+  school       = {Polytechnic University of Catalonia, Spain},
+  year         = {2019},
+}
+
+@article{memory-trend:snl:2020,
+title = {Compute Memory Trends: from Application Requirements to Architectural Needs.},
+author = {Hammond, Simon David},
+year = {2020}
+}
+
+@inproceedings {scale-memcache:nsdi:2013,
+author = {Rajesh Nishtala and Hans Fugal and Steven Grimm and Marc Kwiatkowski and Herman Lee and Harry C. Li and Ryan McElroy and Mike Paleczny and Daniel Peek and Paul Saab and David Stafford and Tony Tung and Venkateshwaran Venkataramani},
+title = {Scaling Memcache at Facebook},
+booktitle = {10th USENIX Symposium on Networked Systems Design and Implementation},
+year = {2013},
+}
+
+@inproceedings{tpp:asplos:2023,
+author = {Maruf, Hasan Al and Wang, Hao and Dhanotia, Abhishek and Weiner, Johannes and Agarwal, Niket and Bhattacharya, Pallab and Petersen, Chris and Chowdhury, Mosharaf and Kanaujia, Shobhit and Chauhan, Prakash},
+title = {TPP: Transparent Page Placement for CXL-Enabled Tiered-Memory},
+year = {2023},
+optabstract = {The increasing demand for memory in hyperscale applications has led to memory becoming a large portion of the overall datacenter spend. The emergence of coherent interfaces like CXL enables main memory expansion and offers an efficient solution to this problem. In such systems, the main memory can constitute different memory technologies with varied characteristics. In this paper, we characterize memory usage patterns of a wide range of datacenter applications across the server fleet of Meta. We, therefore, demonstrate the opportunities to offload colder pages to slower memory tiers for these applications. Without efficient memory management, however, such systems can significantly degrade performance. We propose a novel OS-level application-transparent page placement mechanism (TPP) for CXL-enabled memory. TPP employs a lightweight mechanism to identify and place hot/cold pages to appropriate memory tiers. It enables a proactive page demotion from local memory to CXL-Memory. This technique ensures a memory headroom for new page allocations that are often related to request processing and tend to be short-lived and hot. At the same time, TPP can promptly promote performance-critical hot pages trapped in the slow CXL-Memory to the fast local memory, while minimizing both sampling overhead and unnecessary migrations. TPP works transparently without any application-specific knowledge and can be deployed globally as a kernel release. We evaluate TPP with diverse memory-sensitive workloads in the production server fleet with early samples of new x86 CPUs with CXL 1.1 support. TPP makes a tiered memory system performant as an ideal baseline (<1\% gap) that has all the memory in the local tier. It is 18\% better than today’s Linux, and 5–17\% better than existing solutions including NUMA Balancing and AutoTiering. Most of the TPP patches have been merged in the Linux v5.18 release while the remaining ones are just pending for more discussion.},
+booktitle = {Proceedings of the 28th ACM International Conference on Architectural Support for Programming Languages and Operating Systems, Volume 3},
+optseries = {ASPLOS 2023}
+}
+
+@inproceedings{kona:asplos:2021,
+author = {Calciu, Irina and Imran, M. Talha and Puddu, Ivan and Kashyap, Sanidhya and Maruf, Hasan Al and Mutlu, Onur and Kolli, Aasheesh},
+title = {Rethinking Software Runtimes for Disaggregated Memory},
+year = {2021},
+optabstract = {Disaggregated memory can address resource provisioning inefficiencies in current datacenters. Multiple software runtimes for disaggregated memory have been proposed in an attempt to make disaggregated memory practical. These systems rely on the virtual memory subsystem to transparently offer disaggregated memory to applications using a local memory abstraction. Unfortunately, using virtual memory for disaggregation has multiple limitations, including high overhead that comes from the use of page faults to identify what data to fetch and cache locally, and high dirty data amplification that comes from the use of page-granularity for tracking changes to the cached data (4KB or higher). In this paper, we propose a fundamentally new approach to designing software runtimes for disaggregated memory that addresses these limitations. Our main observation is that we can use cache coherence instead of virtual memory for tracking applications' memory accesses transparently, at cache-line granularity. This simple idea (1) eliminates page faults from the application critical path when accessing remote data, and (2) decouples the application memory access tracking from the virtual memory page size, enabling cache-line granularity dirty data tracking and eviction. Using this observation, we implemented a new software runtime for disaggregated memory that improves average memory access time by 1.7-5X and reduces dirty data amplification by 2-10X, compared to state-of-the-art systems.},
+booktitle = {Proceedings of the 26th ACM International Conference on Architectural Support for Programming Languages and Operating Systems},
+optseries = {ASPLOS '21}
+}
+
+
+@inproceedings{memcached-modeling:sigmetrics:2012,
+author = {Atikoglu, Berk and Xu, Yuehai and Frachtenberg, Eitan and Jiang, Song and Paleczny, Mike},
+title = {Workload Analysis of a Large-Scale Key-Value Store},
+year = {2012},
+optabstract = {Key-value stores are a vital component in many scale-out enterprises, including social networks, online retail, and risk analysis. Accordingly, they are receiving increased attention from the research community in an effort to improve their performance, scalability, reliability, cost, and power consumption. To be effective, such efforts require a detailed understanding of realistic key-value workloads. And yet little is known about these workloads outside of the companies that operate them. This paper aims to address this gap.To this end, we have collected detailed traces from Facebook's Memcached deployment, arguably the world's largest. The traces capture over 284 billion requests from five different Memcached use cases over several days. We analyze the workloads from multiple angles, including: request composition, size, and rate; cache efficacy; temporal patterns; and application use cases. We also propose a simple model of the most representative trace to enable the generation of more realistic synthetic workloads by the community.Our analysis details many characteristics of the caching workload. It also reveals a number of surprises: a GET/SET ratio of 30:1 that is higher than assumed in the literature; some applications of Memcached behave more like persistent storage than a cache; strong locality metrics, such as keys accessed many millions of times a day, do not always suffice for a high hit rate; and there is still room for efficiency and hit rate improvements in Memcached's implementation. Toward the last point, we make several suggestions that address the exposed deficiencies.},
+booktitle = {Proceedings of the 12th ACM SIGMETRICS/PERFORMANCE Joint International Conference on Measurement and Modeling of Computer Systems},
+optseries = {SIGMETRICS '12}
+}
+
+@inproceedings{rocksdb-modeling:fast:2020,
+  title={Characterizing, modeling, and benchmarking RocksDB key-value workloads at Facebook},
+  author={Cao, Zhichao and Dong, Siying},
+  booktitle={Proceedings of the 18th USENIX Conference on File and Storage Technologies},
+  optseries = {FAST '20},
+  year={2020}
+}
+
+@inproceedings{cxl-acc-perf:exhet:2022,
+author = {Cabrera, Anthony M and Young, Aaron R and Vetter, Jeffrey S},
+title = {Design and Analysis of CXL Performance Models for Tightly-Coupled Heterogeneous Computing},
+year = {2022},
+optabstract = {Truly heterogeneous systems enable partitioned workloads to be mapped to the hardware that nets the best performance. However, current practice requires that inter-device communication between different vendors' hardware use host memory as an intermediary step. To date, there are no widely adopted solutions that allow accelerators to directly transfer data. A new cache-coherent protocol, CXL, aims to facilitate easier, fine-grained sharing between accelerators. In this work we analyze existing methods for designing heterogeneous applications that target GPUs and FPGAs working collaboratively, followed by an exploration to show the benefits of a CXL-enabled system. Specifically, we develop a test application that utilizes both an NVIDIA P100 GPU and a Xilinx U250 FPGA to show current communication limitations. From this application, we capture overall execution time and throughput measurements on the FPGA and GPU. We use these measurements as inputs to novel CXL performance models to show that using CXL caching instead of host memory results in a 1.31X speedup, while a more tightly-coupled pipelined implementation using CXL-enabled hardware would result in a speedup of 1.45X.},
+booktitle = {International Workshop on Extreme Heterogeneity Solutions},
+optkeywords = {CXL, GPU-FPGA collaboration, FPGA, heterogeneous computing, GPU},
+optlocation = {Seoul, Republic of Korea},
+optseries = {ExHET '22}
+}
+
+
+
+@inproceedings{swift:sigcomm:2020,
+author = {Kumar, Gautam and Dukkipati, Nandita and Jang, Keon and Wassel, Hassan M. G. and Wu, Xian and Montazeri, Behnam and Wang, Yaogong and Springborn, Kevin and Alfeld, Christopher and Ryan, Michael and Wetherall, David and Vahdat, Amin},
+title = {Swift: Delay is Simple and Effective for Congestion Control in the Datacenter},
+year = {2020},
+optabstract = {We report on experiences with Swift congestion control in Google datacenters. Swift targets an end-to-end delay by using AIMD control, with pacing under extreme congestion. With accurate RTT measurement and care in reasoning about delay targets, we find this design is a foundation for excellent performance when network distances are well-known. Importantly, its simplicity helps us to meet operational challenges. Delay is easy to decompose into fabric and host components to separate concerns, and effortless to deploy and maintain as a congestion signal while the datacenter evolves. In large-scale testbed experiments, Swift delivers a tail latency of <50μs for short RPCs, with near-zero packet drops, while sustaining ~100Gbps throughput per server. This is a tail of <3x the minimal latency at a load close to 100\%. In production use in many different clusters, Swift achieves consistently low tail completion times for short RPCs, while providing high throughput for long RPCs. It has loss rates that are at least 10x lower than a DCTCP protocol, and handles O(10k) incasts that sharply degrade with DCTCP.},
+booktitle = {Proceedings of the 2015 ACM Conference on Special Interest Group on Data Communication},
+optkeywords = {Datacenter Transport, Performance Isolation, Congestion Control},
+optlocation = {Virtual Event, USA},
+optseries = {SIGCOMM '20}
+}
+
+@inproceedings{timely:sigcomm:2015,
+author = {Mittal, Radhika and Lam, Vinh The and Dukkipati, Nandita and Blem, Emily and Wassel, Hassan and Ghobadi, Monia and Vahdat, Amin and Wang, Yaogong and Wetherall, David and Zats, David},
+title = {TIMELY: RTT-Based Congestion Control for the Datacenter},
+year = {2015},
+optabstract = {Datacenter transports aim to deliver low latency messaging together with high throughput. We show that simple packet delay, measured as round-trip times at hosts, is an effective congestion signal without the need for switch feedback. First, we show that advances in NIC hardware have made RTT measurement possible with microsecond accuracy, and that these RTTs are sufficient to estimate switch queueing. Then we describe how TIMELY can adjust transmission rates using RTT gradients to keep packet latency low while delivering high bandwidth. We implement our design in host software running over NICs with OS-bypass capabilities. We show using experiments with up to hundreds of machines on a Clos network topology that it provides excellent performance: turning on TIMELY for OS-bypass messaging over a fabric with PFC lowers 99 percentile tail latency by 9X while maintaining near line-rate throughput. Our system also outperforms DCTCP running in an optimized kernel, reducing tail latency by $13$X. To the best of our knowledge, TIMELY is the first delay-based congestion control protocol for use in the datacenter, and it achieves its results despite having an order of magnitude fewer RTT signals (due to NIC offload) than earlier delay-based schemes such as Vegas.},
+booktitle = {Proceedings of the 2015 ACM Conference on Special Interest Group on Data Communication},
+optkeywords = {delay-based congestion control, os-bypass, rdma, datacenter transport},
+optlocation = {London, United Kingdom},
+optseries = {SIGCOMM '15}
+}
+
+@inproceedings{dcqcn:sigcomm:2015,
+author = {Zhu, Yibo and Eran, Haggai and Firestone, Daniel and Guo, Chuanxiong and Lipshteyn, Marina and Liron, Yehonatan and Padhye, Jitendra and Raindel, Shachar and Yahia, Mohamad Haj and Zhang, Ming},
+title = {Congestion Control for Large-Scale RDMA Deployments},
+year = {2015},
+optabstract = {Modern datacenter applications demand high throughput (40Gbps) and ultra-low latency (< 10 μs per hop) from the network, with low CPU overhead. Standard TCP/IP stacks cannot meet these requirements, but Remote Direct Memory Access (RDMA) can. On IP-routed datacenter networks, RDMA is deployed using RoCEv2 protocol, which relies on Priority-based Flow Control (PFC) to enable a drop-free network. However, PFC can lead to poor application performance due to problems like head-of-line blocking and unfairness. To alleviates these problems, we introduce DCQCN, an end-to-end congestion control scheme for RoCEv2. To optimize DCQCN performance, we build a fluid model, and provide guidelines for tuning switch buffer thresholds, and other protocol parameters. Using a 3-tier Clos network testbed, we show that DCQCN dramatically improves throughput and fairness of RoCEv2 RDMA traffic. DCQCN is implemented in Mellanox NICs, and is being deployed in Microsoft's datacenters.},
+booktitle = {ACM Conference on Special Interest Group on Data Communication},
+optkeywords = {ECN, RDMA, PFC, datacenter transport, congestion control},
+optlocation = {London, United Kingdom},
+optseries = {SIGCOMM '15}
+}
+
+@inproceedings{fat-tree:sigcomm:2008,
+author = {Al-Fares, Mohammad and Loukissas, Alexander and Vahdat, Amin},
+title = {A Scalable, Commodity Data Center Network Architecture},
+year = {2008},
+optabstract = {Today's data centers may contain tens of thousands of computers with significant aggregate bandwidth requirements. The network architecture typically consists of a tree of routing and switching elements with progressively more specialized and expensive equipment moving up the network hierarchy. Unfortunately, even when deploying the highest-end IP switches/routers, resulting topologies may only support 50\% of the aggregate bandwidth available at the edge of the network, while still incurring tremendous cost. Non-uniform bandwidth among data center nodes complicates application design and limits overall system performance.In this paper, we show how to leverage largely commodity Ethernet switches to support the full aggregate bandwidth of clusters consisting of tens of thousands of elements. Similar to how clusters of commodity computers have largely replaced more specialized SMPs and MPPs, we argue that appropriately architected and interconnected commodity switches may deliver more performance at less cost than available from today's higher-end solutions. Our approach requires no modifications to the end host network interface, operating system, or applications; critically, it is fully backward compatible with Ethernet, IP, and TCP.},
+booktitle = {ACM Conference on Special Interest Group on Data Communication},
+optkeywords = {equal-cost routing, data center topology},
+optlocation = {Seattle, WA, USA},
+optseries = {SIGCOMM '08}
+}
+
+
+@inproceedings{beacon:micro:2022,
+  author={Huangfu, Wenqin and Malladi, Krishna T. and Chang, Andrew and Xie, Yuan},
+  booktitle={IEEE/ACM International Symposium on Microarchitecture (MICRO)}, 
+  title={BEACON: Scalable Near-Data-Processing Accelerators for Genome Analysis near Memory Pool with the CXL Support}, 
+  year={2022},
+}
+
+@inproceedings{fulcrum:hpca:2020,
+  author={Lenjani, Marzieh and Gonzalez, Patricia and Sadredini, Elaheh and Li, Shuangchen and Xie, Yuan and Akel, Ameen and Eilert, Sean and Stan, Mircea R. and Skadron, Kevin},
+  booktitle={IEEE International Symposium on High Performance Computer Architecture (HPCA)}, 
+  title={Fulcrum: A Simplified Control and Access Mechanism Toward Flexible and Practical In-Situ Accelerators}, 
+  year={2020},
+}
+
+@article{intel-cxl:ieee-micro:2023,
+  author={Sharma, Debendra Das},
+  journal={IEEE Micro}, 
+  title={Novel Composable and Scale-out Architectures using Compute Express Link}, 
+  year={2023},
+}
+
+@inproceedings{cxl-ssd:hotstorage:2022,
+author = {Jung, Myoungsoo},
+title = {Hello Bytes, Bye Blocks: PCIe Storage Meets Compute Express Link for Memory Expansion (CXL-SSD)},
+year = {2022},
+optabstract = {Compute express link (CXL) is the first open multi-protocol method to support cache coherent interconnect for different processors, accelerators, and memory device types. Even though CXL manages data coherency mainly between CPU memory spaces and memory on attached devices, we argue that it can also be useful to reform existing block storage as cost-efficient, large-scale working memory. Specifically, this paper examines three different sub-protocols of CXL from a memory expander viewpoint. It then suggests which device type can be the best option for PCIe storage to bridge its block semantics to memory-compatible, byte semantics. We then discuss how to integrate a storage-integrated memory expander into an existing system and speculate how much effect it does have on the system performance. Lastly, we visit various CXL network topologies and explore a new opportunity to efficiently manage the storage-integrated, CXL-based memory expansion.},
+booktitle = {The ACM Workshop on Hot Topics in Storage and File Systems (HotStorage)},
+optlocation = {Virtual Event},
+optseries = {HotStorage '22}
+}
+
+@inproceedings{samsung-memory-expander:hcs:2022,
+  author={Park, S. J. and Kim, H. and Kim, K.-S. and So, J. and Ahn, J. and Lee, W.-J. and Kim, D. and Kim, Y.-J. and Seok, J. and Lee, J.-G. and Ryu, H.-Y. and Lee, C. Y. and Prout, J. and Ryoo, K.-C. and Han, S.-J. and Kook, M.-K. and Choi, J. S. and Gim, J. and Ki, Y. S. and Ryu, S. and Park, C. and Lee, D.-G. and Cho, J. and Song, H. and Lee, J. Y.},
+  booktitle={IEEE Hot Chips 34 Symposium (HCS)}, 
+  title={Scaling of Memory Performance and Capacity with CXL Memory Expander}, 
+  year={2022}
+}
+
+@inproceedings{fabric-memory:fast:2017,
+  author={Kimberly Keeton},
+  title={Memory-Driven Computing},
+   booktitle = {The {USENIX} Conference on File and Storage Technologies (FAST)},
+    year = {2017},
+    optmonth = {feb},
+    optseries = {FAST ’17}
+}
+
+@misc{infiniband-spec,
+  title={InfiniBand™ Architecture Specification},
+  howpublished = "\url{https://www.infinibandta.org/ibta-specification/}",
+}
+
+@misc{ofed-perftest,
+  title={Open Fabrics Enterprise Distribution (OFED) Performance Tests},
+  howpublished = "\url{https://github.com/linux-rdma/perftest}",
+}
+
+@misc{asteralabs-pcie-retimer,
+  title={PCIe Retimer},
+  howpublished = "\url{https://www.asteralabs.com/smart-retimers/pci-express-retimers-vs-redrivers-an-eye-popping-difference/}",
+}
+
+@misc{microchip-cxl-retimer,
+  title={CXL Retimer},
+  howpublished = "\url{https://www.microchip.com/en-us/about/media-center/blog/2020/cxl--use-cases-driving-the-need-for-low-latency-performance-reti}",
+}
+
+@inproceedings{cxl:hoti:2022,
+  author={Sharma, Debendra Das},
+  booktitle={IEEE Symposium on High-Performance Interconnects (HOTI)}, 
+  title={Compute Express Link®: An open industry-standard interconnect enabling heterogeneous data-centric computing}, 
+  year={2022},
+}
+
+@inproceedings {mirador:fast:2017,
+author = {Jake Wires and Andrew Warfield},
+title = {Mirador: An Active Control Plane for Datacenter Storage},
+booktitle = {The {USENIX} Conference on File and Storage Technologies (FAST)},
+tyear = {2017},
+optmonth = {feb},
+optseries = {FAST ’17}
+}
+
+@article{power-of-two:tpds:2001,
+  author={M. {Mitzenmacher}},
+  journal={IEEE Transactions on Parallel and Distributed Systems}, 
+  title={The power of two choices in randomized load balancing}, 
+  year={2001},
+  volume={12},
+  number={10},
+  pages={1094-1104},
+}
+
+@inproceedings{xpander:conext:2016,
+author = {Valadarsky, Asaf and Shahaf, Gal and Dinitz, Michael and Schapira, Michael},
+title = {Xpander: Towards Optimal-Performance Datacenters},
+year = {2016},
+optabstract = {Despite extensive efforts to meet ever-growing demands, today's datacenters often exhibit far-from-optimal performance in terms of network utilization, resiliency to failures, cost efficiency, incremental expandability, and more. Consequently, many novel architectures for high-performance datacenters have been proposed. We show that the benefits of state-of-the-art proposals are, in fact, derived from the fact that they are (implicitly) utilizing "expander graphs" (aka expanders) as their network topologies, thus unveiling a unifying theme of these proposals. We observe, however, that these proposals are not optimal with respect to performance, do not scale, or suffer from seemingly insurmountable deployment challenges. We leverage these insights to present Xpander, a novel datacenter architecture that achieves near-optimal performance and provides a tangible alternative to existing datacenter designs. Xpander's design turns ideas from the rich graph-theoretic literature on constructing optimal expanders into an operational reality. We evaluate Xpander via theoretical analyses, extensive simulations, experiments with a network emulator, and an implementation on an SDN-capable network testbed. Our results demonstrate that Xpander significantly outperforms both traditional and proposed datacenter designs. We discuss challenges to real-world deployment and explain how these can be resolved.},
+booktitle = {International on Conference on Emerging Networking EXperiments and Technologies (CoNEXT)},
+optkeywords = {network topologies, expander graphs, datacenter networks},
+optlocation = {Irvine, California, USA},
+optseries = {CoNEXT '16}
+}
+
+@inproceedings{jellyfish:nsdi:2012,
+author = {Singla, Ankit and Hong, Chi-Yao and Popa, Lucian and Godfrey, P. Brighten},
+title = {Jellyfish: Networking Data Centers Randomly},
+year = {2012},
+optabstract = {Industry experience indicates that the ability to incrementally expand data centers is essential. However, existing high-bandwidth network designs have rigid structure that interferes with incremental expansion. We present Jellyfish, a high-capacity network interconnect which, by adopting a random graph topology, yields itself naturally to incremental expansion. Somewhat surprisingly, Jellyfish is more cost-efficient than a fat-tree, supporting as many as 25\% more servers at full capacity using the same equipment at the scale of a few thousand nodes, and this advantage improves with scale. Jellyfish also allows great flexibility in building networks with different degrees of oversubscription. However, Jellyfish's unstructured design brings new challenges in routing, physical layout, and wiring. We describe approaches to resolve these challenges, and our evaluation suggests that Jellyfish could be deployed in today's data centers.},
+booktitle = {Proceedings of the 9th USENIX Conference on Networked Systems Design and Implementation},
+optlocation = {San Jose, CA},
+optseries = {NSDI'12}
+}
+
+@inproceedings{hyperx:sc:2019,
+author = {Domke, Jens and Matsuoka, Satoshi and Ivanov, Ivan R. and Tsushima, Yuki and Yuki, Tomoya and Nomura, Akihiro and Miura, Shin'ichi and McDonald, Nie and Floyd, Dennis L. and Dub\'{e}, Nicolas},
+title = {HyperX Topology: First at-Scale Implementation and Comparison to the Fat-Tree},
+year = {2019},
+optabstract = {The de-facto standard topology for modern HPC systems and data-centers are Folded Clos networks, commonly known as Fat-Trees. The number of network endpoints in these systems is steadily increasing. The switch radix increase is not keeping up, forcing an increased path length in these multi-level trees that will limit gains for latency-sensitive applications. Additionally, today's Fat-Trees force the extensive use of active optical cables which carries a prohibitive cost-structure at scale. To tackle these issues, researchers proposed various low-diameter topologies, such as Dragonfly. Another novel, but only theoretically studied, option is the HyperX. We built the world's first 3 Pflop/s supercomputer with two separate networks, a 3--level Fat-Tree and a 12\texttimes{}8 HyperX. This dual-plane system allows us to perform a side-by-side comparison using a broad set of benchmarks. We show that the HyperX, together with our novel communication pattern-aware routing, can challenge the performance of, or even outperform, traditional Fat-Trees.},
+booktitle = {International Conference for High Performance Computing, Networking, Storage and Analysis (SC},
+optkeywords = {fat-tree, network topology, HyperX, routing, InfiniBand, PARX},
+optlocation = {Denver, Colorado},
+optseries = {SC '19}
+}
+
+@inproceedings{dragonfly:isca:2008,
+  author={Kim, John and Dally, Wiliam J. and Scott, Steve and Abts, Dennis},
+  booktitle={International Symposium on Computer Architecture (ISCA)}, 
+  title={Technology-Driven, Highly-Scalable Dragonfly Topology}, 
+  year={2008},
+}
+
+@techreport{gullfoss:tech-report:2015,
+  author      = {Tseng, Hung-Wei and Liu, Yang and Gahagan, Mark and Li, Jing and Jing, Yanqin and Swanson, Steven},
+  title       = {Gullfoss: Accelerating and Simplifying Data Movement among Heterogeneous Computing and Storage Resources},
+  institution = {UC San Diego},
+  year        = {2015}
+}
+
+@inproceedings{reduce-cache-coherence:pact:2016,
+  author={Caheny, Paul and Casas, Marc and Moretó, Miquel and Gloaguen, Hervé and Saintes, Maxime and Ayguadé, Eduard and Labarta, Jesús and Valero, Mateo},
+  booktitle={International Conference on Parallel Architecture and Compilation Techniques (PACT)}, 
+  title={Reducing cache coherence traffic with hierarchical directory cache and NUMA-aware runtime scheduling}, 
+  year={2016},
+}
+
+@inproceedings{caladan:osdi:2020,
+  title={Caladan: Mitigating interference at microsecond timescales},
+  author={Fried, Joshua and Ruan, Zhenyuan and Ousterhout, Amy and Belay, Adam},
+  booktitle={USENIX Conference on Operating Systems Design and Implementation (OSDI)},
+  year={2020}
+}
+
+@inproceedings{bandwidth-contention,
+  author={Langguth, Johannes and Cai, Xing and Sourouri, Mohammed},
+  booktitle={IEEE 24th International Conference on Parallel and Distributed Systems (ICPADS)}, 
+  title={Memory Bandwidth Contention: Communication vs Computation Tradeoffs in Supercomputers with Multicore Architectures}, 
+  year={2018},
+}
+
+@inproceedings{bandwidth-bandit:ispass:2012,
+  author={Eklov, David and Nikoleris, Nikos and Black-Schaffer, David and Hagersten, Erik},
+  booktitle={IEEE International Symposium on Performance Analysis of Systems and Software (ISPASS)}, 
+  title={Bandwidth bandit: Understanding memory contention}, 
+  year={2012},
+}
+
+@inproceedings{dram-stacks:ispass:2022,
+  author={Eyerman, Stijn and Heirman, Wim and Hur, Ibrahim},
+  booktitle={IEEE International Symposium on Performance Analysis of Systems and Software (ISPASS)}, 
+  title={DRAM Bandwidth and Latency Stacks: Visualizing DRAM Bottlenecks}, 
+  year={2022},
+}
+
+%Entries
+@inproceedings{m3x:atc:2019,
+author = {Asmussen, Nils and Roitzsch, Michael and H\"{a}rtig, Hermann},
+title = {M3X: Autonomous Accelerators via Context-Enabled Fast-Path Communication},
+year = {2019},
+optabstract = {Performance and e_ciency requirements are driving a trend towards specialized accelerators in both datacenters and embedded devices. In order to cut down communication overheads, system components are pinned to cores and fast-path communication between them is established. These fast paths reduce latency by avoiding indirections through the operating system. However, we see three roadblocks that can impede further gains: First, accelerators today need to be assisted by a general-purpose core, because they cannot autonomously access operating system services like file systems or network stacks. Second, fast-path communication is at odds with preemptive context switching, which is still necessary today to improve efficiency when applications underutilize devices. Third, these concepts should be kept orthogonal, such that direct and unassisted communication is possible between any combination of accelerators and general-purpose cores. At the same time, all of them should support switching between multiple application contexts, which is most difficult with accelerators that lack the hardware features to run an operating system.We presentM3X, a system architecture that removes these roadblocks.M3X retains the low overhead of fast-path communication while enabling context switching for generalpurpose cores and specialized accelerators.M3X runs accelerators autonomously and achieves a speedup of 4.7 for PCIe-attached image-processing accelerators compared to traditional assisted operation. At the same time, utilization of the host CPU is reduced by a factor of 30.},
+booktitle = {USENIX Conference on Usenix Annual Technical Conference (ATC)},
+optlocation = {Renton, WA, USA},
+}
+
+@inproceedings{shenango:nsdi:2019,
+author = {Ousterhout, Amy and Fried, Joshua and Behrens, Jonathan and Belay, Adam and Balakrishnan, Hari},
+title = {Shenango: Achieving High CPU Efficiency for Latency-Sensitive Datacenter Workloads},
+year = {2019},
+optabstract = {Datacenter applications demand microsecond-scale tail latencies and high request rates from operating systems, and most applications handle loads that have high variance over multiple timescales. Achieving these goals in a CPU-efficient way is an open problem. Because of the high overheads of today's kernels, the best available solution to achieve microsecond-scale latencies is kernel-bypass networking, which dedicates CPU cores to applications for spin-polling the network card. But this approach wastes CPU: even at modest average loads, one must dedicate enough cores for the peak expected load.Shenango achieves comparable latencies but at far greater CPU efficiency. It reallocates cores across applications at very fine granularity--every 5 µs--enabling cycles unused by latency-sensitive applications to be used productively by batch processing applications. It achieves such fast reallocation rates with (1) an efficient algorithm that detects when applications would benefit from more cores, and (2) a privileged component called the IOKernel that runs on a dedicated core, steering packets from the NIC and orchestrating core reallocations. When handling latency-sensitive applications, such as memcached, we found that Shenango achieves tail latency and throughput comparable to ZygOS, a state-of-the-art, kernel-bypass network stack, but can linearly trade latency-sensitive application throughput for batch processing application throughput, vastly increasing CPU efficiency.},
+booktitle = {USENIX Conference on Networked Systems Design and Implementation (NSDI)},
+optlocation = {Boston, MA, USA},
+}
+
+@inproceedings{shinjuku:nsdi:2019,
+author = {Kaffes, Kostis and Chong, Timothy and Humphries, Jack Tigar and Belay, Adam and Mazi\`{e}res, David and Kozyrakis, Christos},
+title = {Shinjuku: Preemptive Scheduling for usecond-Scale Tail Latency},
+year = {2019},
+optabstract = {The recently proposed dataplanes for microsecond scale applications, such as IX and ZygOS, use nonpreemptive policies to schedule requests to cores. For the many real-world scenarios where request service times follow distributions with high dispersion or a heavy tail, they allow short requests to be blocked behind long requests, which leads to poor tail latency.Shinjuku is a single-address space operating system that uses hardware support for virtualization to make preemption practical at the microsecond scale. This allows Shinjuku to implement centralized scheduling policies that preempt requests as often as every 5µsec and work well for both light and heavy tailed request service time distributions. We demonstrate that Shinjuku provides significant tail latency and throughput improvements over IX and ZygOS for a wide range of workload scenarios. For the case of a RocksDB server processing both point and range queries, Shinjuku achieves up to 6.6\texttimes{} higher throughput and 88\% lower tail latency.},
+booktitle = {USENIX Conference on Networked Systems Design and Implementation (NSDI)},
+optlocation = {Boston, MA, USA},
+}
+
+@inproceedings{meta-bgp:nsdi:2021,
+  title={Running $\{$BGP$\}$ in Data Centers at Scale},
+  author={Abhashkumar, Anubhavnidhi and Subramanian, Kausik and Andreyev, Alexey and Kim, Hyojeong and Salem, Nanda Kishore and Yang, Jingyi and Lapukhov, Petr and Akella, Aditya and Zeng, Hongyi},
+  booktitle={USENIX Symposium on Networked Systems Design and Implementation (NSDI)},
+  year={2021}
+}
+
+@misc{cxl-3-0-spec,
+  title={CXL 3.0 Specification},
+  howpublished = "\url{https://www.computeexpresslink.org/download-the-specification}",
+}
+
+@misc{xconn-cxl2-switch,
+  title={XConn CXL 2.0 switches},
+  howpublished = "\url{https://memverge.com/wp-content/uploads/2022/10/CXL-Forum-OCP_Samsung-Xconn.pdf}",
+}
+
+@inproceedings {legoos:osdi:2018,
+author = {Yizhou Shan and Yutong Huang and Yilun Chen and Yiying Zhang},
+title = {{LegoOS}: A Disseminated, Distributed {OS} for Hardware Resource Disaggregation},
+booktitle = {OSDI},
+year = {2018},
+}
+
+@inproceedings{fractos:eurosys:2022,
+author = {Vilanova, Llu\'{\i}s and Maudlej, Lina and Bergman, Shai and Miemietz, Till and Hille, Matthias and Asmussen, Nils and Roitzsch, Michael and H\"{a}rtig, Hermann and Silberstein, Mark},
+title = {Slashing the Disaggregation Tax in Heterogeneous Data Centers with FractOS},
+year = {2022},
+optabstract = {Disaggregated heterogeneous data centers promise higher efficiency, lower total costs of ownership, and more flexibility for data-center operators. However, current software stacks can levy a high tax on application performance. Applications and OSes are designed for systems where local PCIe-connected devices are centrally managed by CPUs, but this centralization introduces unnecessary messages through the shared data-center network in a disaggregated system.We present FractOS, a distributed OS that is designed to minimize the network overheads of disaggregation in heterogeneous data centers. FractOS elevates devices to be first-class citizens, enabling direct peer-to-peer data transfers and task invocations among them, without centralized application and OS control. FractOS achieves this through: (1) new abstractions to express distributed applications across services and disaggregated devices, (2) new mechanisms that enable devices to securely interact with each other and other data-center services, (3) a distributed and isolated OS layer that implements these abstractions and mechanisms, and can run on host CPUs and SmartNICs.Our prototype shows that FractOS accelerates real-world heterogeneous applications by 47\%, while reducing their network traffic by 3\texttimes{}.},
+booktitle = {Proceedings of the Seventeenth European Conference on Computer Systems (EuroSys)},
+optkeywords = {resource disaggregation, operating systems, distributed systems, data center, capabilities},
+optlocation = {Rennes, France},
+}
+
+@inproceedings{pond:asplos:2023,
+  author = {Huaicheng Li and Daniel S. Berger and Stanko Novakovic and Lisa Hsu and Dan Ernst and Pantea Zardoshti and Monish Shah and Samir Rajadnya and Scott Lee and Ishwar Agarwal and Mark D. Hill and Marcus Fontoura and Ricardo Bianchini},
+  title = "{Pond: CXL-Based Memory Pooling Systems for Cloud Platforms}",
+  booktitle = {To be appeared in ACM International Conference on Architectural Support for Programming Languages and Operating Systems (ASPLOS)},
+  optaddress = {Vancouver, BC Canada},
+  optmonth = {March},
+  year = {2023},
+}
+
+@inproceedings{directcxl:atc:2022,
+author = {Donghyun Gouk and Sangwon Lee and Miryeong Kwon and Myoungsoo Jung},
+title = {Direct Access, {High-Performance} Memory Disaggregation with {DirectCXL}},
+booktitle = {USENIX Annual Technical Conference (USENIX ATC)},
+year = {2022},
+optaddress = {Carlsbad, CA},
+optmonth = jul,
+}
+
+@inproceedings{invisible-probe:oaklnad:2021,
+  author={Tan, Mingtian and Wan, Junpeng and Zhou, Zhe and Li, Zhou},
+  booktitle={IEEE Symposium on Security and Privacy (S\&P)}, 
+  title={Invisible Probe: Timing Attacks with PCIe Congestion Side-channel}, 
+  year={2021},
+}
+
+@inproceedings{ntsocks:conext:2022,
+author = {Huang, Yibo and Huang, Yukai and Yan, Ming and Hu, Jiayu and Liang, Cunming and Xu, Yang and Zou, Wenxiong and Zhang, Yiming and Zhang, Rui and Huang, Chunpu and Wu, Jie},
+title = {An Ultra-Low Latency and Compatible PCIe Interconnect for Rack-Scale Communication},
+year = {2022},
+optabstract = {Emerging network-attached resource disaggregation architecture requires ultra-low latency rack-scale communication. However, current hardware offloading (e.g., RDMA) and user-space (e.g., mTCP) communication schemes still rely on heavily layered protocol stacks which requires the translation between PCIe bus and network protocol, or complex connection/memory resource management within RNICs, inevitably bringing latency overhead.We argue that PCIe Non-Transparent Bridge (NTB) is a superior high-speed in-rack network technology to interconnect PCIe-attached machines or devices with the same PCIe fabric since no translation is needed between PCIe and network protocol. We present NTSocks, the first user-space in-rack interconnect over PCIe fabric which virtualizes native NTB into high-level network functionalities for rack-scale systems with software-hardware co-design. NTSocks provides (1) compatibility with a fast socket-like abstraction, (2) multi-thread scalability using a core-driven dat-aplane model, and (3) fair and efficient resource sharing with a multi-tenant isolation mechanism. Even though PCIe NTB is originally designed for device communication across PCIe domains, NTSocks shows a flexible user-level indirection with performance close to bare-metal NTB while providing common network stack features. In the evaluations with latency-sensitive Key-Value Store, NTSocks achieves better latency by up to 24.5\texttimes{} and 1.58\texttimes{} than kernel and RDMA socket, respectively.},
+booktitle = {International Conference on Emerging Networking EXperiments and Technologies (CoNEXT)},
+optkeywords = {PCIe non-transparent bridging, PCIe interconnect, high-speed networks, rack-scale communication, disaggregation},
+optlocation = {Roma, Italy},
+}
+
+@article{smartio:tocs:2021,
+author = {Markussen, Jonas and Kristiansen, Lars Bj\o{}rlykke and Halvorsen, P\r{a}l and Kielland-Gyrud, Halvor and Stensland, H\r{a}kon Kvale and Griwodz, Carsten},
+title = {SmartIO: Zero-Overhead Device Sharing through PCIe Networking},
+year = {2021},
+volume = {38},
+number = {1–2},
+optabstract = {The large variety of compute-heavy and data-driven applications accelerate the need for a distributed I/O solution that enables cost-effective scaling of resources between networked hosts. For example, in a cluster system, different machines may have various devices available at different times, but moving workloads to remote units over the network is often costly and introduces large overheads compared to accessing local resources. To facilitate I/O disaggregation and device sharing among hosts connected using Peripheral Component Interconnect Express (PCIe) non-transparent bridges, we present SmartIO. NVMes, GPUs, network adapters, or any other standard PCIe device may be borrowed and accessed directly, as if they were local to the remote machines. We provide capabilities beyond existing disaggregation solutions by combining traditional I/O with distributed shared-memory functionality, allowing devices to become part of the same global address space as cluster applications. Software is entirely removed from the data path, and simultaneous sharing of a device among application processes running on remote hosts is enabled. Our experimental results show that I/O devices can be shared with remote hosts, achieving native PCIe performance. Thus, compared to existing device distribution mechanisms, SmartIO provides more efficient, low-cost resource sharing, increasing the overall system performance.},
+journal = {ACM Trans. Comput. Syst.},
+optmonth = {jul},
+optarticleno = {2},
+optnumpages = {78},
+optkeywords = {distributed I/O, NTB, GPU, PCIe, cluster architecture, Device Lending, NVMe, I/O disaggregation, Resource sharing, composable infrastructure}
+}
+
+@inproceedings {aquila:nsdi:2022,
+author = {Dan Gibson and Hema Hariharan and Eric Lance and Moray McLaren and Behnam Montazeri and Arjun Singh and Stephen Wang and Hassan M. G. Wassel and Zhehua Wu and Sunghwan Yoo and Raghuraman Balasubramanian and Prashant Chandra and Michael Cutforth and Peter Cuy and David Decotigny and Rakesh Gautam and Alex Iriza and Milo M. K. Martin and Rick Roy and Zuowei Shen and Ming Tan and Ye Tang and Monica Wong-Chan and Joe Zbiciak and Amin Vahdat},
+title = {Aquila: A unified, low-latency fabric for datacenter networks},
+booktitle = {USENIX Symposium on Networked Systems Design and Implementation (NSDI)},
+year = {2022},
+optisbn = {978-1-939133-27-4},
+optaddress = {Renton, WA},
+optpages = {1249--1266},
+opturl = {https://www.usenix.org/conference/nsdi22/presentation/gibson},
+optpublisher = {USENIX Association},
+optmonth = apr,
+}
+
+@inproceedings{pcie-congestion-model:sc:2016,
+  author={Martinasso, Maxime and Kwasniewski, Grzegorz and Alam, Sadaf R. and Schulthess, Thomas C. and Hoefler, Torsten},
+  booktitle={International Conference for High Performance Computing, Networking, Storage and Analysis (SC)}, 
+  title={A PCIe Congestion-Aware Performance Model for Densely Populated Accelerator Servers}, 
+  year={2016},
+}
+
+@article{sbfc:ieee-micro:2005,
+  author={Krishnan, V. and Mayhew, D.},
+  journal={IEEE Micro}, 
+  title={Localized congestion control in advanced switching interconnects}, 
+  year={2005},
+  volume={25},
+  number={1},
+  pages={10-11},
+}
+
+@inproceedings{dolphin-express:ieee-cluster:2007,
+  author={Krishnan, Venkata},
+  booktitle={2007 IEEE International Conference on Cluster Computing}, 
+  title={Towards an integrated IO and clustering solution using PCI express}, 
+  year={2007},
+}
+
+@inproceedings{merlin:ancs:2014,
+  author={Tu, Cheng-Chun and Lee, Chao-tang and Chiueh, Tzi-cker},
+  booktitle={2014 ACM/IEEE Symposium on Architectures for Networking and Communications Systems (ANCS)}, 
+  title={Marlin: A memory-based rack area network}, 
+  year={2014},
+}
+
+@inproceedings{ladon:systor:2018,
+author = {Tu, William Cheng-Chun and Chiueh, Tzi-cker},
+title = {Seamless Fail-over for PCIe Switched Networks},
+year = {2018},
+optabstract = {PCI Express (PCIe) was originally designed as a local bus interconnect technology for connecting CPUs, GPUs and I/O devices inside a machine, and has since been enhanced to be a full-blown switched network that features point-to-point links, hop-by-hop flow control, end-to-end retransmission, etc. Recently, researchers have further extended PCIe into an intra-rack interconnect designed to connect multiple hosts within the same rack. To viably apply PCIe to such use cases, additional fail-over mechanisms are needed to ensure continued network operation in the presence of control plane and data plane failures. This paper presents the design, implementation and preliminary evaluation of a fault-tolerant PCIe-based rack area network architecture called Ladon, which incorporates a fail-over mechanism that takes effective advantage of PCIe architectural features to significantly reduce the service disruption time due to a control plane failure of a PCIe switch. Empirical tests on an operational Ladon prototype show that the proposed mechanism ensures that a PCIe root complex failure has zero impact on the data plane and incurs only a modest disruption time (less than 40 sec) for the control plane services.},
+booktitle = {ACM International Systems and Storage Conference (SYSTOR)},
+optlocation = {Haifa, Israel},
+optseries = {SYSTOR '18}
+}
