@@ -1,5 +1,5 @@
 \chapter{Aurelia: CXL fabric in making}
-\label{chap:aurelia}
+\label{aurelia:chap}
 
 \section{Introduction}
 %\stingw{the idea is to use CXL fabric as the next-gen rack-scale fabric for disaggregation/composable systems.}
@@ -59,7 +59,7 @@ Dedicating a NIC for each device circumvents the throughput bottleneck but with 
 
 %\vspace{-1ex}
 \section{Motivation and Background}
-\label{sec:motivation}
+\label{aurelia:sec:motivation}
 
 \subsection{What is CXL?}
 Compute Express Link (CXL) emerges as an enhancement of PCIe providing cache coherency (CXL.cache), host-managed or fabric-attached memory (CXL.mem), peer-to-peer memory access between I/O devices (CXL.io).
@@ -149,20 +149,30 @@ To understand the practical challenges, use cases of CXL fabric from CXL specifi
 %
 
 \subsection{Use Cases of CXL Fabric}
-
-The use cases of CXL fabrics demand high memory capacity, bandwidth, and low latency.
+\label{aurelia:subsec:use-cases}
+The use cases of CXL fabrics demand large memory capacity, high bandwidth, and low latency.
 %
-Emerging and existing workloads in data centers, such as training machine learning models, high-performance computing (HPC) applications, and large-scale key-value stores, can be benefited from CXL fabrics.   
+Emerging and existing workloads in data centers, such as machine learning models, 
+large-scale key-value stores, and high-performance computing (HPC) applications, can benefit from CXL fabrics.   
 
-First, training machine learning models requires a large amount of memory on an accelerator, e.g. GPU or TPU, which is beyond the capacity of individual accelerators.
+% Moreover, CXL fabric provides an alternative to Nvidia's proprietary stack (NVLink + NVSwitch + Infiniband RDMA).
+% %
+% CXL fabric will enable future accelerators to connect and cooperate on applications on a shared, open-standard communication substrate
+% instead of using only GPUs.
+%
+% \TODO{cite NERSC's Arxiv report to argue for the need of disagg with concrete numbers.}
+%
+%HPC uses a topology like model training but featuring different 
+% Host CPU cores are connected with accelerators and accessing fabric-attached memory for additional memory capacity and bandwidth~\cite{memory-trend:snl:2020, hpc-disagg-mem:arxiv:2023} (Shown in Figure~\ref{fig:ml-acc-cxl}).
+% Previous works proposed to leave these out of accelerators onto main memory but with potential slowdown caused by explicit memory copying from memory to accelerators~\cite{zero-infinity:sc:2021, zero-offload:atc:2021, deepspeed-inference:sc:2022}.
+
+First, the current machine learning models require a large amount of memory on an accelerator, e.g. GPU or TPU, which is beyond the capacity of individual accelerators.
 %
 To make it even worse, the size of state-of-the-art machine learning models are ranged from 10s of GB to 10s of TB.~\cite{zero:arxiv:2020, zero-infinity:sc:2021, zionex:isca:2022} and keep growing every few months.
 %
-Model training thus requires multiple accelerators to jointly fit the model and training variables in their memory. 
+Training and inference of machine learning models now need multiple accelerators to jointly fit the model and intermediate variables in their memory. 
 %
-% Previous works proposed to leave these out of accelerators onto main memory but with potential slowdown caused by explicit memory copying from memory to accelerators~\cite{zero-infinity:sc:2021, zero-offload:atc:2021, deepspeed-inference:sc:2022}.
-%
-CXL fabric expands accessible memory to accelerators by providing fabric-attached memory.
+CXL fabric could expand accessible memory to accelerators by providing fabric-attached memory.
 %
 Fabric-attached memory increases the memory capacity and bandwidth to all available memory on the fabric~\cite{cxl-3-0-spec, samsung-memory-expander:hcs:2022, memory-scalability:microchip}.
 %
@@ -172,24 +182,8 @@ A host is connected with an accelerator with CXL and they share a coherence doma
 %
 Accelerators access the fabric-attached memory and each other's memory in a producer-consumer fashion of I/O coherency.
 %
-% Moreover, CXL fabric provides an alternative to Nvidia's proprietary stack (NVLink + NVSwitch + Infiniband RDMA).
-% %
-% CXL fabric will enable future accelerators to connect and cooperate on applications on a shared, open-standard communication substrate
-% instead of using only GPUs.
-%
 
-Second, HPC workloads demonstrate high utilization (> 90\%) on memory bandwidth as well as capacity for representative applications~\cite{doe-miniapps, crossroad-benchmarks, exascale-apps}. 
-%
-Though each application stays with its peak memory usage for a different duration of time.
-%
-The cluster is required to be provisioned to the peak bandwidth and capacity to avoid significant slowdown~\cite{hpc-memory-requirement:upc:2019, memory-trend:snl:2020, hpc-disagg-mem:arxiv:2023}.
-%
-% \TODO{cite NERSC's Arxiv report to argue for the need of disagg with concrete numbers.}
-%
-%HPC uses a topology like model training but featuring different 
-% Host CPU cores are connected with accelerators and accessing fabric-attached memory for additional memory capacity and bandwidth~\cite{memory-trend:snl:2020, hpc-disagg-mem:arxiv:2023} (Shown in Figure~\ref{fig:ml-acc-cxl}).
-
-Third, the datacenter runs cloud services with key-value stores.
+Second, the datacenter runs cloud services with key-value stores.
 %
 Key-value stores use RDMA inside datacenter to speed up the communication and operations~\cite{farm:nsdi:2014,herd:sigcomm:2014,eRPC:nsdi:2019, xstore:osdi:2020}
 %
@@ -202,15 +196,21 @@ DircetCXL provides a latency lower bound of CXL because its fabric has a single 
 %
 The hosts do not maintain cache coherence between themselves. Fabric-attached memory module maintains coherence between itself and the host address space it has mapped (Shown in Figure.~\ref{fig:kvs-cxl}).
 
-Model training and HPC workload both involve collective communication while key-value stores involve bursty non-structural communication.
+Third, HPC workloads demonstrate high utilization ($>$ 90\%) on memory bandwidth as well as capacity for representative applications~\cite{doe-miniapps, crossroad-benchmarks, exascale-apps}. 
+%
+Though each application stays with its peak memory usage for a different duration of time.
+%
+The cluster is required to be provisioned to the peak bandwidth and capacity to avoid significant slowdown~\cite{hpc-memory-requirement:upc:2019, memory-trend:snl:2020, hpc-disagg-mem:arxiv:2023}.
+
+Machine learning and HPC workload both involve collective communication while key-value stores involve bursty non-structural communication.
 %
 Collective communication is structural and can be optimized with data prefetch to minimize the stall on pending memory accessing.
 %
 This relaxes their requirement on latency and reduces burstiness.
 %
-Model training uses all-reduce to update model weights to each accelerator after each training iteration. The size of state-of-the-art models are ranged from 10s of GB to 10s of TB.~\cite{zero:arxiv:2020, zero-infinity:sc:2021, zionex:isca:2022}.
+Training and inference of machine learning models use all-reduce to update model weights to each accelerator after each iteration. The size of state-of-the-art models is ranged from 10s of GB to 10s of TB.~\cite{zero:arxiv:2020, zero-infinity:sc:2021, zionex:isca:2022}.
 %
-HPC compared to model training has a more diverse communication pattern, such as sweeping or nearest-neighbors~\cite{mpi-usage:sc:2019, ember-comm, exascale-apps, doe-miniapps}. 
+HPC compared to machine learning has a more diverse communication pattern, such as sweeping or nearest-neighbors~\cite{mpi-usage:sc:2019, ember-comm, exascale-apps, doe-miniapps}. 
 %
 Key-value store and database, however, serve bursty requests and are sensitive to latency~\cite{scale-memcache:nsdi:2013, rocksdb-modeling:fast:2020}
 
@@ -219,19 +219,11 @@ Key-value store and database, however, serve bursty requests and are sensitive t
     \begin{subfigure}[ht]{0.8\columnwidth}
     \centering{
     \includegraphics[width=\columnwidth]{./figure/aurelia/ml-acc-cxl-fabric.pdf}
-    \caption{Model training and HPC. Hosts and their accelerators share a coherent domain.}
+    \caption{Machine learning and HPC. Hosts and their accelerators share a coherent domain.}
     \label{fig:ml-acc-cxl}
     }
     \end{subfigure}
-%%%%
-    % \begin{subfigure}[ht]{0.9\columnwidth}
-    % \centering{
-    % \includegraphics[width=\columnwidth]{figures/hpc-cxl-fabric.pdf}
-    % \caption{HPC cores.}
-    % \label{fig:hpc-cxl}  
-    % }
-    % \end{subfigure}
-%%%%
+
     \begin{subfigure}[ht]{0.8\columnwidth}
     \centering{
     \includegraphics[width=\columnwidth]{./figure/aurelia/kvs-cxl-fabric.pdf}
@@ -239,22 +231,21 @@ Key-value store and database, however, serve bursty requests and are sensitive t
     \label{fig:kvs-cxl}  
     }
     \end{subfigure}
-
 \caption{CXL fabric abstractive topology.}
 \label{fig:cxl-topo}
 \end{figure}
 
-\begin{table}[ht!]
-\begin{tabular}{|l|l|l|l|}
-\hline
-            & Bandwidth & Latency & Burstiness         \\ \hline
-DL Training & +         & $\triangle$    & -           \\ \hline
-HPC         & +         & $\triangle$    & $\triangle$ \\ \hline
-KV Store    & -         & +              & +           \\ \hline
-\end{tabular}
-\caption{Traffic patterns for different workloads.}
-\label{tab:cxl-workload}
-\end{table}
+% \begin{table}[ht!]
+% \begin{tabular}{|l|l|l|l|}
+% \hline
+%             & Bandwidth & Latency & Burstiness         \\ \hline
+% Machine Learning Models & +         & $\triangle$    & -           \\ \hline
+% High Performance Computing        & +         & $\triangle$    & $\triangle$ \\ \hline
+% Key-value Store    & -         & +              & +           \\ \hline
+% \end{tabular}
+% \caption{Traffic patterns for different workloads.}
+% \label{tab:cxl-workload}
+% \end{table}
 
 \section{Challenges}
 % \begin{comment}
@@ -274,9 +265,9 @@ More importantly, with the usage of load/store instructions, the processor and a
 The addressing, routing, and transport-level challenges are discussed in the following subsections.  
 
 \subsection{Addressing and Routing Challenges}
-\label{sec:motivation:routing}
+\label{aurelia:sec:motivation:routing}
 
-\noindent \textbf{Routing.}
+%\noindent \textbf{Routing.}
 CXL routes packets with a per-device ID called Port ID on the fabric. 
 %
 The Port ID-based routing (PBR) addresses each device with a 12-bit ID. 
@@ -321,7 +312,7 @@ CXL fabric supports flexible topology and thus opens the possibility of having a
 These topologies provide multiple paths for a source and a destination, but CXL fabric cannot route packets over multiple possible paths given its current design.
 
 \subsection{Transport-level Challenges}
-\label{sec:motivation:transport}
+\label{aurelia:sec:motivation:transport}
 % The transport of CXL includes PCIe for point-to-point flow control and QoS Telemetry implementing ad hoc rate-throttling for CXL.mem traffic. These two mechanisms are not able to ensure a predictable fabric latency with minimal congestion.  
 
 CXL inherits point-to-point flow control from PCIe that was designed for the communication between the device and CPU rather than a fabric. 
@@ -452,7 +443,7 @@ The aforementioned challenges motivate us to design \aurelia.
 %
 %\TODO{find place to say switch and CXL device are both nodes on a CXL}
 \section{Design of \aurelia}
-\label{sec:design}
+\label{aurelia:sec:design}
 % \stingw{Reduce specific details on routing, merge multi-path and alternative routing. the design rationale is more important. we don't want to be tied to a 
 % specific solution or design point.}
 
@@ -475,7 +466,7 @@ This is analogous to the 32-bit IP address describing hosts in an IP network.
 %
 FAN-ID assignment is agnostic to the underlying topology as long as a FAN-ID is unique for a node on a CXL fabric. 
 %
-Currently, \aurelia assigns FAN-ID to the physical interface of the device. It does not assign FAN-ID to logical interfaces sharing the same physical interface.
+\aurelia assigns FAN-ID to the physical interface of the device. It does not assign FAN-ID to logical interfaces sharing the same physical interface.
 %
 %\aurelia considers multi-tenancy a device-specific detail and do not provide additional FAN-ID to logical CXL interfaces
 %Multi-tenancy of devices is out of the scope of this work.
@@ -521,11 +512,11 @@ For the rest of \aurelia's design, non-oversubscribed Fat-tree is assumed as the
 % \end{figure}
 
 \subsection{Routing}
+\label{aurelia:sec:design:routing}
 % P Path selection, R Routing itself, and L Load balancing. 
 % Path selection determines which paths can be used for sending a given packet. Routing itself
 % Routing answers a question on how the packet finds a way to its destination.
 % Load balancing determines which path (out of identified alternatives) should be used for sending a packet to maximize performance and minimize congestion.
-
 \aurelia routes packets based on FAN-ID addresses like IP routing.
 %
 CXL switches route a packet based on its routing table that maps a group of FAN-ID destinations onto a port. 
@@ -556,15 +547,6 @@ The address suffix approach spreads traffic toward the fat-tree core across diff
 %
 The bottom of Figure~\ref{fig:cxl-fabric-overview} shows the routing table of CXL switch \emph{2:2:1} filled in gray. The prefix table routes packets toward its downstream switches \emph{2:0:1} and \emph{2:1:1}. The suffix table routes the packet upward to core switches \emph{4:1:1} and \emph{4:1:2}.  
 %\TODO{add a running example on to Figure~\ref{fig:fat-tree-routing} or a new one.}
-
-
-\noindent \textbf{Multi-path routing.}
-%
-The two-level routing table of Fat-tree is just an implementation of multi-path routing together with a specific topology. \aurelia imposes no restriction on how the fabric should be constructed. Instead, \aurelia requires routing tables to be able to map a destination to multiple next-hop FAN-ID and its corresponding metric. The metric can be distances in terms of hops or local congestion level on each switch port. 
-%
-\aurelia selects a next-hop with minimal metric and randomly selects one if there are multiple next-hop options with equal metric.  
-%
-Considering the number of hops for shortest path routing, \aurelia can perform a random selection for the next hop on flow granularity or on packet granularity. The former is similar to Equal-Cost Multipathing (ECMP) and the latter is similar to packet spraying. 
 %
 
 % \begin{comment}
@@ -579,19 +561,6 @@ Considering the number of hops for shortest path routing, \aurelia can perform a
 
 % \TODO{we should talk about how the fabric manager will be implemented. GPU-SSD example is not a good one.}
 % \reviwer{B: I encourage you to be more explicit about what's in/out of scope for the fabric manager}
-\noindent \textbf{Adaptive routing.}
-%
-ECMP and packet spraying are oblivious to the workload. 
-%
-\aurelia can further exploit local per-port information on the switches or the fabric manager manipulating the routing table to achieve adaptive routing.
-%
-\aurelia uses per-port EP Backpressure as a measure of local congestion indication. 
-%
-For selecting an egress port with minimal congestion on the switch, \aurelia uses power-of-2 choice~\cite{power-of-two:tpds:2001} to avoid congestion on ports based on possibly delayed congestion information.
-%
-Additionally, \aurelia allows the fabric manager to insert routes and has the sole authority to modify the routing table at any time.
-%
-This is useful for the workload that requires non-trivial routes tailored to specific workloads~\cite{gullfoss:tech-report:2015, fractos:eurosys:2022}. 
 %mirador:fast:2017, 
 %uses multiple devices together~\cite{gullfoss:tech-report:2015, fractos:eurosys:2022}.
 %
@@ -606,12 +575,14 @@ This is useful for the workload that requires non-trivial routes tailored to spe
 
 \begin{figure}[ht!]
     \centering
-    \includegraphics[width=0.9\columnwidth]{figure/aurelia/congestion-control-flow.eps}
-    \caption{\aurelia has a congestion control loop for the fabric, a flow-control loop for the device.}
+    \includegraphics[width=0.9\columnwidth]{figure/aurelia/congestion-control-flow.pdf}
+    \caption{\aurelia uses EP Backpressure notification to resolve congestions and overload signal for flow control to avoid overrunning the buffer on the device.}
+    %has a congestion control loop for the fabric, a flow-control loop for the device.}
     \label{fig:congestion-control}
 \end{figure}
 
 \subsection{End-to-end Congestion Control}
+\label{aurelia:sec:design:congestion-control}
 % \stingw{More on pointing out the unique challenge, don't argue against delay based approach too much. Stay neutral before we have strong evidence.}
 % \balance
 % \begin{comment}
@@ -635,244 +606,329 @@ This is useful for the workload that requires non-trivial routes tailored to spe
 
 % \weitao{Another wild idea is that, if switches and end-point devices could provide more quantitative signals (like 8 bits) to represent congestion level, rather than a single bit to provide a binary signal about congestion, the performance of the congestion control algorithms could be largely improved. As a supporting fact, many commodity switches can support reporting and piggybacking telemetry information for each packet, including per-hop queueing delay and per-hop utilization.}\stingw{the problem with CXL is the packet is 256-byte. we could argue for using more bits in the discussion section. I tried to do the minimal modification to CXL to achieve something useful.}    
 % \end{comment}
-
+\noindent \textbf{Extending existing mechanisms.}
+%
 \aurelia implements end-to-end congestion control with overload avoidance by extending existing mechanisms of CXL. 
 %
-The existing mechanisms are EP Backpressure, rate throttling, and internal load reported by devices.
+The mechanisms are EP Backpressure on switches, internal load reported on receiving devices, and rate throttling on the sending devices.
 %
-EP Backpressure describes the queuing situation in a similar way as Explicit Congestion Notification (ECN) does on Ethernet and Infiniband.
+%EP Backpressure and ECN both indicate congestion explicitly to the receiving endpoints.  
+%and need packets to convoy the congestion signal back to the sender.
 %
-EP Backpressure and ECN both indicate congestion explicitly to the receiving endpoints and need packets to convoy the congestion signal back to the sender.
+EP Backpressure triggers switches to mark packets on their way to the receiving device when noticeable queuing is on the switch.  
 %
-Rate throttling controls the data injection rate into the fabric and thus avoids congestion. 
+This is similar to Explicit Congestion Notification (ECN) for Ethernet and Infiniband because they react when the queuing situation starts to indicate congestion.
+%
+Internal load reporting triggers an overloading signal when the device is overloaded. 
+%
+Device overload is likely to cause significant device-side delay or even loss of CXL packets.
+%
+\aurelia, unlike CXL's design, separates EP Backpressure and the device's internal load as they represent fabric and device information. 
+%
+% for congestion control and overload avoidance 
+% EP Backpressure and internal load use 1 bit for each on the packet header. 
+%
+Rate throttling controls the sending rate into the fabric to avoids congestion and overload. 
 %
 %On top of these mechanisms, CXL fabric is a lossless fabric by its point-to-point flow control design.
 %
-Internal load is used to avoid overloading device that is likely to cause additional device-side delay or loss of CXL packets.
-%
-These factors determine \aurelia to implement a rate-based congestion control with overload avoidance for the devices. 
+% These factors determine \aurelia to implement a rate-based congestion control with overload avoidance for the devices. 
 
+\noindent \textbf{Algorithm.}
+\aurelia's congestion control algorithm operates on the switch, the receiving device, and the sending device.
+%
+On the switches, they mark the packets when the ratio of EP Backpressuring events in its recent window is larger than a specific threshold.
+%
+On the receiving devices, they piggyback an overloading signal to the sending device when its sending rate exceeds the receiver's processing rate.
+%
+The receiving device notifies the sender with EP Backpressure notification (EPN) on its response to the sending device when it receives EP Backpressure marked packets.  
+%
+On the sender side, the sending devices throttle the sending rate based on the 1-bit signal of EPN and the 1-bit overloading signal. 
+%
+When the sender receives a response packet marked with EPN or an overloading signal, the sender records its current rate $R_{c}$ as the target rate $R_{t}$ for later recovery and cuts its rate half in default. 
+%
+The rate cut can also be determined by also a rate reduction factor $\alpha$ like DCTCP and DCQCN~\cite{dcqcn:sigcomm:2015}.         
+%
+The recovery of reduced sending rate has two different paths depending on the trigger.
+%
+If the reduction is triggered by EPN, then the recovery to the target rate $R_{t}$ is expected in a fixed number of iterations. 
+%  
+If the reduction is triggered by an overloading signal, then the recovery is an additive increase.
 
-\aurelia separates EP Backpressure and the device's internal load for congestion control and overload avoidance.
-%as two different metrics as they represent device and fabric information.
+% \stingw{fast recovery for EP Backpressure and slower recovery, i.e. additive, for internal load}
 %
-EP Backpressure as a 2-bit congestion signal on the fabric is piggybacked to the sender if its value is larger than a threshold.
-%
-The 2-bit device internal load serves a quantized credit for the sender not exceeding the receiver's processing rate.
-%
-Using credit to regulate sending rate effectively achieves end-to-end flow control to avoid overloading. 
-%
-Flow control preventing buffer-overrun is handled by the link and physical layer of CXL and thus not a concern for the transport layer. 
-%
-Also, \aurelia generalizes the reporting of device internal load for all memory access, including peer-to-peer memory access between devices.
+% \stingw{EP Backpressure and internal load use 1 bit for each on the packet header.}
 
-Peer-to-peer memory access between devices without embedded CPU motivates the need of implementing rate throttling logic on CXL interface hardware.   
-%
-Also, rate throttling has a tight latency requirement of sub-$\mu$s on CXL fabric.
-%
-Pond measured end-to-end CXL.mem latency and obtained latency ranging to 270 ns on CXL system with a single switch~\cite{cxl:hoti:2022, pond:asplos:2023}. Using Pond's latency assumption, the latency of CXL packet traveling through a two-level fat-tree takes around 680 ns.
+%Flow control preventing buffer-overrun is handled by the link and physical layer of CXL and thus not a concern for the transport layer. 
 
+\noindent \textbf{Protocol implementation.}
+\aurelia relies on hardware implementation to throttle sending rate for congestion control due to sub-$\mu$s latency and peer-to-peer memory access requirements.
+%
+First, rate throttling has a tight latency requirement of sub-$\mu$s on CXL fabric.
+%
+Pond measured end-to-end CXL.mem latency and obtained latency ranging to 270 ns on CXL system with a single switch~\cite{cxl:hoti:2022, pond:asplos:2023}. 
+%
+Under the same assumption, the latency of CXL packet traveling through a two-level fat-tree takes around 680 ns that is under 1 $\mu$s.
+%
+Second, peer-to-peer memory access between devices is expected, especially with the usage of accelerators. Therefore, \aurelia extending CXL's original design generalizes the reporting of device load for all kinds of memory access, including peer-to-peer memory access between devices.
+%
+Peer-to-peer memory access between devices without additional embedded CPU motivates the necessity of implementing rate throttling in hardware on the CXL interface. 
+%
+The control plane of these hardware devices is kept on the host CPU, but the execution of rate throttling is on hardware to meet these requirements.  
+%
+Hardware-based rate throttling ensures all devices on the CXL fabric are able to control their sending rate and further reduces the congestion and overload.
+%
+Implementing rate throttling logic on hardware has been used on RDMA over Infiniband and Ethernet with RoCEv2 support and thus suggesting the feasibility in the case of CXL fabric. 
 
-Combining sub-$\mu$s latency and peer-to-peer memory access requirements, \aurelia relies on hardware to throttle rate for congestion control. 
+\noindent \textbf{Comparable protocol design on lossless fabric.}
+\aurelia's congestion control design is inspired by congestion control on existing lossless fabric, such as Infiniband and DCQCN for RoCEv2, implemented a rate-based congestion control algorithm requiring Explicit Congestion Notification (ECN) on switch to indicate congestion.
 %
-The configuration of these hardware is kept on the host CPU, but the actual rate throttling is on hardware to meet these requirements.  
+Infiniband switches mark packets with a Forward ECN (FECN) bit when congestion is detected~\cite{infiniband-spec}. 
 %
-Implementing rate throttling logic on hardware has been used on RDMA over Infiniband and Ethernet with RoCEv2 support.
+The receiver receives the FECN-marked packets and sends a Backward ECN (BECN) marked packet to the sender.
+% 
+The sender throttles its injection rate when it gets packets with BECN. The throttling over time reduces congestion and the fabric returns to a state without any congestion. 
 %
-Hardware-based rate throttling ensures all devices on the CXL fabric are able to control their injection rate and further regulate the congestion.   
+Thee FECN marking of packets requires switch support and the implementation of BECN and rate throttling requires additional logic in CXL interface hardware.
 %
-Before throttling, \aurelia sets the rate as the target rate for later recovery.
+DCQCN, a congestion control protocol designed for RoCEv2, relies on the ECN of Ethernet to notify the sender to adjust its injection rate similar to Infiniband~\cite{dcqcn:sigcomm:2015}.
 %
-\aurelia throttles the rate of the sender, when the receiver notifies it of the congestion signal and generates EP Backpressure. 
-%
-After rate throttling, \aurelia enters the recovery phase and then performs additive increase when approaching the target rate~\cite{dcqcn:sigcomm:2015}.   
-
-
-
-%%
-% Congestion control on existing lossless fabric, such as Infiniband, DCQCN for RoCEv2, implemented a rate-based congestion control algorithm requireing Explicit Congestion Notification (ECN) on switch to indicate congestion.
-%
-% Infiniband switches mark packets with a Forward ECN (FECN) bit when congestion is detected~\cite{infiniband-spec}. 
+% Before throttling, \aurelia sets the rate as the target rate for later recovery.
 % %
-% The destination node receives the FECN-marked packets and sends a Backward ECN (BECN) marked packet to the source node.
-% % 
-% The source node throttles its injection rate when it gets packets with BECN. The throttling over time reduces congestion and the fabric returns to a state without any congestion. 
+% \aurelia throttles the rate of the sender, when the receiver notifies it of the congestion signal and generates EP Backpressure. 
 % %
-% Thee FECN marking of packets requires switch support and the implementation of BECN and rate throttling requires additional logic in CXL interface hardware.
+% After rate throttling, \aurelia enters the recovery phase and then performs additive increase when approaching the target rate~\cite{dcqcn:sigcomm:2015}. 
+\subsection{Advanced Routing}
+\label{aurelia:sec:design:advanced-routing}
+\noindent \textbf{Multi-path routing.}
 %
-% DCQCN, a congestion control protocol designed for RoCEv2, relies on the ECN of Ethernet to notify the source so the the source adjusts their injection rate similar to Infiniband~\cite{dcqcn:sigcomm:2015}.
-
-% Another category of congestion control protocols is based on delay~\cite{timely:sigcomm:2015, swift:sigcomm:2020}. They make sense on Ethernet/IP networks because NICs are equipped with hardware timestamping. 
-% %
-% Also, the PTP protocol enables high-precision time synchronization over the network. 
-% %
-% Both of these requirements are infeasible for the CXL interface. 
-% %
-% First, measuring accurate delay requires every CXL interface to support hardware timestamping.
-% %
-% Second, PTP time synchronization does not run over CXL protocol and it needs a high-precision time source on every instance of CXL fabric. 
-% %
-% These two requirements add expensive costs to hardware and thus make it infeasible.  
-
-% \aurelia implements a transport layer with rate-based congestion control with hardware-based rate throttling, and ECN-like usage of EP Backpressure.
+The two-level routing table of Fat-tree is just an implementation of multi-path routing together with a specific topology. \aurelia imposes no restriction on how the fabric should be constructed. Instead, \aurelia requires routing tables to be able to map a destination to multiple next-hop FAN-ID and its corresponding metric. The metric can be distances in terms of hops or local congestion level on each switch port. 
 %
-
-
-
-%1. rate throttling 
+\aurelia selects a next-hop with minimal metric and randomly selects one if there are multiple next-hop options with equal metric.  
 %
-% This sub-$\mu$s latnecy makes rate throttling hard on host CPU because state-of-the-art low-latency networking stacks on CPU react in 5 or more $\mu$s~\cite{shenango:nsdi:2019, shinjuku:nsdi:2019, caladan:osdi:2020}. The $\mu$s-level reaction time makes them only possible to be used as a fallback option.
+Considering the number of hops for shortest path routing, \aurelia can perform a random selection for the next hop on flow granularity or on packet granularity. The former is similar to Equal-Cost Multipathing (ECMP) and the latter is similar to packet spraying. 
 
+\noindent \textbf{Adaptive routing.}
 %
-% As EP Backpressure sets the device load on the request packet, the destination sends a memory response with devload indicating the port congestion alone. This response is not a piggyback like the device reporting the internal load. This egress port backpressure notification should trigger rate throttling on the source side (which can be a host or an autonomous device).    
-% \stingw{we should be more specific about the term memory request and response}.   
-
+ECMP and packet spraying are oblivious to the workload. 
 %
-% Previous study of congestion control on lossless fabric, such as Infiniband, DCQCN for RoCEv2, follows a very similar approach.  
-% Both of them implemented a rate based congestion control algorithm in hardware and requires Explicit Congestion Notification (ECN) on switch to indicate congestion. 
+\aurelia would be able to further exploit local per-port information on the switches or the fabric manager manipulating the routing table to achieve adaptive routing.
 %
-%To prevent packet loss, Infiniband implements credit based flow control on its link layer and RoCEv2 implements PFC on Ethernet. 
+\aurelia uses per-port EP Backpressure as a measure of local congestion indication. 
 %
-% Infiniband switches mark packets with a Forward ECN (FECN) bit when congestion is detected. 
-% %
-% The destination node gets the packets with FECN-marked and sends the source node a packet marked with Backward ECN (BECN) bit.
-% % 
-% The source node throttles its injection rate when it gets packets with BECN. The throttling over time reduces congestion and the fabric returns to a state without any congestion. 
-% %
-% Thee FECN marking of packets requires switch support and the implementation of BECN and rate throttling requires additional logic in CXL hardware interface IP.
-% %
-% DCQCN, a congestion control protocol designed for RoCEv2, relies on ECN of Ethernet to notify the source node so the the source node could adjust their injection rate in a similar manner as Infiniband.
-
-
-
-%\subsection{Programmability: Active Networking revisit}
-
-%\TODO{what's active network and what does it matter to CXL}
-%Outline of the design 
-% \begin{itemize}
-% \item Making CXL a proper network, adding L3 and L4
-% \item If we have a system with the refined CXL fabrics with proper L3 and L4, then what kind of abstraction should we use to program this kind of disaggregated system? -> active network
-% \end{itemize}
-% \stingw{Topology-aware congest:}
-%\noindent \textbf{Overview:}
-
-%--------------------------%--------------------------%--------------------------%--------------------------%--------------------------%
+For selecting an egress port with minimal congestion on the switch, \aurelia uses power-of-2 choice~\cite{power-of-two:tpds:2001} to avoid congestion on ports based on possibly delayed congestion information.
 %
-% Also, these devices usually have limited buffer space to store incoming data from the fabric. 
-% %
-% Shallow buffer has smaller headroom to absorb bursts of data before pausing and congesting the link
-% %
-% This motivates exploring multiple paths to route around links with lower bandwidth or other undesirable property. 
-
-% how routing can take congestion and multi-path into consideration.
-% \stingw{Topology-aware multi-path routing:}
-% -> Multiple paths can be found on Dragonfly in ~\cite{aquila:nsdi:2022} and some other HPC used topology.
-% -> From the datacenter literature, ECMP spraying packet to alleviate possible congestion on Clos based topology. (indirect topology)
-% -> Dragonfly topology with more direct node-to-node links. 
-
-% What's the difference and shortcoming of CXL fabrics compared to exitsing network?
-% 1. CXL fabric is different from the current network like Ethernet or Infiniband as its end points/pass-through points are devices may have none to little power of general purpose compute. The entire stack of this network is hardware based. The congestion control algorithm needs to be implemented with little hardware addition on top of PCIe.
-% 2. CPU is still needed here but it does not need to be an endpoint but for setting up/tearing down the flow.
-
-% After establishing CXL after refinement could be a good network, we should argue about how we should program it. we should consider active network.
-% \begin{itemize}
-% \item why are we using active network as the inspiration? Active network has the idea of embedding compute into the fabric if the compute is better to be performed on the fabric rather than on end-host CPU.
-% \item Accelerator and device as the major residents on the fabric instead of a large amount of powerful general-purpose CPU cores.
-% \item Accelerator and device like network switches are programmable but not general-purpose. They don't have the control structure to hold or terminate a flow or connection in anyway.
-% \item We want an abstraction capturing data movement and related compute with it.
-% \item If we want to implement ActiveCXL, what are the missing pieces from CXL spec and current supported hardware?
-% \item $\rightarrow$
-% (1) flow as an abstraction for applications to reason about,
-% (2) capability as a way for distributed control flow?
-% (3) Discrete switch style to load large program on accelerators and capsule style for smaller programs and loaded large programs,
-% (4) packet framing on top of CXL packets for meaningful execution,
-% (5) capsules for data transformation and loaded kernels on accelerators,
-% (6) CPU cores still hold the control information for the setup and tear-down of the flows but they are completely off the data path to avoid becoming bottlenecks.
-% \end{itemize}
-
-% CXL presents a lossless fabric with its point-to-point flow control. 
-% %
-% CXL requires a hardware implementation as devices do not always have general purpose CPU core to run the congestion control algorithm. 
-% %
-% Some of CXL devices do not have the ability to determine its injection rate as they are directed by the CPU as a subordinate.
-% %
-% Also, CXL interface has small buffer to store its  
-
-
+Additionally, \aurelia allows the fabric manager to insert routes and has the sole authority to modify the routing table at any time.
 %
-% \stingw{dragonfly just leave it in the discussion, saying we need higher radix}
-% Path diversity!
-% \stingw{first, ECMP}
-% On the inter-switch level:
-% \stingw{topological specific solution -> ECMP if in the case of Clos}
-% "An equal-cost multipath (ECMP) set is formed when the routing table contains multiple next-hop addresses for the same destination with equal cost. (Routes of equal cost have the same preference and metric values.) If there is an ECMP set for the active route, Junos OS uses a hash algorithm to choose one of the next-hop addresses in the ECMP set to install in the forwarding table."
-
-%"The PBR Edge request port shall decode the request HPA to determine the DPID of the target GFD, using the Fabric Address Segment Table (FAST) and the Interleave DPID Table (IDT)"
-
-% end-to-end level consideration
-% Explain the control plane overhead: 
-% 1. storing more routes on the switch -> maintain a cache and swap the route in when it's not available
-% 2. The routes are only needed to be re-populated when switch failure or device removal on a fabric manager
-% 3. maintain link congestion level in a table when multiple routes are presented 
-% %
-% explain data plane overhead:
-% 1. lookup queuing situation on outgoing inter-switch links
-% %
-% Usually the fabric manager populates the routes in a SDN-style.
-% in the case of performance reroute, device   
-% (1) switch maintains additional fabric based memory buffer as alternative destination 
-% (2) when reroute happens, 
-% slow path: switch notify the fabric manager, the fabric manager asks the destination to pull/read from the fabric buffer
-
-%\stingw{how do we use rate throttling?}
-% \stingw{define autonomous device somewhere earlier?}
-% Rate throttling ideally will be implemented as hardware on CXL interface for "autonomous" devices that are able to initiate CXL requests.
-% Compared to solely doing on host, this improves the control responsiveness and make these device autonomous.  
+This is useful for the workload that requires non-trivial routes tailored to specific workloads~\cite{gullfoss:tech-report:2015, fractos:eurosys:2022}. 
 
 
 \section{Evaluation of \aurelia's Design}
-\label{sec:cc-design}
+\label{aurelia:sec:eval}
 %
-We simulate the design of \aurelia because CXL hardware supporting CXL fabric is not available to the author at the time of writing.
-% 
-The simulation setup and parameters are cross-checked with public available reports~\cite{pond:asplos:2023, demystifying-cxl:micro:2023,h3platform-cxl-memory}. 
+We simulate the design of \aurelia because CXL hardware supporting CXL 3.0 with fabric is not available to the author at the time of writing.
 %
-Our reported numbers are calibrated with H3 platform's CXL memory expansion chassis~\cite{h3platform-cxl-memory}. The difference between our simulation and the reported numbers are within 5\%.
+We evaluate \aurelia's congestion control design using routing described in Sec.~\ref{aurelia:sec:design:routing}. 
+%
+Additional routing designs, such as multipath and adaptive routing, are not enabled for the evaluation.
+%
+The evaluated workloads are: (1) key-value store on memory expansion modules~\cite{samsung-memory-expander:hcs:2022}, and (2) machine learning model inference on GPUs/accelerators involving collective communication~\cite{aws-inferentia:2019}.
+%
+They represent different usage of CXL fabric: one is focused on CPU and memory expansion while the other is focused on the data exchange between accelerators.
+%
+The baseline of the evaluation is vanilla CXL described in its specification~\cite{cxl-3-0-spec}.
+%
+It performs point-to-point flow control for packets of each CXL protocol.
+%
+It does not employ any end-to-end congestion control or flow control mechanisms.
+%
+% \stingw{It has limited support for dev load reporting for CXL.mem
+% but it does not consider the fabric situation.}
 
-\subsection{Packet-level Simulation with ns-3}
+% \TODO{Define the baseline here please.}
+% \stingw{
+% What are we comparing to?
+% %
+% CXL default with only PCIe flow control.
+% %
+% Make sure the large flows don't shut down the port if flows collides.
+% }
+%\stingw{The issue with PCIe is that all traffic are fighting together. CXL-base has different protocol and message classes}  
+
+\subsection{Packet-level Simulation using ns-3}
+\label{aurelia:sec:eval:ns3-simulation}
 We use NS3~\cite{ns-3} to simulate packet level behavior on a CXL fabric.
 %  
 NS3 is a discrete-event network simulator that is open-sourced and well-established in the research community. 
 %
-Previous implementations of lossless fabric using ns-3 are focused on RDMA over Converged Ethernet (RoCE)~\cite{dcqcn:sigcomm:2015, hpcc:sigcomm:2019,pint:sigcomm:2020}.
+Our implementation uses primitive, built-in NS3 classes and starts from scratch because there is no existing simulator for CXL fabric. 
 %
-These implementations are not usable for CXL fabrics. 
+Previous simulators of other lossless fabrics are focused on RDMA over Converged Ethernet (RoCE)~\cite{dcqcn:sigcomm:2015, hpcc:sigcomm:2019,pint:sigcomm:2020}.
 %
-They assume the usage of Ethernet, IP, and the RDMA interface cards.
+These implementations are not usable for CXL fabrics because they assume the usage of Ethernet, IP, and the RDMA interface cards.
 %
-CXL fabrics assumes none of those as the devices on the fabric issue load/store instructions directly.  
-%  
-Our implementation uses the primitive, built-in NS3 classes and starts from scratch. 
+CXL fabrics assumes none of those as the devices on the fabric issue load/store instructions directly.   
 %
-It simulates CXL's transaction layer and link layer in 256B filt mode.
+%The difference between our simulation and the latencies reported on the CXL expansion chassis is within 5\%.
+
+The hardware parameters are cross-checked with published literature~\cite{pond:asplos:2023, demystifying-cxl:micro:2023, h3platform-cxl-memory}. 
 %
-This assumes an underlying PCIe 6.0 physical layer with its forward error correction are fully controlled by the hardware.     
+The latencies on each hardware component are calibrated with H3 platform's CXL expansion chassis supporting CXL 2.0~\cite{h3platform-cxl-memory}. 
 %
-All channels of CXL.mem and CXL.cache are supported.
+The chassis integrates a CXL switch~\cite{xconn-cxl2-switch} supporting CXL.mem and CXL.io that are used in the evaluation.
+
+We simulate CXL's transaction layer and link layer in 256B mode assuming a PCIe 6.0 physical layer.
+%with its forward error correction are fully controlled by the hardware.     
 %
-\stingw{Maybe we need more description of CXL layers}
-Packing of CXL.mem and CXL.cache messages are implemented to ensure the number of packets on the fabric are accurate.  
+The physical layer of PCIe 6.0 with 256 GB/s is on a 16-lane configuration. 
 %
-CXL.io functionalities are partially supported as needed.       
+All links in the simulation use this configuration.
 %
-It enables multi-level switching by extending CXL's port-based routing with~\aurelia's additional mechanism.  
+All messages classes of CXL.mem and CXL.cache are supported.  
+%
+CXL.io functionalities for peer-to-peer memory access are supported. 
+%
+Packing of CXL.mem and CXL.cache messages are implemented to ensure the number of packets on the fabric are accurate to the specification.
+
+The simulator enables multi-level switching and implements \aurelia's addressing, routing, and congestion control mechanism on top of CXL's port-based routing.
+%
+There are 16 nodes on a 2-level fat-tree topology. 
+%
+In the case of machine learning model inference, the topology connects 8 accelerators and 8 memory expansion devices.
+%
+In the case of key-value store, the topology connects 12 memory expansion devices with 4 CPUs.
+  
+%
+\subsection{Simulation of Large Model Inference}
+\label{aurelia:sec:eval:inf}
+%
+We study the improvement of inference throughput on LLaMA2 70B model~\cite{llama:arxiv:2023} due to improved congestion control on the CXL fabric.
+%
+The inference of the model operates on the unit of tokens for a sequence of input and output data.
+%
+First, the fabric connects the accelerators to the memory expansion devices that store the model weights.
+%
+Partial weights of the model are kept on the accelerator as the weights are loaded partition by partition.  
+%from the memory expansion devices.
+%
+Each accelerator stores 8.125 GB partition on the device and another partition on the memory expansion devices.
+% The weight loading and inference exec are pipeline parallel.
+%
+This leaves enough capacity for intermediate generated tokens on the accelerators.
+%
+A run of inference performs 2 operations of weight loading operations between the accelerators and the memory expansion devices.
+%
+Second, the fabric supports the communication among accelerators that aggregates tokens.
+%
+A run of inference performs 2 operations of all-reduce collective communication among the accelerators to aggregate the intermediate and the output tokens.
+%
+Each all-reduce operation exchanges 810 $\times$ 8 MB of data among the accelerators.
+%
+The all-reduce operations are 3 milliseconds apart as these durations represent the computational part of the inference run.
+%
+The simulation executes 1000 runs of inference based on the aforementioned parameters.  
+%
+\aurelia's improved congestion control aims to speed up both the weight loading and the all-reduce operations.
+%
+% The 3 milliseconds durations corresponds to the two major components of the LLaMA2 model, self-attention and feedforward layers.    
+% These tokens are an $E$-dimensional vector, where $E$ is 16384 in our setup.
+% %
+% A sequence has up to $L$ tokens, where $L$ is 256 in our setup.
+% %
+% A run of inference processes $B$ $L$-token sequences containing $E$-dimensional vectors, where $B$ is the batch size of 2048 in our setup.
+
+\aurelia achieves 11\% improvement on median throughput and 17\% improvement on the 10th percentile throughput because of faster weight loading and all-reduce operations. 
+%
+These operations encounter 2.1$\times$ fewer times of pause on the links than the baseline when the links are out of credits to send packets.
+%
+EPN of \aurelia throttles the sending rate to avoid triggering the pause on links. 
+%that the sender and switches do not have enough credits to progress.
+%
+The traffic pattern of weight loading and all-reduce operations does not impose much imbalance therefore there is no overload on any of the accelerators that needs the overload signal for remediation.
+%
+Imbalanced traffic among accelerators could test \aurelia's effectiveness on such kind of traffic pattern. 
+%
+We leave it for future investigation.
 
 \subsection{Simulation Results on YCSB Benchmarks}
-\TODO{CC results with ns-3 simulation}
+\label{aurelia:sec:eval:kv-store}
+%\TODO{Using A, B, C, and F results with ns-3 simulation}
+%
+We study the 99th percentile latency on key-value stores using YCSB benchmarks \cite{ycsb:socc:2010}.
+%
+YCSB benchmarks are widely used to evaluate key-value stores with a mix of insert, read, and updates operations.
+%
+They are used to evaluating key-value stores in memory or on SSD.
+%
+In the case of CXL fabric, we evaluate key-value stores on fabric-attached memory expansion.
+%
+Memory expansion devices manage their own coherence between themselves and connected CPUs.
+%
+They invalidate data on CPU cache to maintain the coherency.
+
+%\stingw{why scan operations are not doable in our setup, so we only do A, B, C and F.}
+We evaluate YCSB A, B, C, and F for read, write, and read-modify-write operations on the key-value store.
+% insert is weak here. 
+%
+YCSB D and E are not evaluated because both of their performance depends on the recent accessed keys and also how the keys are hashed when inserted. 
+%
+These additional requirements make them not ideal for us to objectively evaluate the improvement provided by \aurelia.
+%
+YCSB A, B, C, and F, on the other hand, access key-value pairs based on a fixed Zipf distribution.
+%
+Zipf distribution makes the probability of accessing $n^{th}$ key inversely proportional to $n$.
+%
+The plot of a Zipf distribution in linear scale is similar to an exponential decay curves so the first few $n^{th}$ keys are way more likely to be frequently accessed.
+%
+This makes the traffic imbalanced because the requests to a key-value pair are more likely to be headed to a certain memory expansion device. 
+
+% \stingw{
+% %For D: Request distribution: latest, E needs scanning for a range. 
+% For D, it needs an assumption of the latest and assumes inserts are hashed. 
+% Therefore, its performance depends on the hash for the "latest" distribution.
+% %
+% For E, scanning also depends on the hash for insert. 
+% %
+% This hash heavily impacts how the performance will be looked like and it's not a fixed distribution like Zipf we can control. 
+% }
+
+\aurelia's improvement on 99th percentile latency for YCSB benchmarks is shown in Figure.~\ref{fig:cxl-ycsb-results}.
+%
+\aurelia's EPN and overload signal combined handles the imbalance of traffic caused by Zipf distribution. 
+%
+The improvement for read-only YCSB C is the lowest because it incurs a request-response pair to a specific memory expansion device without any cache invalidation.
+%
+The improvement for YCSB A and B is higher because YCSB A and B incur write and subsequently cache invalidation from the memory expansion device to other CPUs.
+%
+The improvement of YCSB A is higher than YCSB B because it has 50\% of operations as writes compared to 5\% of YCSB B.  
+%
+EPN has a higher contribution to the latency improvement because overload signal makes  
+22\% more improvement on YCSB F compared to \aurelia without it.
+%
+This is expected as overload shouldn't be a frequent event or memory capacity and bandwidth are not properly provisioned.
+%
+In average, \aurelia without overload signal is only 14\% worse on all YCSB benchmarks.
+
+% \stingw{The explanation: EPN handles the congestion and overload signal in this case does contribute to it.
+% %
+% But I guess the question is about the ratio? 
+% %
+% 22\% more on YCSB F compared to \aurelia without it. In average, 14\% more on all.
+% }
+%
+%\TODO{A figure for 99th percentile latency on YCSB A, B, C and F.}
+
+\begin{figure}[ht!]    
+    \centering
+    \includegraphics[width=0.9\columnwidth]{figure/aurelia/ycsb.pdf}
+    \caption{YCSB benchmarks with higher ratio of writes demonstrate more improvement.} 
+    \label{fig:cxl-ycsb-results}
+\end{figure}
+
 
 %\section{Additional Fabric Enhancement Consideration}
 \section{Discussion}
-\label{sec:discussion}
+\label{aurelia:sec:discussion}
 %\TODO{extending discussion for 6-page HotNets}
 % \noindent \textbf{The scale and economic of CXL fabric}
 % how large should we scale CXL fabric to be still cost-effective~\cite{pond:asplos:2023}?
@@ -1084,3 +1140,16 @@ Defense against this specific type of side channel attack is interesting for fut
 
 % \stingw{any topology variant that is more tailor-made to CXL fabric's workload characteristics? 
 %     -> high radix or low radix CXL switch in the future?}
+
+\section{Conclusion}
+\label{aurelia:sec:conclusion}
+%
+Emerging standard CXL facilitates disaggregation with the support of multi-level switching. 
+%
+However, the current CXL fabric presents scalability and latency limitations. \aurelia addresses the challenges by designing proper addressing, routing, and transport layer design.
+
+\section{Sources for Material Presented in This Chapter}
+Chapter~\ref{aurelia:chap}, in part, reprints material as it appears in a published paper titled: 
+"Aurelia: CXL Fabric with Tentacle" by Shu-Ting Wang and Weitao Wang~\cite{aurelia:words:2023}. 
+%
+The dissertation author was the primary researcher and author of this material.

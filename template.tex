@@ -122,6 +122,7 @@
 \usepackage{subcaption}
 \usepackage{url}
 \usepackage{xspace}
+\usepackage{tikz}
 
 %% CAPTION
 % This overrides some of the ugliness in ucsd.cls and
@@ -190,8 +191,8 @@
 %% FOOTNOTE-MAGIC
 % Enables footnotes in tables, re-referencing the same footnote multiple times.
 \usepackage{footnote}
-\makesavenoteenv{tabular}
-\makesavenoteenv{table}
+% \makesavenoteenv{tabular}
+% \makesavenoteenv{table}
 
 
 %% TABLE FORMATTING MADNESS
@@ -200,15 +201,23 @@
 \usepackage{array}  % Enables "m" tabular environment http://ctan.org/pkg/array
 \usepackage{booktabs}  % Enables \toprule  http://ctan.org/pkg/array
 
+% For better spacing of enum env.
+\usepackage{enumitem}
+
 \begin{document}
 
 \definecolor{tealgreen}{rgb}{0.0, 0.51, 0.5}
 \definecolor{cadmiumgreen}{rgb}{0.0, 0.42, 0.24}
 \definecolor{darkolivegreen}{rgb}{0.33, 0.42, 0.18}
+\definecolor{tableheaderblue}{HTML}{004080}
 
 \newcommand{\stingw}[1]{{\color{tealgreen}[\textbf{\sc shuting}: \textit{#1}]}}
 \newcommand{\TODO}[1]{{\color{blue}\textbf{\sc TODO}: \textit{#1}}}
 \newcommand{\aurelia}[0]{\textsc{Aurelia}\xspace}
+
+% Ref:https://tex.stackexchange.com/questions/7032/good-way-to-make-textcircled-numbers
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=0.3pt] (char) {#1};}}
 
 %% FRONT MATTER
 %
@@ -234,11 +243,10 @@
 %   \chapter{My First Chapter Name}
 % and start typing away.
 
-\include{chapter1-intro}
-\include{chapter2-related-work}
-\include{chapter3-daronpon}
-\include{chapter4-fianchetto}
-\include{chapter5-aurelia}
+\include{chapter-intro}
+\include{chapter-daronpon}
+\include{chapter-fianchetto}
+\include{chapter-aurelia}
 
 % \chapter{Just a Test}
 % This is only a test.
@@ -271,34 +279,34 @@
 
 
 %%%% TABLE 1 %%%%
-\vspace{0.25in}
-\begin{table}[!ht]
-\caption[A table of when I get hungry.  Short table caption must be \protect{$< 4$} lines in the list of tables]{A table of when I get hungry. Short table caption must be \protect{$< 4$} lines in the list of tables and match the start of the main table caption verbatim.  Note that tables must be on their own line (no neighboring text) and captions must be single-spaced and appear \protect\textit{above} the table.  Captions can be as long as you want, but if they are longer than 4 lines in the list of figures, you must provide a short figure caption.}
+% \vspace{0.25in}
+% \begin{table}[!ht]
+% \caption[A table of when I get hungry.  Short table caption must be \protect{$< 4$} lines in the list of tables]{A table of when I get hungry. Short table caption must be \protect{$< 4$} lines in the list of tables and match the start of the main table caption verbatim.  Note that tables must be on their own line (no neighboring text) and captions must be single-spaced and appear \protect\textit{above} the table.  Captions can be as long as you want, but if they are longer than 4 lines in the list of figures, you must provide a short figure caption.}
 
-\vspace{-0.25in}
-\begin{center}
-\begin{tabular}{|p{1in}|p{2in}|p{3in}|}
+% \vspace{-0.25in}
+% \begin{center}
+% \begin{tabular}{|p{1in}|p{2in}|p{3in}|}
 
-\hline
-Time of day & Hunger Level & Preferred Food \\
+% \hline
+% Time of day & Hunger Level & Preferred Food \\
 
-\hline
-8am & high & IHOP (French Toast) \\
+% \hline
+% 8am & high & IHOP (French Toast) \\
 
-\hline
-noon & medium & Croutons (Tomato Basil Soup \& Granny Smith Chicken Salad) \\
+% \hline
+% noon & medium & Croutons (Tomato Basil Soup \& Granny Smith Chicken Salad) \\
 
-\hline
-5pm & high & Bombay Coast (Saag Paneer) or Hi Thai (Pad See Ew) \\
+% \hline
+% 5pm & high & Bombay Coast (Saag Paneer) or Hi Thai (Pad See Ew) \\
 
-\hline
-8pm & medium & Yogurt World (froyo!) \\
+% \hline
+% 8pm & medium & Yogurt World (froyo!) \\
 
-\hline
-\end{tabular}
-\end{center}
-\label{tab:analysis3}
-\end{table}
+% \hline
+% \end{tabular}
+% \end{center}
+% \label{tab:analysis3}
+% \end{table}
 
 
 

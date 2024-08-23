@@ -1,0 +1,46 @@
+\begin{tabular}{|l|l|l|l|l|l|l|}
+\hline
+\textcolor{black}{Benchmark} &
+  \textcolor{black}{Kernel 1} &
+  \textcolor{black}{Kernel 1 Accelerator} &
+  \textcolor{black}{Data Restructuring} &
+  \textcolor{black}{Kernel 2} &
+  \textcolor{black}{Kernel 2 Accelerator} &
+  \textcolor{black}{Input Dimension} \\ 
+\hline
+ \begin{tabular}[c]{@{}l@{}}Video\\ Surveillance~\cite{acc-yolov3:iscas:2020}\end{tabular}&
+  H.264 Codec &
+  \begin{tabular}[c]{@{}l@{}}Xilinx Video\\ Codec Unit~\cite{xilinx-u30-vcu}\end{tabular} &
+  \begin{tabular}[c]{@{}l@{}}Mul, MaxPool, \\ Reshape, Cast\end{tabular} &
+  \begin{tabular}[c]{@{}l@{}}Object \\ Detection\end{tabular} &
+  DNN Accelerator~\cite{dnnweaver:micro:2016} &
+  (960, 540, 3) \\ \hline
+  \begin{tabular}[c]{@{}l@{}}Sound\\ Detection~\cite{urbansound-dataset:mm:2014}\end{tabular}&
+  FFT &
+  \begin{tabular}[c]{@{}l@{}}Xilinx Vitis\\ DSP Library~\cite{xilinx-vitis-dsp}\end{tabular} &
+  \begin{tabular}[c]{@{}l@{}}Pow, Add, Mul, \\ Div, Log10, Cast\end{tabular} &
+  \begin{tabular}[c]{@{}l@{}}Support Vector \\ Machine\end{tabular} &
+  \begin{tabular}[c]{@{}l@{}}Xilinx Vitis Data \\ Analytics Library~\cite{xilinx-vitis-data-analytics}\end{tabular} & 
+  (8192, 768) \\ \hline
+\begin{tabular}[c]{@{}l@{}}Brain\\ Stimulation~\cite{rldbs:ijcai:2020}\end{tabular}&  
+  FFT &
+  \begin{tabular}[c]{@{}l@{}}Xilinx Vitis\\ DSP Library~\cite{xilinx-vitis-dsp}\end{tabular} &
+  \begin{tabular}[c]{@{}l@{}}Pow, Div, Mul, \\ Cast\end{tabular} &
+  \begin{tabular}[c]{@{}l@{}}Proximal Policy \\ Optimization\end{tabular} &
+  DNN Accelerator~\cite{dnnweaver:micro:2016}&
+  (256, 1024, 8) \\ \hline
+\begin{tabular}[c]{@{}l@{}}Personal Information \\ Redaction~\cite{microsoft-presidio}\end{tabular} &
+  AES-GCM &
+  \begin{tabular}[c]{@{}l@{}}Xilinx Vitis\\ Security Library~\cite{xilinx-vitis-security}\end{tabular} &
+  Concat, Flatten &
+  \begin{tabular}[c]{@{}l@{}}Regular \\ Expression\end{tabular} &
+  \begin{tabular}[c]{@{}l@{}}Xilinx Vitis Data \\ Analytics Library~\cite{xilinx-vitis-data-analytics}\end{tabular} &
+  (4, 2048, 768) \\ \hline
+  \begin{tabular}[c]{@{}l@{}}Database Hash  Join\\ \cite{doppiodb:fpl:2017} \end{tabular} &
+  Gzip&
+  \begin{tabular}[c]{@{}l@{}}Xilinx Vitis Data~\cite{xilinx-vitis-data-compression} \\ Compression Library \end{tabular} &
+  \begin{tabular}[c]{@{}l@{}}Concat, Reshape, \\ Cast\end{tabular} &
+  Hash Join&
+  \begin{tabular}[c]{@{}l@{}}Xilinx Vitis \\ Database Library~\cite{xilinx-vitis-database}\end{tabular} &
+  (4, 1024, 512) \\ \hline
+\end{tabular}%
