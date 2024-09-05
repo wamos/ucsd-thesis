@@ -837,7 +837,7 @@ The simulation executes 1000 runs of inference based on the aforementioned param
 % %
 % A run of inference processes $B$ $L$-token sequences containing $E$-dimensional vectors, where $B$ is the batch size of 2048 in our setup.
 
-\aurelia achieves 11\% improvement on median throughput and 17\% improvement on the 10th percentile throughput because of faster weight loading and all-reduce operations. 
+\aurelia achieves 21\% improvement on median throughput and 27\% improvement on the 10th percentile throughput because of faster weight loading and all-reduce operations.
 %
 These operations encounter 2.1$\times$ fewer times of pause on the links than the baseline when the links are out of credits to send packets.
 %
@@ -1149,7 +1149,7 @@ Emerging standard CXL facilitates disaggregation with the support of multi-level
 However, the current CXL fabric presents scalability and latency limitations. \aurelia addresses the challenges by designing proper addressing, routing, and transport layer design.
 
 \section{Sources for Material Presented in This Chapter}
-Chapter~\ref{aurelia:chap}, in part, reprints material as it appears in a published paper titled: 
+Chapter~\ref{aurelia:chap}, in part, reprints material as it appears in a published WORD'23 workshoppaper titled: 
 "Aurelia: CXL Fabric with Tentacle" by Shu-Ting Wang and Weitao Wang~\cite{aurelia:words:2023}. 
 %
 The dissertation author was the primary researcher and author of this material.

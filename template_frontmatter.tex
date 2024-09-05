@@ -11,7 +11,7 @@
 
 % No symbols, formulas, superscripts, or Greek letters are allowed
 % in your title.
-\title{Accelerating Data Movement on Different Granularities in Data centers}
+\title{Accelerating Data Movement at Different Granularities in Data centers}
 
 \author{Shu-Ting Wang}
 \degreeyear{\the\year}
@@ -124,23 +124,63 @@ Professor George C. Papen\\
 %  the OGS Formatting Manual for more information.
 %
 \begin{acknowledgements}
-\stingw{Thanks Olivia for supporting everyday throughout my PhD journey.}
 %
-\stingw{Thanks people including Rajdeep, Yibo, Nishant, Room 3140, George, Alex, 
-Rohan, Byung Hoon, Mohammad, Weitao, Pierre-Louis}
+I want to thank Olivia, my significant other and soon-to-be lifelong partner, for supporting me through my PhD journey.
 %
-\stingw{Thanks for my friends, Fujimak, SmallGGRen, HakkaFish playing Mario Kart 8 Deluxe with me during my lowest point of my life.}
+It is a wild ride and thank you to be always on my side.
+
+I want to thank all faculty members who invested their time mentoring me, 
 %
-\stingw{Thanks Dr. Yiting Xia hosting me during my visit to MPI Informatics.}
+Prof. George Porter for the first four years of advising that significantly shapes my taste and capability to do research, 
 %
-\stingw{Thanks for Yin Chin Foundation for their scholarship helping me for conference travel and supporting myself during finical instable times.}
+Prof. Steve Swanson for chairing my committee and giving me the last push to finish the dissertation,
 %
-\stingw{Thanks my mom and grandfather for unconditionally support my dream of pursuing research}
+Prof. Geoff Voelker for being on my committee and his wonderful operating system class,
 %
-\stingw{Thanks Bird Rock Coffee, Art of espresso, Finjin Coffee}
-%  Thanks to whoever deserves credit for Blacks Beach, Porters Pub, and
-%  every coffee shop in San Diego.
-%  Thanks also to hottubs.
+Prof. George Papen for being on my committee and his insights on networking and optics, 
+%
+Prof. Alex Snoeren on all the critiques on my figures during weekly meetings, 
+%
+and Prof. Jishen Zhao for being willing to serve on my committee.
+
+To Rajdeep, Yibo, Nishant, Stew, Audrey, Anil, Ariana, and all other tenants of room 3140, 
+thanks for hanging out with me and being my friends or at least making me think we are friends.
+%
+The camaraderie is invaluable, and I will bear that in mind when I embark on my next journey.
+
+To Rohan, Byung Hoon, Hanyang, Soroush, Amin and Chris, thanks for long talks and chats about research and the time of questioning of our life choices while still working on research.  
+
+To Pierre-Louis, Weitao, and Dan, thanks for sharing my research interest on CXL and other topics.
+%
+I really enjoy all the online chats and meetings and the idea of I am not in this alone pushes me to finish the last chapter of this dissertation.
+
+To Dr. Yiting Xia, Jialong, Yiming, and Federicom, thanks for hosting me at MPI-INF in Saarbr\"{u}cken while I am working on this dissertation. 
+
+To Fujimak, SmallGGRen, HakkaFish and StanfordSneaky, I really enjoy our time on Mario cart racing and chatting about lives and politics. I will keep your real name in private in case other people scoop you folks from me. 
+
+I want to thank Yin Chin Foundation for their scholarship helping me for conference travel and supporting myself during finical instable times.
+
+Coffee as the fuel for any research output is essential. I want to thank the great coffee shops and roasters in San Diego: Bird Rock coffee, the Art of Espresso, and Finjin. 
+
+At last, I want to thank all my collaborators and co-authors, who are listed next.
+%
+Chapter~\ref{daronpon:chap}, in part, reprints material as it appears in a draft titled: 
+"Daronpon: Datacenter-scale Sub-RTT Replica Selection for Low-latency Applications"
+by Shu-Ting Wang, Stewart Grant, Keerthana Ganesan, George Porter, and Alex C. Snoeren.
+%
+The dissertation author was the primary researcher and author of this material.
+
+Chapter~\ref{fianchetto:chap}, in part, reprints material as it appears in a paper titled: "Data Motion Acceleration: Chaining Cross-Domain Multi Accelerators"
+by Shu-Ting Wang, Hanyang Xu, Amin Mamandipoor, Rohan Mahapatra, Byung Hoon Ahn, 
+Soroush Ghodrati, Krishnan Kailas, Mohammad Alian, and Hadi Esmaeilzadeh~\cite{dmx:hpca:2024}.
+% 
+The dissertation author was the primary researcher and author of this material.
+
+Chapter~\ref{aurelia:chap}, in part, reprints material as it appears in a published WORD'23 workshoppaper titled: 
+"Aurelia: CXL Fabric with Tentacle" by Shu-Ting Wang and Weitao Wang~\cite{aurelia:words:2023}. 
+%
+The dissertation author was the primary researcher and author of this material.
+%
 \end{acknowledgements}
 
 
@@ -177,7 +217,33 @@ Rohan, Byung Hoon, Mohammad, Weitao, Pierre-Louis}
 %   The abstract may continue to a second page if necessary.
 %
 \begin{abstract}
-  This dissertation will be abstract.
+  The dissertation investigates the redundant communication between servers for large scale web and cache requests and redundant data movement between accelerators for compute-intensive applications.
+  %
+  The redundancy is an impending and critical issue for datacenters designed for hardware accelerators and disaggregated resources.
+  % 
+  The dissertation makes the following three contributions to address this.
+  %
+  The first contribution of the dissertation is \daronpon. 
+  %
+  \daronpon dynamically load balances and reroutes large scale requests of web and cache application on microsecond timescale. 
+  %
+  \daronpon prevents these requests stranded on busy servers with network congestion and long queuing delay to be processed.
+  %
+  \daronpon shows improvement on various service time characterizations of different applications 
+  %
+  The second contribution of the dissertation is \dmx. 
+  %
+  \dmx acts as a compute-enabled bypass for inter-accelerator communication. 
+  %
+  \dmx accelerates the data restructuring needed between accelerators and saves the data movement between accelerators and CPUs for compute-intensive applications.
+  %
+  \dmx shows improvement on a series of benchmarks involving different application domains.
+  %
+  The third contribution of the dissertation is \aurelia. 
+  %
+  \aurelia leverages the emerging interconnect of CXL to investigate the design of a scalable fabric for accelerators and fabric-attached memory expansion.
+  %
+  \aurelia improves routing and transport based on current specification of CXL and shows performance improvement on machine learning and key-value store applications.
 \end{abstract}
 
 
