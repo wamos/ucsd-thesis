@@ -1,14 +1,1277 @@
-\begin{thebibliography}{Mar83}
+\newcommand{\etalchar}[1]{$^{#1}$}
+\begin{thebibliography}{MGPM{\etalchar{+}}22}
 
-\bibitem[Mar83]{Martin_1983}
-Robert~D. Martin.
-\newblock {\em Human Brain Evolution in an Ecological Context}.
-\newblock American Museum of Natural History, 1983.
+\bibitem[ABAL{\etalchar{+}}20]{far-memory:eurosys:2020}
+Emmanuel Amaro, Christopher Branner-Augmon, Zhihong Luo, Amy Ousterhout, Marcos~K. Aguilera, Aurojit Panda, Sylvia Ratnasamy, and Scott Shenker.
+\newblock Can far memory improve job throughput?
+\newblock In {\em Proceedings of the Fifteenth European Conference on Computer Systems}, 2020.
 
-\bibitem[RI99]{Rilling_Insel_1999}
-James~K. Rilling and Thomas~R. Insel.
-\newblock The primate neocortex in comparative perspective using magnetic
-  resonance imaging.
-\newblock {\em Journal of Human Evolution}, 37(2):191--223, 1999.
+\bibitem[ABR{\etalchar{+}}20]{ibm-compression-accelerator:isca:2020}
+Bulent Abali, Bart Blaner, John Reilly, Matthias Klein, Ashutosh Mishra, Craig~B. Agricola, Bedri Sendir, Alper Buyuktosunoglu, Christian Jacobi, William~J. Starke, Haren Myneni, and Charlie Wang.
+\newblock Data compression accelerator on ibm power9 and z15 processors : Industrial product.
+\newblock In {\em ISCA}, 2020.
+
+\bibitem[ACFM16]{fusedlayercnn:micro:2016}
+Manoj Alwani, Han Chen, Michael Ferdman, and Peter Milder.
+\newblock Fused-layer cnn accelerators.
+\newblock In {\em MICRO}, 2016.
+
+\bibitem[AED{\etalchar{+}}]{conga}
+Mohammad Alizadeh, Tom Edsall, Sarang Dharmapurikar, Ramanan Vaidyanathan, Kevin Chu, Andy Fingerhut, Vinh~The Lam, Francis Matus, Rong Pan, Navindra Yadav, and George Varghese.
+\newblock {CONGA}: Distributed congestion-aware load balancing for datacenters.
+\newblock In {\em Proc. of the ACM Conference on Special Interest Group on Data Communication}, SIGCOMM ’14.
+
+\bibitem[AFLV08]{fat-tree:sigcomm:2008}
+Mohammad Al-Fares, Alexander Loukissas, and Amin Vahdat.
+\newblock A scalable, commodity data center network architecture.
+\newblock In {\em ACM Conference on Special Interest Group on Data Communication}, 2008.
+
+\bibitem[AKK{\etalchar{+}}15]{dcs:micro:2015}
+Jaehyung Ahn, Dongup Kwon, Youngsok Kim, Mohammadamin Ajdari, Jaewon Lee, and Jangwoo Kim.
+\newblock Dcs: A fast and scalable device-centric server architecture.
+\newblock In {\em MICRO}, 2015.
+
+\bibitem[ama]{amazon_ec2_f1}
+Amazon {EC2} {F1} {Instances}.
+
+\bibitem[AMH{\etalchar{+}}]{google_slicer}
+Atul Adya, Daniel Myers, Jon Howell, Jeremy Elson, Colin Meek, Vishesh Khemani, Stefan Fulger, Pan Gu, Lakshminath Bhuvanagiri, Jason Hunter, Roberto Peon, Larry Kai, Alexander Shraer, Arif Merchant, and Kfir Lev-Ari.
+\newblock Slicer: Auto-sharding for datacenter applications.
+\newblock In {\em Proc. of the {USENIX} Symposium on Operating Systems Design and Implementation}, OSDI ’16.
+
+\bibitem[APR20]{acc-yolov3:iscas:2020}
+Afzal Ahmad, Muhammad~Adeel Pasha, and Ghulam~Jilani Raza.
+\newblock Accelerating tiny yolov3 using fpga-based hardware/software co-design.
+\newblock In {\em IEEE ISCAS}, 2020.
+
+\bibitem[ast]{asteralabs-pcie-retimer}
+Pcie retimer.
+\newblock \url{https://www.asteralabs.com/smart-retimers/pci-express-retimers-vs-redrivers-an-eye-popping-difference/}.
+
+\bibitem[awsa]{aws-inferentia:2019}
+{AWS} inferentia.
+
+\bibitem[awsb]{aws-trainium:2022}
+{AWS} trainium.
+
+\bibitem[awsc]{aws-vt1-instance}
+Aws vt1 instance.
+
+\bibitem[azu]{azure_serverless_computing:2021}
+Azure serverless.
+\newblock \url{https://azure.microsoft.com/en-us/solutions/serverless/#overview}.
+
+\bibitem[BBCS17]{spin:atc:2017}
+Shai Bergman, Tanya Brokhman, Tzachi Cohen, and Mark Silberstein.
+\newblock {SPIN}: Seamless operating system integration of {Peer-to-Peer} {DMA} between {SSDs} and {GPUs}.
+\newblock In {\em ATC}, 2017.
+
+\bibitem[BBRL{\etalchar{+}}20]{pint:sigcomm:2020}
+Ran Ben~Basat, Sivaramakrishnan Ramanathan, Yuliang Li, Gianni Antichi, Minian Yu, and Michael Mitzenmacher.
+\newblock Pint: Probabilistic in-band network telemetry.
+\newblock In {\em Proceedings of the Annual Conference of the ACM Special Interest Group on Data Communication on the Applications, Technologies, Architectures, and Protocols for Computer Communication}, 2020.
+
+\bibitem[BCH13]{datacenter-as-a-computer:2013}
+Luiz~André Barroso, Jimmy Clidaras, and Urs Hölzle.
+\newblock {\em The Datacenter as a Computer: An Introduction to the Design of Warehouse-Scale Machines, Second Edition}.
+\newblock 2013.
+
+\bibitem[BEHL{\etalchar{+}}19]{asap:toc:2019}
+Subho~Sankar Banerjee, Mohamed El-Hadedy, Jong~Bin Lim, Zbigniew~T. Kalbarczyk, Deming Chen, Steven~S. Lumetta, and Ravishankar~K. Iyer.
+\newblock Asap: Accelerated short-read alignment on programmable hardware.
+\newblock {\em IEEE Transactions on Computers}, 2019.
+
+\bibitem[BEL{\etalchar{+}}23]{pond-saving:ieee-micro:2023}
+Daniel~S. Berger, Daniel Ernst, Huaicheng Li, Pantea Zardoshti, Monish Shah, Samir Rajadnya, Scott Lee, Lisa Hsu, Ishwar Agarwal, Mark~D. Hill, and Ricardo Bianchini.
+\newblock Design tradeoffs in cxl-based memory pools for public cloud platforms.
+\newblock {\em IEEE Micro}, 2023.
+
+\bibitem[BGK{\etalchar{+}}13]{rmt:sigcomm:2013}
+Pat Bosshart, Glen Gibb, Hun-Seok Kim, George Varghese, Nick McKeown, Martin Izzard, Fernando Mujica, and Mark Horowitz.
+\newblock Forwarding metamorphosis: Fast programmable match-action processing in hardware for sdn.
+\newblock In {\em Proceedings of the Conference of the ACM Special Interest Group on Data Communication}, 2013.
+
+\bibitem[BGP{\etalchar{+}}19]{conda:isca:2019}
+Amirali Boroumand, Saugata Ghose, Minesh Patel, Hasan Hassan, Brandon Lucia, Rachata Ausavarungnirun, Kevin Hsieh, Nastaran Hajinazar, Krishna~T. Malladi, Hongzhong Zheng, and Onur Mutlu.
+\newblock Conda: Efficient cache coherence support for near-data accelerators.
+\newblock In {\em ISCA}, 2019.
+
+\bibitem[Bis21]{intel-sapphire-rapids:hotchips:2021}
+Arijit Biswas.
+\newblock Sapphire rapids.
+\newblock In {\em Hot Chips}, 2021.
+
+\bibitem[BMPR17]{killer_microseconds}
+Luiz Barroso, Mike Marty, David Patterson, and Parthasarathy Ranganathan.
+\newblock Attack of the killer microseconds.
+\newblock {\em Commun. ACM}, 60(4):48–54, March 2017.
+
+\bibitem[BMR{\etalchar{+}}20]{gpt3:neurips:2020}
+Tom Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared~D Kaplan, Prafulla Dhariwal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, Sandhini Agarwal, Ariel Herbert-Voss, Gretchen Krueger, Tom Henighan, Rewon Child, Aditya Ramesh, Daniel Ziegler, Jeffrey Wu, Clemens Winter, Chris Hesse, Mark Chen, Eric Sigler, Mateusz Litwin, Scott Gray, Benjamin Chess, Jack Clark, Christopher Berner, Sam McCandlish, Alec Radford, Ilya Sutskever, and Dario Amodei.
+\newblock Language models are few-shot learners.
+\newblock In H.~Larochelle, M.~Ranzato, R.~Hadsell, M.F. Balcan, and H.~Lin, editors, {\em Advances in Neural Information Processing Systems}, 2020.
+
+\bibitem[BPP{\etalchar{+}}16]{IX}
+Adam Belay, George Prekas, Mia Primorac, Ana Klimovic, Samuel Grossman, Christos Kozyrakis, and Edouard Bugnion.
+\newblock The ix operating system: Combining low latency, high throughput, and efficiency in a protected dataplane.
+\newblock {\em ACM Trans. Comput. Syst.}, 34(4), December 2016.
+
+\bibitem[bro]{broadcom:pcie-switches}
+Broadcom pex88000 managed pci express 4.0 switches.
+
+\bibitem[BTY{\etalchar{+}}]{cheetah}
+Tom Barbette, Chen Tang, Haoran Yao, Dejan Kosti{\'c}, Gerald Q.~Maguire Jr., Panagiotis Papadimitratos, and Marco Chiesa.
+\newblock A high-speed load-balancer design with guaranteed per-connection-consistency.
+\newblock In {\em 17th {USENIX} Symposium on Networked Systems Design and Implementation}, NSDI '20.
+
+\bibitem[BWPN18]{zeppelin:isscc:2018}
+Noah Beck, Sean White, Milam Paraschou, and Samuel Naffziger.
+\newblock Zeppelin: An soc for multichip architectures.
+\newblock In {\em IEEE ISSCC}, 2018.
+
+\bibitem[CCP{\etalchar{+}}16]{cloud-scale-acc:micro:2016}
+Adrian~M. Caulfield, Eric~S. Chung, Andrew Putnam, Hari Angepat, Jeremy Fowers, Michael Haselman, Stephen Heil, Matt Humphrey, Puneet Kaur, Joo-Young Kim, Daniel Lo, Todd Massengill, Kalin Ovtcharov, Michael Papamichael, Lisa Woods, Sitaram Lanka, Derek Chiou, and Doug Burger.
+\newblock A cloud-scale acceleration architecture.
+\newblock In {\em MICRO}, 2016.
+
+\bibitem[CD20]{rocksdb-modeling:fast:2020}
+Zhichao Cao and Siying Dong.
+\newblock Characterizing, modeling, and benchmarking rocksdb key-value workloads at facebook.
+\newblock In {\em Proceedings of the 18th USENIX Conference on File and Storage Technologies}, 2020.
+
+\bibitem[CDS{\etalchar{+}}14]{diannao:asplos:2014}
+Tianshi Chen, Zidong Du, Ninghui Sun, Jia Wang, Chengyong Wu, Yunji Chen, and Olivier Temam.
+\newblock Diannao: a small-footprint high-throughput accelerator for ubiquitous machine-learning.
+\newblock In {\em ASPLOS}, 2014.
+
+\bibitem[CFM{\etalchar{+}}17]{drmt:sigcomm:2017}
+Sharad Chole, Andy Fingerhut, Sha Ma, Anirudh Sivaraman, Shay Vargaftik, Alon Berger, Gal Mendelson, Mohammad Alizadeh, Shang-Tse Chuang, Isaac Keslassy, Ariel Orda, and Tom Edsall.
+\newblock Drmt: Disaggregated programmable switching.
+\newblock In {\em Proceedings of the Conference of the ACM Special Interest Group on Data Communication}, 2017.
+
+\bibitem[CGG{\etalchar{+}}12]{arc:dac:2012}
+Jason Cong, Mohammad~Ali Ghodrat, Michael Gill, Beayna Grigorian, and Glenn Reinman.
+\newblock Architecture support for accelerator-rich cmps.
+\newblock In {\em Proceedings of the 49th Annual Design Automation Conference}, 2012.
+
+\bibitem[CGH{\etalchar{+}}18]{smem:fpl:2018}
+Jason Cong, Licheng Guo, Po-Tsang Huang, Peng Wei, and Tianhe Yu.
+\newblock Smem++: A pipelined and time-multiplexed smem seeding accelerator for genome sequencing.
+\newblock In {\em FPL}, 2018.
+
+\bibitem[CIP{\etalchar{+}}21]{kona:asplos:2021}
+Irina Calciu, M.~Talha Imran, Ivan Puddu, Sanidhya Kashyap, Hasan~Al Maruf, Onur Mutlu, and Aasheesh Kolli.
+\newblock Rethinking software runtimes for disaggregated memory.
+\newblock In {\em Proceedings of the 26th ACM International Conference on Architectural Support for Programming Languages and Operating Systems}, 2021.
+
+\bibitem[CKB{\etalchar{+}}20]{genasm:micro:2020}
+Damla~Senol Cali, Gurpreet~S. Kalsi, Zülal Bingöl, Can Firtina, Lavanya Subramanian, Jeremie~S. Kim, Rachata Ausavarungnirun, Mohammed Alser, Juan Gomez-Luna, Amirali Boroumand, Anant Norion, Allison Scibisz, Sreenivas Subramoneyon, Can Alkan, Saugata Ghose, and Onur Mutlu.
+\newblock Genasm: A high-performance, low-power approximate string matching acceleration framework for genome sequence analysis.
+\newblock In {\em MICRO}, 2020.
+
+\bibitem[CKL{\etalchar{+}}22]{segram:isca:2022}
+Damla~Senol Cali, Konstantinos Kanellopoulos, Jo\"{e}l Lindegger, Z\"{u}lal Bing\"{o}l, Gurpreet~S. Kalsi, Ziyi Zuo, Can Firtina, Meryem~Banu Cavlak, Jeremie Kim, Nika~Mansouri Ghiasi, Gagandeep Singh, Juan G\'{o}mez-Luna, Nour~Almadhoun Alserr, Mohammed Alser, Sreenivas Subramoney, Can Alkan, Saugata Ghose, and Onur Mutlu.
+\newblock Segram: A universal hardware accelerator for genomic sequence-to-graph and sequence-to-sequence mapping.
+\newblock In {\em ISCA}, 2022.
+
+\bibitem[CMJ{\etalchar{+}}18]{tvm:osdi18}
+Tianqi Chen, Thierry Moreau, Ziheng Jiang, Lianmin Zheng, Eddie Yan, Haichen Shen, Meghan Cowan, Leyuan Wang, Yuwei Hu, Luis Ceze, et~al.
+\newblock {TVM}: An automated end-to-end optimizing compiler for deep learning.
+\newblock In {\em OSDI}, 2018.
+
+\bibitem[CMM{\etalchar{+}}22]{chiosa:pvldb:2022}
+Monica Chiosa, Fabio Maschi, Ingo M\"{u}ller, Gustavo Alonso, and Norman May.
+\newblock Hardware acceleration of compression and encryption in sap hana.
+\newblock {\em Proc. VLDB Endow.}, 15(12):3277–3291, 2022.
+
+\bibitem[CQS{\etalchar{+}}22]{democratizing:cacm:2022}
+Yuze Chi, Weikang Qiao, Atefeh Sohrabizadeh, Jie Wang, and Jason Cong.
+\newblock Democratizing domain-specific computing.
+\newblock {\em Commun. ACM}, 66(1):74–85, dec 2022.
+
+\bibitem[cro]{crossroad-benchmarks}
+Crossroads benchmarks.
+\newblock \url{https://www.lanl.gov/projects/crossroads/benchmarks-performance-analysis.php}.
+
+\bibitem[CST{\etalchar{+}}10]{ycsb:socc:2010}
+Brian~F. Cooper, Adam Silberstein, Erwin Tam, Raghu Ramakrishnan, and Russell Sears.
+\newblock Benchmarking cloud serving systems with ycsb.
+\newblock In {\em Proceedings of the 1st ACM Symposium on Cloud Computing}, 2010.
+
+\bibitem[cxl]{cxl-3-0-spec}
+Cxl 3.0 specification.
+\newblock \url{https://www.computeexpresslink.org/download-the-specification}.
+
+\bibitem[CYES19]{eyerissv2:journal:2019}
+Yu-Hsin Chen, Tien-Ju Yang, Joel Emer, and Vivienne Sze.
+\newblock Eyeriss v2: A flexible accelerator for emerging deep neural networks on mobile devices.
+\newblock {\em JETCAS}, 2019.
+
+\bibitem[CZY{\etalchar{+}}18]{autotvm:2018}
+Tianqi Chen, Lianmin Zheng, Eddie Yan, Ziheng Jiang, Thierry Moreau, Luis Ceze, Carlos Guestrin, and Arvind Krishnamurthy.
+\newblock Learning to optimize tensor programs.
+\newblock In {\em NeurIPS}, pages 3389--3400, 2018.
+
+\bibitem[{Dah}00]{dahlin_stale_info}
+M.~{Dahlin}.
+\newblock Interpreting stale load information.
+\newblock {\em IEEE Transactions on Parallel and Distributed Systems}, 11(10):1033--1047, 2000.
+
+\bibitem[Dal23]{accelerator-cluster:hoti:2023}
+Bill Dally.
+\newblock Accelerator clusters: the new supercomputer.
+\newblock In {\em HOTI}, 2023.
+
+\bibitem[DB]{tail_at_scale}
+Jeffrey Dean and Luiz~Andr\'{e} Barroso.
+\newblock The tail at scale.
+\newblock {\em Commun. ACM}, 56(2):74–80.
+
+\bibitem[DFC{\etalchar{+}}15]{shidiannao:isca:2015}
+Zidong Du, Robert Fasthuber, Tianshi Chen, Paolo Ienne, Ling Li, Tao Luo, Xiaobing Feng, Yunji Chen, and Olivier Temam.
+\newblock Shidiannao: shifting vision processing closer to the sensor.
+\newblock In {\em ISCA}, 2015.
+
+\bibitem[DGR{\etalchar{+}}74]{dennard_scaling}
+R.~H. Dennard, F.~H. Gaensslen, V.~L. Rideout, E.~Bassous, and A.~R. LeBlanc.
+\newblock Design of ion-implanted {MOSFET}'s with very small physical dimensions.
+\newblock {\em JSSC}, 1974.
+
+\bibitem[dgxa]{dgx-gh200}
+{DGX GH200}.
+\newblock \url{https://www.nvidia.com/en-us/data-center/dgx-gh200/}.
+
+\bibitem[dgxb]{dgx-superpod}
+{DGX SuperPOD}.
+\newblock \url{https://www.nvidia.com/en-us/data-center/dgx-superpod/}.
+
+\bibitem[DK13]{paragon:asplos:2013}
+Christina Delimitrou and Christos Kozyrakis.
+\newblock Paragon: Qos-aware scheduling for heterogeneous datacenters.
+\newblock In {\em ASPLOS}, 2013.
+
+\bibitem[dma]{dma_buf:kernel:2022}
+dma-buf.
+
+\bibitem[DMN{\etalchar{+}}23]{hpc-disagg-mem:arxiv:2023}
+Nan Ding, Pieter Maris, Hai~Ah Nam, Taylor Groves, Muaaz~Gul Awan, LeAnn Lindsey, Christopher Daley, Oguz Selvitopi, Leonid Oliker, Nicholas Wright, and Samuel Williams.
+\newblock Evaluating the potential of disaggregated memory systems for hpc applications, 2023.
+
+\bibitem[DNCH14]{farm:nsdi:2014}
+Aleksandar Dragojevi{\'c}, Dushyanth Narayanan, Miguel Castro, and Orion Hodson.
+\newblock {FaRM}: Fast remote memory.
+\newblock In {\em 11th USENIX Symposium on Networked Systems Design and Implementation (NSDI 14)}, April 2014.
+
+\bibitem[doe]{doe-miniapps}
+Characterization of the doe mini-apps.
+\newblock \url{https://portal.nersc.gov/project/CAL/doe-miniapps.htm}.
+
+\bibitem[{DPD}21]{dpdk}
+{DPDK}.
+\newblock Data plane development kit ({DPDK}), 2021.
+
+\bibitem[EBA{\etalchar{+}}11]{dark_silicon_isca2011}
+Hadi Esmaeilzadeh, Emily Blem, Renée~St. Amant, Karthikeyan Sankaralingam, and Doug Burger.
+\newblock Dark silicon and the end of multicore scaling.
+\newblock In {\em 2011 38th Annual International Symposium on Computer Architecture (ISCA)}, pages 365--376, 2011.
+
+\bibitem[EFM{\etalchar{+}}22]{flexdriver:asplos:2022}
+Haggai Eran, Maxim Fudim, Gabi Malka, Gal Shalom, Noam Cohen, Amit Hermony, Dotan Levi, Liran Liss, and Mark Silberstein.
+\newblock Flexdriver: A network driver for your accelerator.
+\newblock In {\em ASPLOS}, 2022.
+
+\bibitem[EGG{\etalchar{+}}21]{verigoodml:iccad:2021}
+Hadi Esmaeilzadeh, Soroush Ghodrati, Jie Gu, Shiyu Guo, Andrew~B Kahng, Joon~Kyung Kim, Sean Kinzer, Rohan Mahapatra, Susmita~Dey Manasi, Edwin Mascarenhas, et~al.
+\newblock Verigood-ml: An open-source flow for automated ml hardware synthesis.
+\newblock In {\em ICCAD}, 2021.
+
+\bibitem[emb]{ember-comm}
+Ember.
+\newblock \url{https://proxyapps.exascaleproject.org/app/ember-communication-patterns/}.
+
+\bibitem[exa]{exascale-apps}
+Ecp proxy applications.
+\newblock \url{https://proxyapps.exascaleproject.org/app/}.
+
+\bibitem[EYC{\etalchar{+}}]{maglev}
+Daniel~E. Eisenbud, Cheng Yi, Carlo Contavalli, Cody Smith, Roman Kononov, Eric Mann-Hielscher, Ardas Cilingiroglu, Bin Cheyney, Wentao Shang, and Jinnah~Dylan Hosein.
+\newblock Maglev: A fast and reliable software network load balancer.
+\newblock In {\em 13th {USENIX} Symposium on Networked Systems Design and Implementation}, NSDI '16.
+
+\bibitem[fab]{fabric-saving}
+Fabric saving for gpu.
+\newblock \url{https://gigaio.com/2023/01/gigaio-doubles-gpu-performance-at-a-30-cost-savings-with-intel-sapphire-rapids/}.
+
+\bibitem[fac20]{facebook_shard}
+Facebook shard manager.
+\newblock https://engineering.fb.com/2020/08/24/\\ production-engineering/scaling-services-with-shard-manager/, 2020.
+
+\bibitem[FOP{\etalchar{+}}18]{brainwave:isca:2018}
+Jeremy Fowers, Kalin Ovtcharov, Michael Papamichael, Todd Massengill, Ming Liu, Daniel Lo, Shlomi Alkalay, Michael Haselman, Logan Adams, Mahdi Ghandi, Stephen Heil, Prerak Patel, Adam Sapek, Gabriel Weisz, Lisa Woods, Sitaram Lanka, Steven~K. Reinhardt, Adrian~M. Caulfield, Eric~S. Chung, and Doug Burger.
+\newblock A configurable cloud-scale dnn processor for real-time ai.
+\newblock In {\em ISCA}, 2018.
+
+\bibitem[FSZ{\etalchar{+}}18]{genax:isca:2018}
+Daichi Fujiki, Arun Subramaniyan, Tianjun Zhang, Yu~Zeng, Reetuparna Das, David Blaauw, and Satish Narayanasamy.
+\newblock Genax: A genome sequencing accelerator.
+\newblock In {\em ISCA}, 2018.
+
+\bibitem[FWO{\etalchar{+}}20]{seedex:micro:2020}
+Daichi Fujiki, Shunhao Wu, Nathan Ozog, Kush Goliya, David Blaauw, Satish Narayanasamy, and Reetuparna Das.
+\newblock Seedex: A genome sequencing accelerator for optimal alignments in subminimal space.
+\newblock In {\em MICRO}, 2020.
+
+\bibitem[GAK{\etalchar{+}}20]{planaria:micro:2020}
+Soroush Ghodrati, Byung~Hoon Ahn, Joon~Kyung Kim, Sean Kinzer, Brahmendra~Reddy Yatham, Navateja Alla, Hardik Sharma, Mohammad Alian, Eiman Ebrahimi, Nam~Sung Kim, et~al.
+\newblock Planaria: Dynamic architecture fission for spatial multi-tenant acceleration of deep neural networks.
+\newblock In {\em MICRO}, 2020.
+
+\bibitem[GHL{\etalchar{+}}22]{aquila:nsdi:2022}
+Dan Gibson, Hema Hariharan, Eric Lance, Moray McLaren, Behnam Montazeri, Arjun Singh, Stephen Wang, Hassan M.~G. Wassel, Zhehua Wu, Sunghwan Yoo, Raghuraman Balasubramanian, Prashant Chandra, Michael Cutforth, Peter Cuy, David Decotigny, Rakesh Gautam, Alex Iriza, Milo M.~K. Martin, Rick Roy, Zuowei Shen, Ming Tan, Ye~Tang, Monica Wong-Chan, Joe Zbiciak, and Amin Vahdat.
+\newblock Aquila: A unified, low-latency fabric for datacenter networks.
+\newblock In {\em USENIX Symposium on Networked Systems Design and Implementation (NSDI)}, 2022.
+
+\bibitem[gig]{gigaio-pcie-swtich}
+Gigaio fabrex.
+
+\bibitem[GKK{\etalchar{+}}23]{profiling:isca:2023}
+Abraham Gonzalez, Aasheesh Kolli, Samira Khan, Sihang Liu, Vidushi Dadu, Sagar Karandikar, Jichuan Chang, Krste Asanovic, and Parthasarathy Ranganathan.
+\newblock Profiling hyperscale big data processing.
+\newblock In {\em Proceedings of the 50th Annual International Symposium on Computer Architecture}, 2023.
+
+\bibitem[GLH{\etalchar{+}}]{duet}
+Rohan Gandhi, Hongqiang~Harry Liu, Y.~Charlie Hu, Guohan Lu, Jitendra Padhye, Lihua Yuan, and Ming Zhang.
+\newblock Duet: Cloud scale load balancing with hardware and software.
+\newblock In {\em Proceedings of the 2014 ACM Conference on SIGCOMM}, SIGCOMM '14.
+
+\bibitem[GLKJ22]{directcxl:atc:2022}
+Donghyun Gouk, Sangwon Lee, Miryeong Kwon, and Myoungsoo Jung.
+\newblock Direct access, {High-Performance} memory disaggregation with {DirectCXL}.
+\newblock In {\em USENIX Annual Technical Conference (USENIX ATC)}, 2022.
+
+\bibitem[GLS{\etalchar{+}}20]{awb-gcn:micro:2020}
+Tong Geng, Ang Li, Runbin Shi, Chunshu Wu, Tianqi Wang, Yanfei Li, Pouya Haghi, Antonino Tumeo, Shuai Che, Steve Reinhardt, and Martin~C. Herbordt.
+\newblock Awb-gcn: A graph convolutional network accelerator with runtime workload rebalancing.
+\newblock In {\em MICRO}, 2020.
+
+\bibitem[GLY{\etalchar{+}}]{challenging_programable}
+Nadeen Gebara, Alberto Lerner, Mingran Yang, Minlan Yu, Paolo Costa, and Manya Ghobadi.
+\newblock Challenging the stateless quo of programmable switches.
+\newblock In {\em Proceedings of the 19th ACM Workshop on Hot Topics in Networks}, HotNets '20.
+
+\bibitem[gpu]{gpudirect:2019}
+Gpudirect.
+
+\bibitem[GYG{\etalchar{+}}]{drill}
+Soudeh Ghorbani, Zibin Yang, P.~Brighten Godfrey, Yashar Ganjali, and Amin Firoozshahian.
+\newblock {DRILL}: Micro load balancing for low-latency data center networks.
+\newblock In {\em Proc. of the ACM Conference on Special Interest Group on Data Communication}, SIGCOMM ’17.
+
+\bibitem[GYP{\etalchar{+}}19]{tangram:asplos19}
+Mingyu Gao, Xuan Yang, Jing Pu, Mark Horowitz, and Christos Kozyrakis.
+\newblock Tangram: Optimized coarse-grained dataflow for scalable nn accelerators.
+\newblock In {\em ASPLOS}, 2019.
+
+\bibitem[h3p]{h3platform-cxl-memory}
+Falcon c5022 of h3 platform.
+\newblock \url{https://www.h3platform.com/product-detail/overview/35}.
+
+\bibitem[Ham20]{memory-trend:snl:2020}
+Simon~David Hammond.
+\newblock Compute memory trends: from application requirements to architectural needs.
+\newblock 2020.
+
+\bibitem[HBB{\etalchar{+}}18]{facebook_datacenter:hpca:2018}
+Kim Hazelwood, Sarah Bird, David Brooks, Soumith Chintala, Utku Diril, Dmytro Dzhulgakov, Mohamed Fawzy, Bill Jia, Yangqing Jia, Aditya Kalro, et~al.
+\newblock Applied machine learning at facebook: A datacenter infrastructure perspective.
+\newblock In {\em 2018 IEEE International Symposium on High Performance Computer Architecture (HPCA)}, 2018.
+
+\bibitem[HFFA11]{dark_silicon:babak}
+N.~Hardavellas, M.~Ferdman, B.~Falsafi, and A.~Ailamaki.
+\newblock Toward dark silicon in servers.
+\newblock {\em IEEE Micro}, 31(4):6--15, July--Aug. 2011.
+
+\bibitem[HJZ{\etalchar{+}}13]{hou:hpca:2013}
+Rui Hou, Tao Jiang, Liuhang Zhang, Pengfei Qi, Jianbo Dong, Haibin Wang, Xiongli Gu, and Shujie Zhang.
+\newblock Cost effective data center servers.
+\newblock In {\em HPCA}, 2013.
+
+\bibitem[HLL{\etalchar{+}}19]{medal:micro:2019}
+Wenqin Huangfu, Xueqi Li, Shuangchen Li, Xing Hu, Peng Gu, and Yuan Xie.
+\newblock Medal: Scalable dimm based near data processing accelerator for dna seeding algorithm.
+\newblock In {\em MICRO}, 2019.
+
+\bibitem[HMCX22]{beacon:micro:2022}
+Wenqin Huangfu, Krishna~T. Malladi, Andrew Chang, and Yuan Xie.
+\newblock Beacon: Scalable near-data-processing accelerators for genome analysis near memory pool with the cxl support.
+\newblock In {\em IEEE/ACM International Symposium on Microarchitecture (MICRO)}, 2022.
+
+\bibitem[HML{\etalchar{+}}20]{nest:iccad:2020}
+Wenqin Huangfu, Krishna~T. Malladi, Shuangchen Li, Peng Gu, and Yuan Xie.
+\newblock Nest: Dimm based near-data-processing accelerator for k-mer counting.
+\newblock In {\em ICCAD}, 2020.
+
+\bibitem[HMSA{\etalchar{+}}21]{wfa:fpl:2021}
+Abbas Haghi, Santiago Marco-Sola, Lluc Alvarez, Dionysios Diamantopoulos, Christoph Hagleitner, and Miquel Moreto.
+\newblock An fpga accelerator of the wavefront algorithm for genomics pairwise alignment.
+\newblock In {\em FPL}, 2021.
+
+\bibitem[Hor14]{horowitz:isscc:2014}
+Mark Horowitz.
+\newblock 1.1 computing's energy problem (and what we can do about it).
+\newblock In {\em 2014 IEEE International Solid-State Circuits Conference Digest of Technical Papers (ISSCC)}, pages 10--14, 2014.
+
+\bibitem[HWS{\etalchar{+}}16]{graphicionado:micro:2016}
+Tae~Jun Ham, Lisa Wu, Narayanan Sundaram, Nadathur Satish, and Margaret Martonosi.
+\newblock Graphicionado: A high-performance and energy-efficient accelerator for graph analytics.
+\newblock In {\em MICRO}, 2016.
+
+\bibitem[inf]{infiniband-spec}
+Infiniband™ architecture specification.
+\newblock \url{https://www.infinibandta.org/ibta-specification/}.
+
+\bibitem[inta]{intel-cascade-lake}
+Intel cascade lake.
+
+\bibitem[intb]{intel-dsa}
+Intel data streaming accelerator.
+
+\bibitem[intc]{intel-ice-lake}
+Intel ice lake.
+
+\bibitem[intd]{intel-rapl}
+Intel rapl.
+
+\bibitem[inte]{intel-sapphire-rapids}
+Intel sapphire rapids.
+
+\bibitem[intf]{intel-vtune}
+Intel vtune profiler.
+
+\bibitem[JHYA{\etalchar{+}}21]{tpuv4i:isca:2021}
+Norman~P. Jouppi, Doe Hyun~Yoon, Matthew Ashcraft, Mark Gottscho, Thomas~B. Jablin, George Kurian, James Laudon, Sheng Li, Peter Ma, Xiaoyu Ma, Thomas Norrie, Nishant Patil, Sushma Prasad, Cliff Young, Zongwei Zhou, and David Patterson.
+\newblock Ten lessons from three generations shaped google’s tpuv4i : Industrial product.
+\newblock In {\em ISCA}, 2021.
+
+\bibitem[JLZ{\etalchar{+}}]{netchain}
+Xin Jin, Xiaozhou Li, Haoyu Zhang, Nate Foster, Jeongkeun Lee, Robert Soul{\'e}, Changhoon Kim, and Ion Stoica.
+\newblock Netchain: Scale-free sub-rtt coordination.
+\newblock In {\em 15th {USENIX} Symposium on Networked Systems Design and Implementation}, NSDI'18.
+
+\bibitem[JPOB20]{pymtl3:ieee-micro:2020}
+Shunning Jiang, Peitian Pan, Yanghui Ou, and Christopher Batten.
+\newblock Pymtl3: A python framework for open-source hardware modeling, generation, simulation, and verification.
+\newblock {\em IEEE Micro}, 40(4):58--66, 2020.
+
+\bibitem[Jun22]{cxl-ssd:hotstorage:2022}
+Myoungsoo Jung.
+\newblock Hello bytes, bye blocks: Pcie storage meets compute express link for memory expansion (cxl-ssd).
+\newblock In {\em The ACM Workshop on Hot Topics in Storage and File Systems (HotStorage)}, 2022.
+
+\bibitem[JYP{\etalchar{+}}17]{tpu:isca:2017}
+Norman~P Jouppi, Cliff Young, Nishant Patil, David Patterson, Gaurav Agrawal, Raminder Bajwa, Sarah Bates, Suresh Bhatia, Nan Boden, Al~Borchers, et~al.
+\newblock In-datacenter performance analysis of a tensor processing unit.
+\newblock In {\em ISCA}, 2017.
+
+\bibitem[KAC{\etalchar{+}}18]{dcs-ctrl:isca:2018}
+Dongup Kwon, Jaehyung Ahn, Dongju Chae, Mohammadamin Ajdari, Jaewon Lee, Suheon Bae, Youngsok Kim, and Jangwoo Kim.
+\newblock Dcs-ctrl: A fast and flexible device-control mechanism for device-centric server architecture.
+\newblock In {\em ISCA}, 2018.
+
+\bibitem[KB]{hovercraft}
+Marios Kogias and Edouard Bugnion.
+\newblock Hovercraft: Achieving scalability and fault-tolerance for microsecond-scale datacenter services.
+\newblock In {\em Proceedings of the Fifteenth European Conference on Computer Systems}, EuroSys '20.
+
+\bibitem[KCH{\etalchar{+}}19]{shinjuku:nsdi:2019}
+Kostis Kaffes, Timothy Chong, Jack~Tigar Humphries, Adam Belay, David Mazi\`{e}res, and Christos Kozyrakis.
+\newblock Shinjuku: Preemptive scheduling for usecond-scale tail latency.
+\newblock In {\em USENIX Conference on Networked Systems Design and Implementation (NSDI)}, 2019.
+
+\bibitem[KdCL{\etalchar{+}}20]{rldbs:ijcai:2020}
+Dmitrii Krylov, Remi des Combes, Romain Laroche, Michael Rosenblum, and Dmitry~V Dylov.
+\newblock Reinforcement learning framework for deep brain stimulation study.
+\newblock In {\em IJCAI}, 2020.
+
+\bibitem[KDH{\etalchar{+}}15]{google-datacenter-isca15}
+Svilen Kanev, Juan~Pablo Darago, Kim Hazelwood, Parthasarathy Ranganathan, Tipp Moseley, Gu-Yeon Wei, and David Brooks.
+\newblock Profiling a warehouse-scale computer.
+\newblock {\em SIGARCH Comput. Archit. News}, 43(3S):158–169, June 2015.
+
+\bibitem[KDSA08]{dragonfly:isca:2008}
+John Kim, Wiliam~J. Dally, Steve Scott, and Dennis Abts.
+\newblock Technology-driven, highly-scalable dragonfly topology.
+\newblock In {\em International Symposium on Computer Architecture (ISCA)}, 2008.
+
+\bibitem[KGH{\etalchar{+}}]{clove}
+Naga Katta, Aditi Ghag, Mukesh Hira, Isaac Keslassy, Aran Bergman, Changhoon Kim, and Jennifer Rexford.
+\newblock Clove: Congestion-aware load balancing at the virtual edge.
+\newblock In {\em Proc. of the ACM International Conference on Emerging Networking Experiments and Technologies}, CoNEXT ’17.
+
+\bibitem[KGP{\etalchar{+}}13]{meet-the-walkers:isca:2013}
+Onur Kocberber, Boris Grot, Javier Picorel, Babak Falsafi, Kevin Lim, and Parthasarathy Ranganathan.
+\newblock Meet the walkers: Accelerating index traversals for in-memory databases.
+\newblock In {\em Proceedings of the 46th Annual IEEE/ACM International Symposium on Microarchitecture}, MICRO-46, page 468–479, New York, NY, USA, 2013. Association for Computing Machinery.
+
+\bibitem[KHK{\etalchar{+}}]{HULA}
+Naga Katta, Mukesh Hira, Changhoon Kim, Anirudh Sivaraman, and Jennifer Rexford.
+\newblock {HULA}: Scalable load balancing using programmable data planes.
+\newblock In {\em Proc. of the Symposium on SDN Research}, SOSR ’16.
+
+\bibitem[KIB]{crab}
+Marios Kogias, Rishabh Iyer, and Edouard Bugnion.
+\newblock Bypassing the load balancer without regrets.
+\newblock In {\em Proceedings of the ACM Symposium on Cloud Computing}, SoCC '20.
+
+\bibitem[KIMR20]{geniehd:date:2020}
+Yeseong Kim, Mohsen Imani, Niema Moshiri, and Tajana Rosing.
+\newblock Geniehd: Efficient dna pattern matching accelerator using hyperdimensional computing.
+\newblock In {\em DATE}, 2020.
+
+\bibitem[KKA14]{herd:sigcomm:2014}
+Anuj Kalia, Michael Kaminsky, and David~G. Andersen.
+\newblock Using rdma efficiently for key-value services.
+\newblock In {\em Proceedings of the 2014 ACM Conference on SIGCOMM}, 2014.
+
+\bibitem[KKA19]{eRPC:nsdi:2019}
+Anuj Kalia, Michael Kaminsky, and David Andersen.
+\newblock Datacenter {RPCs} can be general and fast.
+\newblock In {\em 16th USENIX Symposium on Networked Systems Design and Implementation (NSDI 19)}, February 2019.
+
+\bibitem[KLK{\etalchar{+}}21]{protobuf:isca:2021}
+Sagar Karandikar, Chris Leary, Chris Kennelly, Jerry Zhao, Dinesh Parimi, Borivoje Nikolic, Krste Asanovic, and Parthasarathy Ranganathan.
+\newblock A hardware accelerator for protocol buffers.
+\newblock In {\em MICRO}, 2021.
+
+\bibitem[KM05]{sbfc:ieee-micro:2005}
+V.~Krishnan and D.~Mayhew.
+\newblock Localized congestion control in advanced switching interconnects.
+\newblock {\em IEEE Micro}, 25(1):10--11, 2005.
+
+\bibitem[KPG{\etalchar{+}}]{r2p2}
+Marios Kogias, George Prekas, Adrien Ghosn, Jonas Fietz, and Edouard Bugnion.
+\newblock {R2P2}: Making rpcs first-class datacenter citizens.
+\newblock In {\em Proc. of the {USENIX} Annual Technical Conference}, ATC ’19.
+
+\bibitem[KSK18]{maeri:asplos18}
+Hyoukjun Kwon, Ananda Samajdar, and Tushar Krishna.
+\newblock Maeri: Enabling flexible dataflow mapping over dnn accelerators via reconfigurable interconnects.
+\newblock {\em ASPLOS}, 2018.
+
+\bibitem[KVHD]{flowbender}
+Abdul Kabbani, Balajee Vamanan, Jahangir Hasan, and Fabien Duchene.
+\newblock Flowbender: Flow-level adaptive routing for improved latency and throughput in datacenter networks.
+\newblock In {\em Proc. of the ACM International on Conference on Emerging Networking Experiments and Technologies}, CoNEXT ’14.
+
+\bibitem[KXH{\etalchar{+}}]{microsoft_service_fabric}
+Gopal Kakivaya, Lu~Xun, Richard Hasha, Shegufta~Bakht Ahsan, Todd Pfleiger, Rishi Sinha, Anurag Gupta, Mihail Tarta, Mark Fussell, Vipul Modi, Mansoor Mohsin, Ray Kong, Anmol Ahuja, Oana Platon, Alex Wun, Matthew Snider, Chacko Daniel, Dan Mastrian, Yang Li, Aprameya Rao, Vaishnav Kidambi, Randy Wang, Abhishek Ram, Sumukh Shivaprakash, Rajeet Nair, Alan Warwick, Bharat~S. Narasimman, Meng Lin, Jeffrey Chen, Abhay~Balkrishna Mhatre, Preetha Subbarayalu, Mert Coskun, and Indranil Gupta.
+\newblock Service fabric: A distributed platform for building microservices in the cloud.
+\newblock In {\em Proc. of the EuroSys Conference}, EuroSys '18.
+
+\bibitem[LBB{\etalchar{+}}22]{ibm-telum-processor:isca:2022}
+Cedric Lichtenau, Alper Buyuktosunoglu, Ramon Bertran, Peter Figuli, Christian Jacobi, Nikolaos Papandreou, Haris Pozidis, Anthony Saporito, Andrew Sica, and Elpida Tzortzatos.
+\newblock {AI} accelerator on {IBM Telum} processor: Industrial product.
+\newblock In {\em Proceedings of the 49th Annual International Symposium on Computer Architecture}, page 1012–1028, 2022.
+
+\bibitem[LBN{\etalchar{+}}23]{pond:asplos:2023}
+Huaicheng Li, Daniel~S. Berger, Stanko Novakovic, Lisa Hsu, Dan Ernst, Pantea Zardoshti, Monish Shah, Samir Rajadnya, Scott Lee, Ishwar Agarwal, Mark~D. Hill, Marcus Fontoura, and Ricardo Bianchini.
+\newblock {Pond: CXL-Based Memory Pooling Systems for Cloud Platforms}.
+\newblock In {\em To be appeared in ACM International Conference on Architectural Support for Programming Languages and Operating Systems (ASPLOS)}, 2023.
+
+\bibitem[LCL{\etalchar{+}}15]{pudiannao:asplos:2015}
+Daofu Liu, Tianshi Chen, Shaoli Liu, Jinhong Zhou, Shengyuan Zhou, Olivier Teman, Xiaobing Feng, Xuehai Zhou, and Yunji Chen.
+\newblock Pudiannao: A polyvalent machine learning accelerator.
+\newblock In {\em ASPLOS}, 2015.
+
+\bibitem[LDT{\etalchar{+}}16]{cambricon:isca:2016}
+Shaoli Liu, Zidong Du, Jinhua Tao, Dong Han, Tao Luo, Yuan Xie, Yunji Chen, and Tianshi Chen.
+\newblock Cambricon: An instruction set architecture for neural networks.
+\newblock In {\em ISCA}, 2016.
+
+\bibitem[LGS{\etalchar{+}}20]{fulcrum:hpca:2020}
+Marzieh Lenjani, Patricia Gonzalez, Elaheh Sadredini, Shuangchen Li, Yuan Xie, Ameen Akel, Sean Eilert, Mircea~R. Stan, and Kevin Skadron.
+\newblock Fulcrum: A simplified control and access mechanism toward flexible and practical in-situ accelerators.
+\newblock In {\em IEEE International Symposium on High Performance Computer Architecture (HPCA)}, 2020.
+
+\bibitem[LGY{\etalchar{+}}20]{savi:iccad:2020}
+Ann~Franchesca Laguna, Hasindu Gamaarachchi, Xunzhao Yin, Michael Niemier, Sri Parameswaran, and X.~Sharon Hu.
+\newblock Seed-and-vote based in-memory accelerator for dna read mapping.
+\newblock In {\em ICCAD}, 2020.
+
+\bibitem[lina]{linux-drm-gem}
+Linux kernel drm-gem drivers.
+
+\bibitem[linb]{linux-gem-lwn}
+Lwn.net article on gem.
+
+\bibitem[LKK{\etalchar{+}}18]{unpu:isscc:2018}
+Jinmook Lee, Changhyeon Kim, Sanghoon Kang, Dongjoo Shin, Sangyeob Kim, and Hoi-Jun Yoo.
+\newblock Unpu: A 50.6 tops/w unified deep neural network accelerator with 1b-to-16b fully-variable weight bit-precision.
+\newblock In {\em ISSCC}, 2018.
+
+\bibitem[LKY{\etalchar{+}}17]{extrav:pvldb:2017}
+Jinho Lee, Heesu Kim, Sungjoo Yoo, Kiyoung Choi, H.~Peter Hofstee, Gi-Joon Nam, Mark~R. Nutter, and Damir Jamsek.
+\newblock Extrav: Boosting graph processing near storage with a coherent accelerator.
+\newblock {\em PVLDB}, 2017.
+
+\bibitem[LLKB21]{gcnax:hpca:2021}
+Jiajun Li, Ahmed Louri, Avinash Karanth, and Razvan Bunescu.
+\newblock Gcnax: A flexible and energy-efficient accelerator for graph convolutional neural networks.
+\newblock In {\em HPCA}, 2021.
+
+\bibitem[LMC{\etalchar{+}}22]{hydra:fast:2022}
+Youngmoon Lee, Hasan~Al Maruf, Mosharaf Chowdhury, Asaf Cidon, and Kang~G. Shin.
+\newblock Hydra : Resilient and highly available remote memory.
+\newblock In {\em 20th USENIX Conference on File and Storage Technologies (FAST 22)}, February 2022.
+
+\bibitem[LML{\etalchar{+}}19]{hpcc:sigcomm:2019}
+Yuliang Li, Rui Miao, Hongqiang~Harry Liu, Yan Zhuang, Fei Feng, Lingbo Tang, Zheng Cao, Ming Zhang, Frank Kelly, Mohammad Alizadeh, and Minlan Yu.
+\newblock Hpcc: high precision congestion control.
+\newblock In {\em Proceedings of the ACM Special Interest Group on Data Communication}, 2019.
+
+\bibitem[LMM{\etalchar{+}}19]{mpi-usage:sc:2019}
+Ignacio Laguna, Ryan Marshall, Kathryn Mohror, Martin Ruefenacht, Anthony Skjellum, and Nawrin Sultana.
+\newblock A large-scale study of mpi usage in open-source hpc applications.
+\newblock In {\em Proceedings of the International Conference for High Performance Computing, Networking, Storage and Analysis}, 2019.
+
+\bibitem[LMS{\etalchar{+}}]{nopaxos}
+Jialin Li, Ellis Michael, Naveen~Kr. Sharma, Adriana Szekeres, and Dan R.~K. Ports.
+\newblock Just say {NO} to paxos overhead: Replacing consensus with network ordering.
+\newblock In {\em 12th {USENIX} Symposium on Operating Systems Design and Implementation ({OSDI} 16)}.
+
+\bibitem[LNM{\etalchar{+}}]{pegasus}
+Jialin Li, Jacob Nelson, Ellis Michael, Xin Jin, and Dan R.~K. Ports.
+\newblock Pegasus: Tolerating skewed workloads in distributed storage with in-network coherence directories.
+\newblock In {\em 14th {USENIX} Symposium on Operating Systems Design and Implementation ({OSDI} 20)}.
+
+\bibitem[LRW{\etalchar{+}}]{quic}
+Adam Langley, Alistair Riddoch, Alyssa Wilk, Antonio Vicente, Charles Krasic, Dan Zhang, Fan Yang, Fedor Kouranov, Ian Swett, Janardhan Iyengar, Jeff Bailey, Jeremy Dorfman, Jim Roskind, Joanna Kulik, Patrik Westin, Raman Tenneti, Robbie Shade, Ryan Hamilton, Victor Vasiliev, Wan-Teh Chang, and Zhongyi Shi.
+\newblock The quic transport protocol: Design and internet-scale deployment.
+\newblock In {\em Proceedings of the Conference of the ACM Special Interest Group on Data Communication}, SIGCOMM '17.
+
+\bibitem[LT21]{nds:micro:2021}
+Yu-Chia Liu and Hung-Wei Tseng.
+\newblock Nds: N-dimensional storage.
+\newblock In {\em MICRO}, 2021.
+
+\bibitem[LWL{\etalchar{+}}21]{engn:toc:2021}
+Shengwen Liang, Ying Wang, Cheng Liu, Lei He, Huawei LI, Dawen Xu, and Xiaowei Li.
+\newblock Engn: A high-throughput and energy-efficient accelerator for large graph neural networks.
+\newblock {\em TC}, 2021.
+
+\bibitem[LZT{\etalchar{+}}21]{pointacc:micro:2021}
+Yujun Lin, Zhekai Zhang, Haotian Tang, Hanrui Wang, and Song Han.
+\newblock Pointacc: Efficient point cloud accelerator.
+\newblock In {\em MICRO}, 2021.
+
+\bibitem[MAW{\etalchar{+}}22]{mahapatra:mlarchsys:2022}
+Rohan Mahapatra, Byung~Hoon Ahn, Shu-Ting Wang, Hanyang Xu, and Hadi Esmaeilzadeh.
+\newblock Exploring efficient ml-based scheduler for microservices in heterogenous clusters.
+\newblock In {\em Machine Learning for Computer Architecture and Systems 2022}, 2022.
+
+\bibitem[MBA{\etalchar{+}}18]{hats:micro:2018}
+Anurag Mukkara, Nathan Beckmann, Maleen Abeydeera, Xiaosong Ma, and Daniel Sanchez.
+\newblock Exploiting locality in graph analytics through hardware-accelerated traversal scheduling.
+\newblock In {\em MICRO}, 2018.
+
+\bibitem[MBS19]{phi:micro:2019}
+Anurag Mukkara, Nathan Beckmann, and Daniel Sanchez.
+\newblock Phi: Architectural support for synchronization- and bandwidth-efficient commutative scatter updates.
+\newblock In {\em MICRO}, 2019.
+
+\bibitem[MC20]{leap:atc:2020}
+Hasan~Al Maruf and Mosharaf Chowdhury.
+\newblock Effectively prefetching remote memory with leap.
+\newblock In {\em 2020 USENIX Annual Technical Conference (USENIX ATC 20)}, July 2020.
+
+\bibitem[MdKA{\etalchar{+}}19]{snap:sosp:2019}
+Michael Marty, Marc de~Kruijf, Jacob Adriaens, Christopher Alfeld, Sean Bauer, Carlo Contavalli, Mike Dalton, Nandita Dukkipati, William~C. Evans, Steve Gribble, Nicholas Kidd, Roman Kononov, Gautam Kumar, Carl Mauer, Emily Musick, Lena Olson, Mike Ryan, Erik Rubow, Kevin Springborn, Paul Turner, Valas Valancius, Xi~Wang, and Amin Vahdat.
+\newblock Snap: a microkernel approach to host networking.
+\newblock In {\em ACM SIGOPS 27th Symposium on Operating Systems Principles}, 2019.
+
+\bibitem[mem]{memory-scalability:microchip}
+Dram resource scalability enabled by cxl.
+\newblock \url{https://www.computeexpresslink.org/post/dram-resource-scalability-enabled-by-cxl}.
+
+\bibitem[{Mem}21]{memcached}
+{Memcached}.
+\newblock Memcached.
+\newblock https://memcached.org/, 2021.
+
+\bibitem[MFJQ{\etalchar{+}}16]{murray:micro:2016}
+Sean Murray, William Floyd-Jones, Ying Qi, George Konidaris, and Daniel~J. Sorin.
+\newblock The microarchitecture of a real-time robot motion planning accelerator.
+\newblock In {\em MICRO}, 2016.
+
+\bibitem[MGPM{\etalchar{+}}22]{genstore:asplos:2022}
+Nika Mansouri~Ghiasi, Jisung Park, Harun Mustafa, Jeremie Kim, Ataberk Olgun, Arvid Gollwitzer, Damla Senol~Cali, Can Firtina, Haiyu Mao, Nour Almadhoun~Alserr, Rachata Ausavarungnirun, Nandita Vijaykumar, Mohammed Alser, and Onur Mutlu.
+\newblock Genstore: A high-performance in-storage processing system for genome sequence analysis.
+\newblock In {\em ASPLOS}, 2022.
+
+\bibitem[MHH{\etalchar{+}}22]{zionex:isca:2022}
+Dheevatsa Mudigere, Yuchen Hao, Jianyu Huang, Zhihao Jia, Andrew Tulloch, Srinivas Sridharan, Xing Liu, Mustafa Ozdal, Jade Nie, Jongsoo Park, Liang Luo, Jie~(Amy) Yang, Leon Gao, Dmytro Ivchenko, Aarti Basant, Yuxi Hu, Jiyan Yang, Ehsan~K. Ardestani, Xiaodong Wang, Rakesh Komuravelli, Ching-Hsiang Chu, Serhat Yilmaz, Huayu Li, Jiyuan Qian, Zhuobo Feng, Yinbin Ma, Junjie Yang, Ellie Wen, Hong Li, Lin Yang, Chonglin Sun, Whitney Zhao, Dimitry Melts, Krishna Dhulipala, KR~Kishore, Tyler Graf, Assaf Eisenman, Kiran~Kumar Matam, Adi Gangidi, Guoqiang~Jerry Chen, Manoj Krishnan, Avinash Nayak, Krishnakumar Nair, Bharath Muthiah, Mahmoud khorashadi, Pallab Bhattacharya, Petr Lapukhov, Maxim Naumov, Ajit Mathews, Lin Qiao, Mikhail Smelyanskiy, Bill Jia, and Vijay Rao.
+\newblock Software-hardware co-design for fast and scalable training of deep learning recommendation models.
+\newblock In {\em Proceedings of the 49th Annual International Symposium on Computer Architecture}, 2022.
+
+\bibitem[mica]{microsoft-azure:zipline:2019}
+Azure zipline.
+
+\bibitem[micb]{microchip-cxl-retimer}
+Cxl retimer.
+\newblock \url{https://www.microchip.com/en-us/about/media-center/blog/2020/cxl--use-cases-driving-the-need-for-low-latency-performance-reti}.
+
+\bibitem[micc]{microsoft-presidio}
+Presidio: Data protection and anonymization sdk.
+
+\bibitem[{Mit}00]{mitzenmacher_old_info}
+M.~{Mitzenmacher}.
+\newblock How useful is old information?
+\newblock {\em IEEE Transactions on Parallel and Distributed Systems}, 11(1):6--20, 2000.
+
+\bibitem[{Mit}01]{power-of-two:tpds:2001}
+M.~{Mitzenmacher}.
+\newblock The power of two choices in randomized load balancing.
+\newblock {\em IEEE Transactions on Parallel and Distributed Systems}, 12(10):1094--1104, 2001.
+
+\bibitem[MKA{\etalchar{+}}16]{pcie-congestion-model:sc:2016}
+Maxime Martinasso, Grzegorz Kwasniewski, Sadaf~R. Alam, Thomas~C. Schulthess, and Torsten Hoefler.
+\newblock A pcie congestion-aware performance model for densely populated accelerator servers.
+\newblock In {\em International Conference for High Performance Computing, Networking, Storage and Analysis (SC)}, 2016.
+
+\bibitem[MKGT16]{asic-cloud:isca:2016}
+Ikuo Magaki, Moein Khazraee, Luis~Vega Gutierrez, and Michael~Bedford Taylor.
+\newblock Asic clouds: Specializing the datacenter.
+\newblock In {\em ISCA}, 2016.
+
+\bibitem[MKH{\etalchar{+}}21]{smartio:tocs:2021}
+Jonas Markussen, Lars~Bj\o{}rlykke Kristiansen, P\r{a}l Halvorsen, Halvor Kielland-Gyrud, H\r{a}kon~Kvale Stensland, and Carsten Griwodz.
+\newblock Smartio: Zero-overhead device sharing through pcie networking.
+\newblock {\em ACM Trans. Comput. Syst.}, 38(1–2), 2021.
+
+\bibitem[{Mon}21]{mongodb}
+{MongoDB}.
+\newblock https://www.mongodb.com/, 2021.
+
+\bibitem[MPA{\etalchar{+}}16]{tabla:hpca:2016}
+Divya Mahajan, Jongse Park, Emmanuel Amaro, Hardik Sharma, Amir Yazdanbakhsh, Joon~Kyung Kim, and Hadi Esmaeilzadeh.
+\newblock Tabla: A unified template-based framework for accelerating statistical machine learning.
+\newblock In {\em HPCA}, 2016.
+
+\bibitem[MvKI21]{tf.data:pvldb:2021}
+Derek~G. Murray, Ji\v{r}\'{\i} \v{S}im\v{s}a, Ana Klimovic, and Ihor Indyk.
+\newblock Tf.data: A machine learning data processing framework.
+\newblock {\em Proc. VLDB Endow.}, 14(12), 2021.
+
+\bibitem[MWD{\etalchar{+}}23]{tpp:asplos:2023}
+Hasan~Al Maruf, Hao Wang, Abhishek Dhanotia, Johannes Weiner, Niket Agarwal, Pallab Bhattacharya, Chris Petersen, Mosharaf Chowdhury, Shobhit Kanaujia, and Prakash Chauhan.
+\newblock Tpp: Transparent page placement for cxl-enabled tiered-memory.
+\newblock In {\em Proceedings of the 28th ACM International Conference on Architectural Support for Programming Languages and Operating Systems, Volume 3}, 2023.
+
+\bibitem[MYS{\etalchar{+}}22]{wisefuse:sigmetrics:2022}
+Ashraf Mahgoub, Edgardo~Barsallo Yi, Karthick Shankar, Eshaan Minocha, Sameh Elnikety, Saurabh Bagchi, and Somali Chaterji.
+\newblock Wisefuse: Workload characterization and dag transformation for serverless workflows.
+\newblock In {\em SIGMETRICS}, 2022.
+
+\bibitem[MZK{\etalchar{+}}]{silkroad}
+Rui Miao, Hongyi Zeng, Changhoon Kim, Jeongkeun Lee, and Minlan Yu.
+\newblock Silkroad: Making stateful layer-4 load balancing fast and cheap using switching asics.
+\newblock In {\em Proceedings of the Conference of the ACM Special Interest Group on Data Communication}, SIGCOMM '17.
+
+\bibitem[nap]{napi:kernel:2022}
+Napi.
+
+\bibitem[NAZ{\etalchar{+}}18]{pcie-bench:sigcomm:2018}
+Rolf Neugebauer, Gianni Antichi, Jos\'{e}~Fernando Zazo, Yury Audzevich, Sergio L\'{o}pez-Buedo, and Andrew~W. Moore.
+\newblock Understanding pcie performance for end host networking.
+\newblock In {\em Proceedings of the 2018 Conference of the ACM Special Interest Group on Data Communication}, 2018.
+
+\bibitem[NBB{\etalchar{+}}21]{amd-chiplet:isca:2021}
+Samuel Naffziger, Noah Beck, Thomas Burd, Kevin Lepak, Gabriel~H. Loh, Mahesh Subramony, and Sean White.
+\newblock Pioneering chiplet technology and design for the amd epyc™ and ryzen™ processor families.
+\newblock In {\em Proceedings of the 48th Annual International Symposium on Computer Architecture}, 2021.
+
+\bibitem[ner]{ner-transformer}
+Transformers based named entity recognition models.
+
+\bibitem[NFG{\etalchar{+}}]{nishtala_memcached_nsdi13}
+Rajesh Nishtala, Hans Fugal, Steven Grimm, Marc Kwiatkowski, Herman Lee, Harry~C Li, Ryan McElroy, Mike Paleczny, Daniel Peek, Paul Saab, David Stafford, Tony Tung, and Venkateshwaran Venkataramani.
+\newblock Scaling {Memcache} at {Facebook}.
+\newblock page~14.
+
+\bibitem[NFG{\etalchar{+}}13]{scale-memcache:nsdi:2013}
+Rajesh Nishtala, Hans Fugal, Steven Grimm, Marc Kwiatkowski, Herman Lee, Harry~C. Li, Ryan McElroy, Mike Paleczny, Daniel Peek, Paul Saab, David Stafford, Tony Tung, and Venkateshwaran Venkataramani.
+\newblock Scaling memcache at facebook.
+\newblock In {\em 10th USENIX Symposium on Networked Systems Design and Implementation}, 2013.
+
+\bibitem[NKA20]{p2pdma:apsys:2020}
+Ryo Nakamura, Yohei Kuga, and Kunio Akashi.
+\newblock How beneficial is peer-to-peer dma?
+\newblock In {\em APSys}, 2020.
+
+\bibitem[noa]{noauthor_cloudsuite_nodate}
+{CloudSuite} {\textbar} {A} {Benchmark} {Suite} for {Cloud} {Services}.
+
+\bibitem[NPB{\etalchar{+}}21]{robomorphic:asplos:2021}
+Sabrina~M. Neuman, Brian Plancher, Thomas Bourgeat, Thierry Tambe, Srinivas Devadas, and Vijay~Janapa Reddi.
+\newblock Robomorphic computing: A design methodology for domain-specific accelerators parameterized by robot morphology.
+\newblock In {\em ASPLOS}, 2021.
+
+\bibitem[NRB{\etalchar{+}}19]{gencache:micro:2019}
+Anirban Nag, C.~N. Ramachandra, Rajeev Balasubramonian, Ryan Stutsman, Edouard Giacomin, Hari Kambalasubramanyam, and Pierre-Emmanuel Gaillardon.
+\newblock Gencache: Leveraging in-cache operators for efficient sequence alignment.
+\newblock In {\em MICRO}, 2019.
+
+\bibitem[ns-]{ns-3}
+ns-3.
+\newblock \url{https://www.nsnam.org/}.
+
+\bibitem[nvi]{nvidia-dali:2018}
+Nvidia dali.
+
+\bibitem[nvl]{nvlink}
+{NVLink}.
+\newblock \url{https://www.nvidia.com/en-us/data-center/nvlink/}.
+
+\bibitem[OAVR]{beamer}
+Vladimir Olteanu, Alexandru Agache, Andrei Voinescu, and Costin Raiciu.
+\newblock Stateless datacenter load-balancing with beamer.
+\newblock In {\em 15th {USENIX} Symposium on Networked Systems Design and Implementation}, NSDI '18.
+
+\bibitem[ods]{odsa-bow-spec}
+{ODSA}-{BoW} specifications.
+
+\bibitem[OFB{\etalchar{+}}19]{shenango:nsdi:2019}
+Amy Ousterhout, Joshua Fried, Jonathan Behrens, Adam Belay, and Hari Balakrishnan.
+\newblock Shenango: Achieving high cpu efficiency for latency-sensitive datacenter workloads.
+\newblock In {\em USENIX Conference on Networked Systems Design and Implementation (NSDI)}, 2019.
+
+\bibitem[ofe]{ofed-perftest}
+Open fabrics enterprise distribution (ofed) performance tests.
+\newblock \url{https://github.com/linux-rdma/perftest}.
+
+\bibitem[OO]{raft}
+Diego Ongaro and John Ousterhout.
+\newblock In search of an understandable consensus algorithm.
+\newblock In {\em Proceedings of the 2014 USENIX Conference on USENIX Annual Technical Conference}, ATC'14.
+
+\bibitem[OYQ{\etalchar{+}}19]{string-figure:hpca:2019}
+Matheus Ogleari, Ye~Yu, Chen Qian, Ethan Miller, and Jishen Zhao.
+\newblock String figure: A scalable and elastic memory network architecture.
+\newblock In {\em 2019 IEEE International Symposium on High Performance Computer Architecture (HPCA)}, 2019.
+
+\bibitem[PBY{\etalchar{+}}]{ananta}
+Parveen Patel, Deepak Bansal, Lihua Yuan, Ashwin Murthy, Albert Greenberg, David~A. Maltz, Randy Kern, Hemant Kumar, Marios Zikos, Hongyu Wu, Changhoon Kim, and Naveen Karri.
+\newblock Ananta: Cloud scale load balancing.
+\newblock In {\em Proceedings of the ACM SIGCOMM 2013 Conference on SIGCOMM}, SIGCOMM '13.
+
+\bibitem[PCC{\etalchar{+}}14]{catapult:isca:2014}
+Andrew Putnam, Adrian Caulfield, Eric Chung, Derek Chiou, Kypros Constantinides, John Demme, Hadi Esmaeilzadeh, Jeremy Fowers, Gopi Prashanth, Jan Gray, Michael Haselman, Scott Hauck, Stephen Heil, Amir Hormati, Joo-Young Kim, Sitaram Lanka, James~R. Larus, Eric Peterson, Aaron Smith, Jason Thong, Phillip~Yi Xiao, and Doug Burger.
+\newblock A reconfigurable fabric for accelerating large-scale datacenter services.
+\newblock In {\em ISCA}, 2014.
+
+\bibitem[pcia]{pcie-spec}
+Pci-sig specifications.
+\newblock \url{https://pcisig.com/specifications}.
+
+\bibitem[pcib]{pcie-6-7}
+Pcie 6.0 and 7.0.
+\newblock \url{https://www.xda-developers.com/pcie-6-to-launch-in-2024-pcie-7-in-2027/}.
+
+\bibitem[PGK{\etalchar{+}}20]{optimusprime:asplos:2020}
+Arash Pourhabibi, Siddharth Gupta, Hussein Kassir, Mark Sutherland, Zilu Tian, Mario~Paulo Drumond, Babak Falsafi, and Christoph Koch.
+\newblock Optimus prime: Accelerating data transformation in servers.
+\newblock In {\em ASPLOS}, 2020.
+
+\bibitem[PGW{\etalchar{+}}20]{blackparrot:ieee-micro:2020}
+Daniel Petrisko, Farzam Gilani, Mark Wyse, Dai~Cheol Jung, Scott Davidson, Paul Gao, Chun Zhao, Zahra Azad, Sadullah Canakci, Bandhav Veluri, Tavio Guarino, Ajay Joshi, Mark Oskin, and Michael~Bedford Taylor.
+\newblock Blackparrot: An agile open-source risc-v multicore for accelerator socs.
+\newblock {\em IEEE Micro}, 40(4):93--102, 2020.
+
+\bibitem[PKB]{zygos}
+George Prekas, Marios Kogias, and Edouard Bugnion.
+\newblock Zygos: Achieving low tail latency for microsecond-scale networked tasks.
+\newblock In {\em Proceedings of the Symposium on Operating Systems Principles}, SOSP '17.
+
+\bibitem[PKK{\etalchar{+}}22]{samsung-memory-expander:hcs:2022}
+S.~J. Park, H.~Kim, K.-S. Kim, J.~So, J.~Ahn, W.-J. Lee, D.~Kim, Y.-J. Kim, J.~Seok, J.-G. Lee, H.-Y. Ryu, C.~Y. Lee, J.~Prout, K.-C. Ryoo, S.-J. Han, M.-K. Kook, J.~S. Choi, J.~Gim, Y.~S. Ki, S.~Ryu, C.~Park, D.-G. Lee, J.~Cho, H.~Song, and J.~Y. Lee.
+\newblock Scaling of memory performance and capacity with cxl memory expander.
+\newblock In {\em IEEE Hot Chips 34 Symposium (HCS)}, 2022.
+
+\bibitem[PRM{\etalchar{+}}17]{scnn:isca:2017}
+Angshuman Parashar, Minsoo Rhu, Anurag Mukkara, Antonio Puglielli, Rangharajan Venkatesan, Brucek Khailany, Joel Emer, Stephen~W Keckler, and William~J Dally.
+\newblock {SCNN: An Accelerator for Compressed-sparse Convolutional Neural Networks}.
+\newblock In {\em ISCA}, 2017.
+
+\bibitem[PVSW{\etalchar{+}}]{peltenburg-2019-fletcher}
+Johan Peltenburg, Jeroen Van~Straten, Lars Wijtemans, Lars Van~Leeuwen, Zaid Al-Ars, and Peter Hofstee.
+\newblock Fletcher: A framework to efficiently integrate fpga accelerators with apache arrow.
+\newblock In {\em FPL}.
+
+\bibitem[QSK{\etalchar{+}}20]{sigma:hpca:2020}
+Eric Qin, Ananda Samajdar, Hyoukjun Kwon, Vineet Nadella, Sudarshan Srinivasan, Dipankar Das, Bharat Kaul, and Tushar Krishna.
+\newblock Sigma: A sparse and irregular gemm accelerator with flexible interconnects for dnn training.
+\newblock {\em HPCA}, 2020.
+
+\bibitem[RAAGG21]{jetstream:micro:2021}
+Shafiur Rahman, Mahbod Afarin, Nael Abu-Ghazaleh, and Rajiv Gupta.
+\newblock Jetstream: Graph analytics on streaming data with event-driven hardware accelerator.
+\newblock In {\em MICRO}, 2021.
+
+\bibitem[Rad19]{hpc-memory-requirement:upc:2019}
+Milan Radulovic.
+\newblock {\em Memory bandwidth and latency in {HPC:} system requirements and performance impact}.
+\newblock PhD thesis, Polytechnic University of Catalonia, Spain, 2019.
+
+\bibitem[RAGG20]{graphpulse:micro:2020}
+Shafiur Rahman, Nael Abu-Ghazaleh, and Rajiv Gupta.
+\newblock Graphpulse: An event-driven hardware accelerator for asynchronous graph processing.
+\newblock In {\em MICRO}, 2020.
+
+\bibitem[RF18]{yolov3}
+Joseph Redmon and Ali Farhadi.
+\newblock Yolov3: An incremental improvement.
+\newblock {\em arXiv}, 2018.
+
+\bibitem[roc21]{rocksdb}
+{RocksDB}.
+\newblock https://rocksdb.org/, 2021.
+
+\bibitem[RRR{\etalchar{+}}21]{zero-infinity:sc:2021}
+Samyam Rajbhandari, Olatunji Ruwase, Jeff Rasley, Shaden Smith, and Yuxiong He.
+\newblock Zero-infinity: Breaking the gpu memory wall for extreme scale deep learning.
+\newblock In {\em Proceedings of the International Conference for High Performance Computing, Networking, Storage and Analysis}, 2021.
+
+\bibitem[RRRH20]{zero:arxiv:2020}
+Samyam Rajbhandari, Jeff Rasley, Olatunji Ruwase, and Yuxiong He.
+\newblock Zero: Memory optimizations toward training trillion parameter models, 2020.
+
+\bibitem[RSAB20]{aifm:osdi:2020}
+Zhenyuan Ruan, Malte Schwarzkopf, Marcos~K. Aguilera, and Adam Belay.
+\newblock {AIFM}: {High-Performance}, {Application-Integrated} far memory.
+\newblock In {\em 14th USENIX Symposium on Operating Systems Design and Implementation (OSDI 20)}, 2020.
+
+\bibitem[RSC{\etalchar{+}}21]{google-vcu:asplos:2021}
+Parthasarathy Ranganathan, Daniel Stodolsky, Jeff Calow, Jeremy Dorfman, Marisabel Guevara, Clinton~Wills Smullen~IV, Aki Kuusela, Raghu Balasubramanian, Sandeep Bhatia, Prakash Chauhan, Anna Cheung, In~Suk Chong, Niranjani Dasharathi, Jia Feng, Brian Fosco, Samuel Foss, Ben Gelb, Sara~J. Gwin, Yoshiaki Hase, Da-ke He, C.~Richard Ho, Roy~W. Huffman~Jr., Elisha Indupalli, Indira Jayaram, Poonacha Kongetira, Cho~Mon Kyaw, Aaron Laursen, Yuan Li, Fong Lou, Kyle~A. Lucke, JP~Maaninen, Ramon Macias, Maire Mahony, David~Alexander Munday, Srikanth Muroor, Narayana Penukonda, Eric Perkins-Argueta, Devin Persaud, Alex Ramirez, Ville-Mikko Rautio, Yolanda Ripley, Amir Salek, Sathish Sekar, Sergey~N. Sokolov, Rob Springer, Don Stark, Mercedes Tan, Mark~S. Wachsler, Andrew~C. Walton, David~A. Wickeraad, Alvin Wijaya, and Hon~Kwan Wu.
+\newblock Warehouse-scale video acceleration: Co-design and deployment in the wild.
+\newblock In {\em ASPLOS}, 2021.
+
+\bibitem[RZB{\etalchar{+}}]{facebook:sigcomm15}
+Arjun Roy, Hongyi Zeng, Jasmeet Bagga, George Porter, and Alex~C. Snoeren.
+\newblock Inside the social network's (datacenter) network.
+\newblock In {\em Proc. of the ACM Conference on Special Interest Group on Data Communication}, SIGCOMM ’15.
+
+\bibitem[SAA{\etalchar{+}}17]{in-network-compute:hotnets:2017}
+Amedeo Sapio, Ibrahim Abdelaziz, Abdulla Aldilaijan, Marco Canini, and Panos Kalnis.
+\newblock In-network computation is a dumb idea whose time has come.
+\newblock In {\em Proceedings of the 16th ACM Workshop on Hot Topics in Networks}, 2017.
+
+\bibitem[SCC{\etalchar{+}}19]{dua:nsdi:2019}
+Ran Shu, Peng Cheng, Guo Chen, Zhiyuan Guo, Lei Qu, Yongqiang Xiong, Derek Chiou, and Thomas Moscibroda.
+\newblock Direct universal access: Making data center resources available to {FPGA}.
+\newblock In {\em NSDI}, 2019.
+
+\bibitem[SCV{\etalchar{+}}19]{simba:micro:2019}
+Yakun~Sophia Shao, Jason Clemons, Rangharajan Venkatesan, Brian Zimmer, Matthew Fojtik, Nan Jiang, Ben Keller, Alicia Klinefelter, Nathaniel Pinckney, Priyanka Raina, et~al.
+\newblock Simba: Scaling deep-learning inference with multi-chip-module-based architecture.
+\newblock In {\em MICRO}, 2019.
+
+\bibitem[SCW{\etalchar{+}}07]{freepdk:mse:2007}
+James~E. Stine, Ivan Castellanos, Michael Wood, Jeff Henson, Fred Love, W.~Rhett Davis, Paul~D. Franzon, Michael Bucher, Sunil Basavarajaiah, Julie Oh, and Ravi Jenkal.
+\newblock Freepdk: An open-source variation-aware design kit.
+\newblock In {\em 2007 IEEE International Conference on Microelectronic Systems Education (MSE'07)}, pages 173--174, 2007.
+
+\bibitem[SFM17a]{escher:fccm:2017}
+Yongming Shen, Michael Ferdman, and Peter Milder.
+\newblock Escher: A cnn accelerator with flexible buffering to minimize off-chip transfer.
+\newblock In {\em FCCM}, 2017.
+
+\bibitem[SFM17b]{yongming-isca17}
+Yongming Shen, Michael Ferdman, and Peter Milder.
+\newblock Maximizing cnn accelerator efficiency through resource partitioning.
+\newblock In {\em ISCA}, 2017.
+
+\bibitem[Sha22]{cxl:hoti:2022}
+Debendra~Das Sharma.
+\newblock Compute express link®: An open industry-standard interconnect enabling heterogeneous data-centric computing.
+\newblock In {\em IEEE Symposium on High-Performance Interconnects (HOTI)}, 2022.
+
+\bibitem[Sha23]{intel-cxl:ieee-micro:2023}
+Debendra~Das Sharma.
+\newblock Novel composable and scale-out architectures using compute express link.
+\newblock {\em IEEE Micro}, 2023.
+
+\bibitem[SHCZ18]{legoos:osdi:2018}
+Yizhou Shan, Yutong Huang, Yilun Chen, and Yiying Zhang.
+\newblock {LegoOS}: A disseminated, distributed {OS} for hardware resource disaggregation.
+\newblock In {\em OSDI}, 2018.
+
+\bibitem[SHPG]{jellyfish}
+Ankit Singla, Chi-Yao Hong, Lucian Popa, and P.~Brighten Godfrey.
+\newblock Jellyfish: Networking data centers randomly.
+\newblock In {\em 9th {USENIX} Symposium on Networked Systems Design and Implementation}, NSDI '12.
+
+\bibitem[SJB14]{urbansound-dataset:mm:2014}
+Justin Salamon, Christopher Jacoby, and Juan~Pablo Bello.
+\newblock A dataset and taxonomy for urban sound research.
+\newblock In {\em ACM Multimedia}, 2014.
+
+\bibitem[SMLE18]{robox:isca:2018}
+Jacob Sacks, Divya Mahajan, Richard~C Lawson, and Hadi Esmaeilzadeh.
+\newblock Robox: an end-to-end solution to accelerate autonomous control in robotics.
+\newblock In {\em ISCA}, 2018.
+
+\bibitem[SOA{\etalchar{+}}]{jupiter-rising}
+Arjun Singh, Joon Ong, Amit Agarwal, Glen Anderson, Ashby Armistead, Roy Bannon, Seb Boving, Gaurav Desai, Bob Felderman, Paulie Germano, Anand Kanagala, Jeff Provost, Jason Simmons, Eiichi Tanda, Jim Wanderer, Urs Hölzle, Stephen Stuart, and Amin Vahdat.
+\newblock Jupiter rising: A decade of clos topologies and centralized control in google’s datacenter network.
+\newblock In {\em Proc. of the ACM Conference on Special Interest Group on Data Communication}, SIGCOMM ’15.
+
+\bibitem[SOI{\etalchar{+}}17]{doppiodb:fpl:2017}
+David Sidler, Muhsen Owaida, Zsolt István, Kaan Kara, and Gustavo Alonso.
+\newblock doppiodb: A hardware accelerated database.
+\newblock In {\em FPL}, 2017.
+
+\bibitem[SPM{\etalchar{+}}16]{dnnweaver:micro:2016}
+Hardik Sharma, Jongse Park, Divya Mahajan, Emmanuel Amaro, Joon Kim, Chenkai Shao, Asit Misra, and Hadi Esmaeilzadeh.
+\newblock From high-level deep neural models to fpgas.
+\newblock In {\em MICRO}, 2016.
+
+\bibitem[SQLC17]{pipelayer:hpca:2017}
+Linghao Song, Xuehai Qian, Hai Li, and Yiran Chen.
+\newblock Pipelayer: A pipelined reram-based accelerator for deep learning.
+\newblock In {\em HPCA}, 2017.
+
+\bibitem[sup]{supermicro-sapphire-rapids}
+Intel built-in accelerators.
+
+\bibitem[SWH{\etalchar{+}}16]{cbrain:dac:2016}
+Lili Song, Ying Wang, Yinhe Han, Xin Zhao, Bosheng Liu, and Xiaowei Li.
+\newblock C-brain: A deep learning accelerator that tames the diversity of cnns through adaptive data-level parallelization.
+\newblock In {\em DAC}, 2016.
+
+\bibitem[SYY{\etalchar{+}}23]{demystifying-cxl:micro:2023}
+Yan Sun, Yifan Yuan, Zeduo Yu, Reese Kuper, Chihun Song, Jinghan Huang, Houxiang Ji, Siddharth Agarwal, Jiaqi Lou, Ipoom Jeong, Ren Wang, Jung~Ho Ahn, Tianyin Xu, and Nam~Sung Kim.
+\newblock Demystifying cxl memory with genuine cxl-ready systems and devices.
+\newblock In {\em Proceedings of the 56th Annual IEEE/ACM International Symposium on Microarchitecture}, 2023.
+
+\bibitem[SZQ{\etalchar{+}}18]{graphr:hpca:2018}
+Linghao Song, Youwei Zhuo, Xuehai Qian, Hai Li, and Yiran Chen.
+\newblock Graphr: Accelerating graph processing using reram.
+\newblock In {\em HPCA}, 2018.
+
+\bibitem[Tay18]{basejump:dac:2018}
+Michael~Bedford Taylor.
+\newblock Invited: Basejump stl: Systemverilog needs a standard template library for hardware design.
+\newblock In {\em 2018 55th ACM/ESDA/IEEE Design Automation Conference (DAC)}, 2018.
+
+\bibitem[TBD18]{darwin:asplos:2018}
+Yatish Turakhia, Gill Bejerano, and William~J. Dally.
+\newblock Darwin: A genomics co-processor provides up to 15,000x acceleration on long read assembly.
+\newblock In {\em ASPLOS}, 2018.
+
+\bibitem[TDP{\etalchar{+}}19]{in-network-compute:eurosys:2019}
+Yuta Tokusashi, Huynh~Tu Dang, Fernando Pedone, Robert Soul\'{e}, and Noa Zilberman.
+\newblock The case for in-network computing on demand.
+\newblock In {\em Proceedings of the Fourteenth EuroSys Conference 2019}, 2019.
+
+\bibitem[TLG{\etalchar{+}}15]{gullfoss:tech-report:2015}
+Hung-Wei Tseng, Yang Liu, Mark Gahagan, Jing Li, Yanqin Jing, and Steven Swanson.
+\newblock Gullfoss: Accelerating and simplifying data movement among heterogeneous computing and storage resources.
+\newblock Technical report, UC San Diego, 2015.
+
+\bibitem[TLI{\etalchar{+}}23]{llama:arxiv:2023}
+Hugo Touvron, Thibaut Lavril, Gautier Izacard, Xavier Martinet, Marie-Anne Lachaux, Timothée Lacroix, Baptiste Rozière, Naman Goyal, Eric Hambro, Faisal Azhar, Aurelien Rodriguez, Armand Joulin, Edouard Grave, and Guillaume Lample.
+\newblock Llama: Open and efficient foundation language models, 2023.
+
+\bibitem[TMS20]{lynx:asplos:2020}
+Maroun Tork, Lina Maudlej, and Mark Silberstein.
+\newblock Lynx: A smartnic-driven accelerator-centric architecture for network servers.
+\newblock In {\em ASPLOS}, 2020.
+
+\bibitem[tof20]{tofino2}
+Intel tofino 2 p4 programmability with more bandwidth.
+\newblock \url{https://www.intel.com/content/www/us/en/products/network-io/programmable-ethernet-switch/tofino-2-series/tofino-2.html}, 2020.
+
+\bibitem[TVK{\etalchar{+}}20]{asic-cloud:cacm:2020}
+Michael~Bedford Taylor, Luis Vega, Moein Khazraee, Ikuo Magaki, Scott Davidson, and Dustin Richmond.
+\newblock Asic clouds: Specializing the datacenter for planet-scale applications.
+\newblock {\em Commun. ACM}, 63(7), 2020.
+
+\bibitem[TWZL21]{invisible-probe:oaklnad:2021}
+Mingtian Tan, Junpeng Wan, Zhe Zhou, and Zhou Li.
+\newblock Invisible probe: Timing attacks with pcie congestion side-channel.
+\newblock In {\em IEEE Symposium on Security and Privacy (S\&P)}, 2021.
+
+\bibitem[TZZ{\etalchar{+}}16]{morpheus:isca:2016}
+Hung-Wei Tseng, Qianchen Zhao, Yuxiao Zhou, Mark Gahagan, and Steven Swanson.
+\newblock Morpheus: Creating application objects efficiently for heterogeneous computing.
+\newblock In {\em ISCA}, 2016.
+
+\bibitem[uci]{ucie-spec}
+{UCIe} 1.1 specifications.
+
+\bibitem[VKO20]{lsq}
+S.~Vargaftik, I.~Keslassy, and A.~Orda.
+\newblock Lsq: Load balancing in large-scale heterogeneous systems with multiple dispatchers.
+\newblock {\em IEEE/ACM Transactions on Networking}, 28(03):1186--1198, 2020.
+
+\bibitem[VMB{\etalchar{+}}22]{fractos:eurosys:2022}
+Llu\'{\i}s Vilanova, Lina Maudlej, Shai Bergman, Till Miemietz, Matthias Hille, Nils Asmussen, Michael Roitzsch, Hermann H\"{a}rtig, and Mark Silberstein.
+\newblock Slashing the disaggregation tax in heterogeneous data centers with fractos.
+\newblock In {\em Proceedings of the Seventeenth European Conference on Computer Systems (EuroSys)}, 2022.
+
+\bibitem[VPA{\etalchar{+}}]{letitflow}
+Erico Vanini, Rong Pan, Mohammad Alizadeh, Parvin Taheri, and Tom Edsall.
+\newblock Let it flow: Resilient asymmetric load balancing with flowlet switching.
+\newblock In {\em 14th {USENIX} Symposium on Networked Systems Design and Implementation}, NSDI ’17.
+
+\bibitem[VSDS]{xpander}
+Asaf Valadarsky, Gal Shahaf, Michael Dinitz, and Michael Schapira.
+\newblock Xpander: Towards optimal-performance datacenters.
+\newblock In {\em Proceedings of the 12th International on Conference on Emerging Networking EXperiments and Technologies}, CoNEXT '16.
+
+\bibitem[WCB]{seda}
+Matt Welsh, David Culler, and Eric Brewer.
+\newblock Seda: An architecture for well-conditioned, scalable internet services.
+\newblock In {\em Proceedings of the Eighteenth ACM Symposium on Operating Systems Principles}, SOSP '01.
+
+\bibitem[WCC20]{xstore:osdi:2020}
+Xingda Wei, Rong Chen, and Haibo Chen.
+\newblock Fast {RDMA-based} ordered {Key-Value} store using remote learned cache.
+\newblock In {\em 14th USENIX Symposium on Operating Systems Design and Implementation (OSDI 20)}, November 2020.
+
+\bibitem[Win77]{jsq_fcfs}
+Wayne Winston.
+\newblock Optimality of the shortest line discipline.
+\newblock {\em Journal of Applied Probability}, 14(1):181--189, 1977.
+
+\bibitem[WLP{\etalchar{+}}14]{q100:asplos:2014}
+Lisa Wu, Andrea Lottarini, Timothy~K. Paine, Martha~A. Kim, and Kenneth~A. Ross.
+\newblock Q100: The architecture and design of a database processing unit.
+\newblock In {\em Proceedings of the 19th International Conference on Architectural Support for Programming Languages and Operating Systems}, ASPLOS '14, page 255–268, New York, NY, USA, 2014. Association for Computing Machinery.
+
+\bibitem[WQM{\etalchar{+}}23]{canvas:nsdi:2023}
+Chenxi Wang, Yifan Qiao, Haoran Ma, Shi Liu, Wenguang Chen, Ravi Netravali, Miryung Kim, and Guoqing~Harry Xu.
+\newblock Canvas: Isolated and adaptive swapping for {Multi-Applications} on remote memory.
+\newblock In {\em 20th USENIX Symposium on Networked Systems Design and Implementation (NSDI 23)}, April 2023.
+
+\bibitem[WW23]{aurelia:words:2023}
+Shu-Ting Wang and Weitao Wang.
+\newblock Aurelia: Cxl fabric with tentacle.
+\newblock In {\em Proceedings of the 4th Workshop on Resource Disaggregation and Serverless}, WORDS '23, 2023.
+
+\bibitem[WXM{\etalchar{+}}24]{dmx:hpca:2024}
+Shu-Ting Wang, Hanyang Xu, Amin Mamandipoor, Rohan Mahapatra, Byung~Hoon Ahn, Soroush Ghodrati, Krishnan Kailas, Mohammad Alian, and Hadi Esmaeilzadeh.
+\newblock Data motion acceleration: Chaining cross-domain multi accelerators.
+\newblock In {\em 2024 IEEE International Symposium on High-Performance Computer Architecture (HPCA)}, pages 1043--1062, 2024.
+
+\bibitem[xco]{xconn-cxl2-switch}
+Xconn cxl 2.0 switches.
+\newblock \url{https://memverge.com/wp-content/uploads/2022/10/CXL-Forum-OCP_Samsung-Xconn.pdf}.
+
+\bibitem[xila]{xilinx-u30-vcu}
+Xilinx u30 vcu.
+
+\bibitem[xilb]{xilinx-vitis-data-analytics}
+Xilinx vitis data analytics library.
+
+\bibitem[xilc]{xilinx-vitis-data-compression}
+Xilinx vitis data compression library.
+
+\bibitem[xild]{xilinx-vitis-database}
+Xilinx vitis database library.
+
+\bibitem[xile]{xilinx-vitis-dsp}
+Xilinx vitis dsp library.
+
+\bibitem[xilf]{xilinx-vitis-libraries}
+Xilinx vitis libraries.
+
+\bibitem[xilg]{xilinx-vitis-security}
+Xilinx vitis security library.
+
+\bibitem[Yas14]{top-down:ispass:2014}
+Ahmad Yasin.
+\newblock A top-down method for performance analysis and counters architecture.
+\newblock In {\em 2014 IEEE International Symposium on Performance Analysis of Systems and Software (ISPASS)}, pages 35--44, 2014.
+
+\bibitem[YDH{\etalchar{+}}20]{hygcn:hpca:2020}
+Mingyu Yan, Lei Deng, Xing Hu, Ling Liang, Yujing Feng, Xiaochun Ye, Zhimin Zhang, Dongrui Fan, and Yuan Xie.
+\newblock Hygcn: A gcn accelerator with hybrid architecture.
+\newblock In {\em HPCA}, 2020.
+
+\bibitem[YZL{\etalchar{+}}18]{accugraph:pact:2018}
+Pengcheng Yao, Long Zheng, Xiaofei Liao, Hai Jin, and Bingsheng He.
+\newblock An efficient graph accelerator with parallel data conflict management.
+\newblock In {\em PACT}, 2018.
+
+\bibitem[ZAB{\etalchar{+}}22]{dsi-dlrm:isca:2022}
+Mark Zhao, Niket Agarwal, Aarti Basant, Bu\u{g}ra Gedik, Satadru Pan, Mustafa Ozdal, Rakesh Komuravelli, Jerry Pan, Tianshu Bao, Haowei Lu, Sundaram Narayanan, Jack Langman, Kevin Wilfong, Harsha Rastogi, Carole-Jean Wu, Christos Kozyrakis, and Parik Pol.
+\newblock Understanding data storage and ingestion for large-scale deep recommendation model training: Industrial product.
+\newblock In {\em ISCA}, 2022.
+
+\bibitem[ZAC17]{hgum:reconfig:2017}
+Sizhuo Zhang, Hari Angepat, and Derek Chiou.
+\newblock Hgum: Messaging framework for hardware accelerators.
+\newblock In {\em ReConFig}, 2017.
+
+\bibitem[ZBL{\etalchar{+}}19]{harmonia}
+Hang Zhu, Zhihao Bai, Jialin Li, Ellis Michael, Dan R.~K. Ports, Ion Stoica, and Xin Jin.
+\newblock Harmonia: Near-linear scalability for replicated storage with in-network conflict detection.
+\newblock {\em Proc. VLDB Endow.}, 13(3):376–389, 2019.
+
+\bibitem[ZDZ{\etalchar{+}}16]{cambricon-x:micro:2016}
+Shijin Zhang, Zidong Du, Lei Zhang, Huiying Lan, Shaoli Liu, Ling Li, Qi~Guo, Tianshi Chen, and Yunji Chen.
+\newblock Cambricon-x: An accelerator for sparse neural networks.
+\newblock In {\em MICRO}, 2016.
+
+\bibitem[ZEF{\etalchar{+}}15]{dcqcn:sigcomm:2015}
+Yibo Zhu, Haggai Eran, Daniel Firestone, Chuanxiong Guo, Marina Lipshteyn, Yehonatan Liron, Jitendra Padhye, Shachar Raindel, Mohamad~Haj Yahia, and Ming Zhang.
+\newblock Congestion control for large-scale rdma deployments.
+\newblock In {\em ACM Conference on Special Interest Group on Data Communication}, 2015.
+
+\bibitem[ZKC{\etalchar{+}}]{racksched}
+Hang Zhu, Kostis Kaffes, Zixu Chen, Zhenming Liu, Christos Kozyrakis, Ion Stoica, and Xin Jin.
+\newblock Racksched: A microsecond-scale scheduler for rack-scale computers.
+\newblock In {\em Proceedings of the {USENIX} Symposium on Operating Systems Design and Implementation}, OSDI '20.
+
+\bibitem[ZLJ{\etalchar{+}}21]{deepgraph:hpca:2021}
+Yu~Zhang, Xiaofei Liao, Hai Jin, Ligang He, Bingsheng He, Haikun Liu, and Lin Gu.
+\newblock Depgraph: A dependency-driven accelerator for efficient iterative graph processing.
+\newblock In {\em HPCA}, 2021.
+
+\bibitem[ZLS{\etalchar{+}}15]{dnnoptimizing:fpga:2015}
+Chen Zhang, Peng Li, Guangyu Sun, Yijin Guan, Bingjun Xiao, and Jason Cong.
+\newblock Optimizing fpga-based accelerator design for deep convolutional neural networks.
+\newblock In {\em FPGA}, 2015.
+
+\bibitem[ZLZK]{facebook_microburst}
+Qiao Zhang, Vincent Liu, Hongyi Zeng, and Arvind Krishnamurthy.
+\newblock High-resolution measurement of data center microbursts.
+\newblock In {\em Proc. of the Internet Measurement Conference}, IMC '17.
+
+\bibitem[ZMTC18]{minnow:asplos:2018}
+Dan Zhang, Xiaoyu Ma, Michael Thomson, and Derek Chiou.
+\newblock Minnow: Lightweight offload engines for worklist management and worklist-directed prefetching.
+\newblock In {\em ASPLOS}, 2018.
+
+\bibitem[ZWL{\etalchar{+}}22]{carbink:osdi:2022}
+Yang Zhou, Hassan M.~G. Wassel, Sihang Liu, Jiaqi Gao, James Mickens, Minlan Yu, Chris Kennelly, Paul Turner, David~E. Culler, Henry~M. Levy, and Amin Vahdat.
+\newblock Carbink: {Fault-Tolerant} far memory.
+\newblock In {\em 16th USENIX Symposium on Operating Systems Design and Implementation (OSDI 22)}, July 2022.
+
+\bibitem[ZZB{\etalchar{+}}]{hermes}
+Hong Zhang, Junxue Zhang, Wei Bai, Kai Chen, and Mosharaf Chowdhury.
+\newblock Resilient datacenter load balancing in the wild.
+\newblock In {\em Proc. of the ACM Conference on Special Interest Group on Data Communication}, SIGCOMM ’17.
+
+\bibitem[ZZL{\etalchar{+}}21]{lccg:sc:2021}
+Jin Zhao, Yu~Zhang, Xiaofei Liao, Ligang He, Bingsheng He, Hai Jin, and Haikun Liu.
+\newblock Lccg: A locality-centric hardware accelerator for high throughput of concurrent graph processing.
+\newblock In {\em SC}, 2021.
+
+\bibitem[ZZW{\etalchar{+}}18]{graphp:hpca:2018}
+Mingxing Zhang, Youwei Zhuo, Chao Wang, Mingyu Gao, Yongwei Wu, Kang Chen, Christos Kozyrakis, and Xuehai Qian.
+\newblock Graphp: Reducing communication for pim-based graph processing with efficient data partition.
+\newblock In {\em HPCA}, 2018.
 
 \end{thebibliography}

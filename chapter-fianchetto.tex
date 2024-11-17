@@ -13,8 +13,8 @@
 \newcommand{\pir}[0]{\textsf{Personal Info Redaction}\xspace}
 \newcommand{\dhj}[0]{\textsf{Database Hash Join}\xspace}
 
-\section{Introduction}
-\label{fianchetto:sec:intro}
+% \section{Introduction}
+% \label{fianchetto:sec:intro}
 %\vspace{-2ex}
 
 With the effective end of Dennard Scaling~\cite{dennard_scaling}, the dark silicon~\cite{dark_silicon_isca2011, dark_silicon:babak} phenomenon has led to the development and adoption of Domain-Specific Architectures (DSA) or accelerators.
@@ -24,7 +24,7 @@ With the Cambrian explosion of accelerators~\cite{diannao:asplos:2014, dnnoptimi
 Amazon Web Service (AWS)~\cite{aws-inferentia:2019, aws-trainium:2022}, Microsoft Azure~\cite{catapult:isca:2014, cloud-scale-acc:micro:2016, brainwave:isca:2018, microsoft-azure:zipline:2019}, and Google Cloud Platform (GCP)~\cite{tpu:isca:2017,tpuv4i:isca:2021,google-vcu:asplos:2021} as the three providers of public cloud recently started offering accelerator equipped instances. 
 %
 
-The offering is the result of market push toward compute-intensive applications such as genomics, content streaming, recommendation systems, virtual reality, data analytics, etc. 
+The offering of accelerator equipped instances is the result of market push toward hardware-accelerated compute-intensive applications such as genomics, content streaming, recommendation systems, virtual reality, data analytics, etc. 
 %
 Such applications often cross the boundary of multiple domains, each of which can be potentially accelerated with its own domain-specific architecture (DSA). 
 %
@@ -54,7 +54,7 @@ These applications would maximally benefit from the DSAs in the cloud only if al
 
 To enable heterogeneous cross-domain multi-acceleration, there is an essential need for cross-stack solutions for accelerator chaining to enable intimate communication between different DSAs, each of which is responsible for accelerating a part of a single application. 
 %
-This paper sets out to explore a heterogeneous cross-domain multi-acceleration datacenter that harvests the recent initiative towards democratizing hardware design and enables the vision of a \textit{sea of accelerators}
+This chapter sets out to explore a heterogeneous cross-domain multi-acceleration datacenter that harvests the recent initiative towards democratizing hardware design and enables the vision of a \textit{sea of accelerators}
 ~\cite{pymtl3:ieee-micro:2020, basejump:dac:2018, blackparrot:ieee-micro:2020, democratizing:cacm:2022, profiling:isca:2023}.
 
 In a cross-domain multi-acceleration system, a chain of DSAs is created, where each DSA accepts inputs in a specific data structure and produces outputs in another data structure. 
@@ -97,7 +97,7 @@ The significant additional improvements over a baseline that itself maximally sp
 Future datacenter computing landscape will deploy an ocean of accelerators, each purpose-built for accelerating different 
 application domains.
 %
-A mixture of CPU, GPU, with FPGA- and ASIC- based accelerator cards is already employed in today's cloud services~\cite{catapult:isca:2014, cloud-scale-acc:micro:2016, tpu:2017, brainwave:isca:2018, aws-inferentia:2019,tpuv4i:isca:2021,google-vcu:asplos:2021, aws-trainium:2022}.
+A mixture of CPU, GPU, with FPGA- and ASIC- based accelerator cards is already employed in today's cloud services~\cite{catapult:isca:2014, cloud-scale-acc:micro:2016, tpu:isca:2017, brainwave:isca:2018, aws-inferentia:2019,tpuv4i:isca:2021,google-vcu:asplos:2021, aws-trainium:2022}.
 %
 Such an accelerator-heavy datacenter~\cite{asic-cloud:isca:2016, asic-cloud:cacm:2020} breaks applications into several domains, each running on a domain-specific accelerator (DSA), possibly implemented on different accelerator cards. \footnote{DSA and accelerator are used interchangeable throughout Chapter~\ref{fianchetto:chap}.} %Fig.\ref{fig:overview}(b) illustrates a server that includes four heterogeneous accelerator cards, developed by different vendors. %multi-acceleration of multiple kernels in end-to-end applications using heterogeneous accelerator cards. 
 %
@@ -288,7 +288,7 @@ Heeding these insights, this work makes a case for accelerating the data motion.
 
 Multi-acceleration in Figure~\ref{fig:motiv-ex}(b) represents the current system design using CPU for data motion. This design requires data to move through the CPU for restructuring the output of one accelerator before the data can be used by the next accelerator. 
 %
-In this paper, we propose Data Motion Acceleration as illustrated in Figure~\ref{fig:motiv-ex}(c) to facilitate data motion between heterogeneous accelerators. %\dmx avoids the unnecessary data movement between CPU and accelerator and accelerates the non-trivial operations of data restructuring.
+In this chapter, we propose Data Motion Acceleration as illustrated in Figure~\ref{fig:motiv-ex}(c) to facilitate data motion between heterogeneous accelerators. %\dmx avoids the unnecessary data movement between CPU and accelerator and accelerates the non-trivial operations of data restructuring.
 %
 \dmx accelerates data restructuring and bypasses CPU for data movement between accelerators via integrating the purposefully-built Data Restructuring Accelerator (\drx) into the system.
 %
@@ -394,7 +394,7 @@ This fixed power budget limits the performance of \drx.
 As we will show in Sec.\ref{sec:results}, Integrated \drx becomes the performance bottleneck when scaling the number of accelerators to more than 8.
 %    
 Although integrating \drx %as a separated die 
-using die-to-die interconnects like UCIe could alleviate the affect, integrated \drx still become the performance bottleneck with excessive data movement~\cite{amd-chiplet:isca:2021, odsa-bow-spec, ucie-spec}.
+using die-to-die interconnects like UCIe could alleviate the affect, integrated \drx still becomes the performance bottleneck with excessive data movement~\cite{amd-chiplet:isca:2021, odsa-bow-spec, ucie-spec}.
 %This fixed amount prevents \systemName to further scale the compute from \drx to match up with the data restructuring demand from accelerators.
 %
 Moreover, Integrated \drx has the same data movement as the baseline CPU without \drx. Such design requires all accelerators to send their data to the CPU which makes the PCIe link connecting the CPU to the accelerators the bandwidth bottleneck when multiple accelerators use \drx at the same time. Such data movement is also the main source of system energy consumption. %PCIe switches creates bandwidth oversubscription that force accelerators to share their bandwidth to move data in and out of \drx on the CPU.
@@ -413,12 +413,14 @@ This configuration considers implementing \drx as a standalone PCIe card that is
 %
 %The advantage of the standalone \drx is the higher power budget of a PCIe card compared with an integrated \drx. 
 %
-Without using an external power supply cable, the performance of a single Standalone \drx PCIe card is limited by the PCIe power supply standard, which is 25 Watts.
+Without using an external power supply cable, the performance of a single Standalone \drx PCIe card is limited by the PCIe power supply standard, which is 25 Watts, and its bus bandwidth.
 %
 Nevertheless, as illustrated in Figure~\ref{fig:standalone-drx}, installing multiple Standalone \drx cards can scale \drx performance with the number of accelerators. 
 %resolves the power limit imposed by CPU integration and further the scale of \drx to match up with the number of accelerators.  
 %
-However, this Standalone \drx still incurs bandwidth oversubscription as the PCIe link to a shared, Standalone \drx card can become the bottleneck. 
+However, this Standalone \drx still incurs bandwidth oversubscription as the PCIe link to a shared, Standalone \drx card can become the bottleneck.
+%
+The bandwidth contention could be worse with multiple Standalone \drx cards are under the same PCIe switch. 
 %However, this Standalone \drx still incurs bandwidth oversubscription as accelerator accessing a piece of shared hardware below a PCIe switch.
 %
 
@@ -549,7 +551,7 @@ For data packing optimization, the DRX compiler partitions the kernel's multidim
 
 %DRX ISA is a significant departure from the traditional SIMD semantics and offers optimization for memory, loop, and data packing. For memory optimization, DRX uses software-managed on-chip scratchpads instead of vector register files and conventional cache hierarchy in common SIMD ISA. Memory instruction configures the Data Access Engine to fetch data from DRAM directly to on-chip scratchpads. For loop optimization, DRX uses hardware loops within Loop Repeater to eliminate branch instruction overhead. Loop instructions configure the Instruction Repeater based on the dimensions of kernel multidimensional arrays. For data packing optimization, the DRX compiler partitions the kernel multidimensional arrays across the REs to eliminate the need for pack/unpack instructions. 
 
-During the vector execution, loop instructions first configure the Off-chip Data Access Engine and Strided Scratchpad Address Calculator with sets of <Base, Stride, Iteration> configurations that correspond to the input/output loop dimensions and data location. 
+During the vector execution, loop instructions first configure the Off-chip Data Access Engine and Strided Scratchpad Address Calculator with sets of (Base, Stride, Iteration) configurations that correspond to the input/output loop dimensions and data location. 
 %
 After the Off-chip Data Access Engine loads the data to scratchpad banks, compute instruction is issued with scratchpad addresses calculated by the Instruction Repeater by traversing the dimensions of multidimensional arrays based on the configurations in the Strided Scratchpad Address Calculator. 
 %
@@ -1291,7 +1293,7 @@ The challenge arises due to the diverse data formats generated and consumed by e
 %
 This necessitates restructuring inputs and outputs across accelerators. 
 %
-While some prior works have focused on performed data restructuring using CPUs, this paper introduces the concept of Data Motion Acceleration (DMX) for efficient cross-domain multi-acceleration with heterogeneous DSAs.
+While some prior works have focused on performed data restructuring using CPUs, \dmx introduces the concept of data motion acceleration of for efficient cross-domain multi-acceleration with heterogeneous DSAs.
 %
 We review the most relevant related work in three areas: data movement, data restructuring, and interconnect fabrics integration below.
 %
@@ -1317,7 +1319,7 @@ HGum~\cite{hgum:reconfig:2017} and Fletcher~\cite{peltenburg-2019-fletcher} impl
 %
 For machine learning pipelines, tf.data~\cite{tf.data:pvldb:2021}, DSI~\cite{dsi-dlrm:isca:2022}, DALI~\cite{nvidia-dali:2018} optimize data restructuring on GPU with programmable operations.
 %
-In contrast to these prior works that only optimize data restructuring for a single accelerator, this paper investigates data restructuring and movement for multi-acceleration with heterogeneous devices.
+In contrast to these prior works that only optimize data restructuring for a single accelerator, this chapter investigates data restructuring and movement for multi-acceleration with heterogeneous devices.
 %
 
 \noindent \textbf{Interconnect fabrics.}
@@ -1338,17 +1340,17 @@ This work, however, tackles data motion challenges to maximize the performance o
 \label{sec:conclusion}
 %
 % With heterogeneous data centers, while accelerators are becoming a prominent component, there is a need for considering issues that arise in the intersection of system and architecture.
-In this work, we quantified the data motion cost of chaining heterogeneous domain-specific accelerators for multi-acceleration.
+In this chapter, we quantified the data motion performance and cost of chaining heterogeneous domain-specific accelerators for multi-acceleration.
 %
 The results showed that the data motion overhead curtails the end-to-end speedup of accelerating each domain on a set of heterogeneous accelerators. 
 %
-The paper introduced \dmx that seamlessly weaves together multiple accelerators that deliver the performance of a large, monolithic cross-domain accelerator. 
+The chapter introduced \dmx that seamlessly weaves together multiple accelerators that deliver the performance of a large, monolithic cross-domain accelerator. 
 %
 On average, \dmx provides between 3.4$\times$ to 8.2$\times$ speedup, 3.0$\times$ to 13.6$\times$ higher throughput, and 3.8$\times$ to 5.2$\times$ energy reduction.
 
 Even with current single-domain accelerators, overheads of moving data on- and off-chip is presently a dominant factor that limits the performance and energy efficiency of gains~\cite{horowitz:isscc:2014, accelerator-cluster:hoti:2023}. 
 %
-The impact of the data motion--highlighted in this paper--will worsen when cross-domain accelerators are chained in future datacenters to cater to the requirements of emerging end-to-end applications.
+The impact of the data motion--highlighted in this chapter--will worsen when cross-domain accelerators are chained in future datacenters to cater to the requirements of emerging end-to-end applications.
 %
 This even includes the multimodal generative AI applications that use multiple models and require acceleration beyond neural networks (e.g., vector database lookups, search, etc.).
 %

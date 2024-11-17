@@ -4,8 +4,8 @@
 %\newcommand{\daronpon}[0]{Daronpon\xspace}
 %\newcommand{\daronpon}{Daronpon}
 
-\section{Introduction}
-\label{daronpon:sec:intro}
+% \section{Introduction}
+% \label{daronpon:sec:intro}
 
 To improve both performance and fault tolerance, datacenter
 applications are provisioned to scale horizontally, with replicated
@@ -26,7 +26,7 @@ performance~\cite{facebook_microburst}.  These events arise within the
 operating system, runtime, and application software as well as due to
 network-level incast events, where many clients send to a
 common destination server, causing in-network buffering and
-substantial queuing delays~\cite{facebook_memcache}.  Moreover, the
+substantial queuing delays~\cite{scale-memcache:nsdi:2013}.  Moreover, the
 potential impact of these so-called ``microbursts'' increases with
 network bandwidth.  Large bursts can lead to packet drops and
 necessitate end-to-end retransmissions.
@@ -43,16 +43,18 @@ switches or middle boxes---often generally referred to as
 with a server rack, for example R2P2~\cite{r2p2} and
 Racksched~\cite{racksched}.  These approaches take into account server
 load balancing, building upon prior approaches to core scheduling in
-individual servers~\cite{IX,shinjuku,shenango,seda}. Further,
+individual servers~\cite{IX, shinjuku:nsdi:2019, shenango:nsdi:2019,seda}. Further,
 Vargaftik et al.~\cite{lsq} show that, for the multiple-dispatcher
 environments that we target, a stable and highly efficient load
 balancing approach is possible through a carefully controlled exchange
 of status updates between servers and dispatchers.
 
-We present \daronpon, an inter-rack load balancer targeted to network
-services with sub-RTT service times.  \daronpon periodically
-exchanges service-load information between dispatchers, either through
-explicit gossip messages or piggybacked onto redirected application
+We present \daronpon, an inter-rack load balancer targeting
+services with round-trip time dominating the overall response time 
+and service time on microsecond timescales.
+%
+\daronpon periodically exchanges service-load information between dispatchers,
+either through explicit gossip messages or piggybacked onto redirected application
 requests.  We employ a logarithmic threshold approach to minimize
 the network overhead of state-exchange messages while ensuring that
 application requests are forwarded to replicas with good performance.
@@ -139,8 +141,8 @@ do not involve long-lived connections.
 (We support any request/response service on top of a connection-less
 transport or one with migration ability~\cite{crab,quic}.)  Techniques
 for dispatching such microsecond-duration requests within an end-host
-operating system have been explored recently~\cite{IX, shinjuku, snap,
-  shenango, zygos}.  These end-host-based approaches use load-aware
+operating system have been explored recently~\cite{IX, shinjuku:nsdi:2019, snap:sosp:2019,
+shenango:nsdi:2019, zygos}.  These end-host-based approaches use load-aware
 schedulers to direct requests to CPU cores and to quickly rebalance
 those allocations.  Extensions to these techniques demonstrate similar
 scheduling performance at the scope of a entire server
@@ -177,7 +179,7 @@ A proven-optimal algorithm, join-the-shortest-queue (JSQ), ensures requests expe
 %
 Unfortunately, centralization prevents cross-rack sharding and scale-out designs.  
 %
-In contrast, fully decentralized approaches (e.g. client-based power-of-two designs~\cite{power_of_2}) either require network-wide message round trips to measure load or rely on out-of-date information from previous response.
+In contrast, fully decentralized approaches (e.g. client-based power-of-two designs~\cite{power-of-two:tpds:2001}) either require network-wide message round trips to measure load or rely on out-of-date information from previous response.
 %
 As the service time of requests approaches that of an RTT, 
 both approaches provides little benefit on acquiring more up-to-date information.
@@ -342,7 +344,7 @@ Given imperfect, or stale, information about remote servers, the
 question becomes: \textit{when is redirecting requests a good course of action}? 
 %  
 We submit that given reasonably predictable, but
-potentially eccentric, request patterns, the correct course of action
+potentially erratic, request patterns, the correct course of action
 is to act conservatively when conditions are manageable, and to react
 quickly and decisively when request loads spike, i.e., in microburst
 scenarios.  
@@ -393,10 +395,12 @@ track server load by counting the number of outstanding requests for each
 service running on that rack. Figure~\ref{fig:racks} illustrates the role that
 ToRs play in our load balancing scheme.  When a request arrives at a ToR it
 makes a load balancing decision. It either \textit{Admits} the request, or it
-\textit{Redirects} it to another replica. The choice to either admit or
-redirect is subject to the local load the service is currently experiencing
-under the ToR (as understood by \daronpon), and an estimation of the load
-each replica has on remote ToRs. 
+\textit{Redirects} it to another replica. 
+%
+Requests are redirected in FIFO without specific priority.
+%
+The choice to either admit or redirect is subject to the local load the service is currently experiencing
+under the ToR (as understood by \daronpon), and an estimation of the load each replica has on remote ToRs.
 
 %If a request is admitted the ToR increments it's
 %load counter for that service. Once the server complete the request
@@ -436,7 +440,7 @@ while generating little overhead otherwise.
 The second one is opportunistic piggybacking that spreads load information between ToRs when requests are
 redirected. 
 %
-We find in our evaluation that our log gossip approach prevents large queue build-ups, while our piggyback approach greatly reduces latency in the common case.  
+We find in our evaluation that our log gossip approach prevents large queue build-ups, while our piggyback approach reduces latency.
 %
 %These results are outlined in detail later in this paper.
 
@@ -683,7 +687,7 @@ For instance, if the load were to
 increase from 1 to 2, a gossip message would be broadcast to all other servers
 with the replicated service that crossed this threshold.
 %
-In this message, load information for all other shared services is added. When the boundary of two is crossed, and the value of two is sent, this ToR will not issue another gossip message until the load on the service rises by a power of two to four, or falls back down by a power of two to one.
+In this message, load information for all other shared services is added. When the boundary of two is crossed, and the value of two is sent, this ToR will not issue another gossip message until the load on the service rises by a power of two to four outstanding requests, or falls back down by a power of two to one.
 
 %%
 %% Sorting microbursts by size
@@ -868,8 +872,15 @@ allows for high throughput and low latency packet processing in user
 space~\cite{dpdk}. DPDK ToRs emulate ToR switches with limited latency overhead
 ($<$ 1 microsecond).  Ideally, we would implement our algorithm on P4 switches,
 however to our knowledge no cloud providers allow for customers to offload
-custom programs to programmable switches at this time.  We implement our
-clients using DPDK for lower latency and precisely controllable request rates.
+custom programs to programmable switches at this time.  
+%
+Considering that programmable P4 switches have not been widely deployed in datacenters, \daronpon could also be offloaded to SmartNICs, reducing packet processing latency through dedicated hardware without interrupting the main CPU cores
+%
+% \TODO{George: This is a key issue as programmable switches have not been wildly deployed.
+% Need to comment on the potential issues and overhead without it.
+% }
+%
+We implement our clients using DPDK for lower latency and precisely controllable request rates.
 These traits are important as AWS's ENA NICs do not have hardware timestamping
 available to users.  Our DPDK clients can generate hundreds of thousands of
 requests per second with a single virtual core. These UDP-based servers
@@ -884,7 +895,7 @@ load information. Redirecting involves header manipulation, tracking
 load information using hashtable table lookups, and counter
 increment/decrement operations. The operations we used in these DPDK
 ToRs are carefully chosen to be simple, and within the capabilities of
-programable switches to compute.
+programmable switches to compute.
 
 \paragraph{Custom packet headers:} \daronpon appends a custom header after
 the IPv4 UDP header. The header consists of a unique request ID for each
@@ -909,9 +920,9 @@ servers under a ToR switch.
 \newcommand{\servers}[0]{6\xspace}
 \newcommand{\servercores}{1\xspace}
 \newcommand{\tors}{3\xspace}
-\newcommand{\torscores}{16 \xspace}
-\newcommand{\clients}{6 \xspace}
-\newcommand{\clientcores}{1 \xspace}
+\newcommand{\torscores}{16\xspace}
+\newcommand{\clients}{6\xspace}
+\newcommand{\clientcores}{1\xspace}
 
 We evaluate \daronpon in on the Amazon Web Services cloud (AWS
 \texttt{us-west-2} region) using \texttt{c5n} instances. 
@@ -942,7 +953,7 @@ Both of them select the replica of the service on the client side.
 %
 \textit{Power-of-2 choices} for service selection is another baseline that selects a replica of a service based on load information available to the client.
 %
-The power-of-2 choices~\cite{power_of_2} randomly chooses two random replicas of services and picks the one with lower load out of the two ones.   
+The power-of-2 choices~\cite{power-of-two:tpds:2001} randomly chooses two random replicas of services and picks the one with lower load out of the two ones.   
 %
 The load information used for service selection is stale when it reaches the client because the actual load may have changed.
 %
@@ -1239,12 +1250,10 @@ The overhead from gossip remains low.
 \paragraph{Scaling:} In production cluster, managers determine the application
 service replication factor. This factor is determined dynamically by monitoring
 system load, which can cause applications to scale up and down significantly on
-the order of hours.  \daronpon{}'s gossip broadcast is inflated by this
-replication factor, and therefore very large replication counts (e.g. in the
-100s) present a potential bottleneck.  We believe that overhead can be
-constrained with proper placement of services to maximize the intersection of
-services across a same set of racks.  Additionally, careful placement enables
-piggybacking to carry more load information per redirected request.
+the order of hours.  \daronpon{}'s gossip broadcast could be inflated by the replication factor, and therefore large replication counts (e.g. in the
+100s) present a potential bottleneck.  
+%
+Proper placement of services is possible to constrain the overhead of gossip within a specific sets of racks. The placement can also enable piggybacking to carry load information for multiple services on a single redirected request.
 
 \paragraph{Emerging Topologies:} \daronpon\ works on any datacenter topology
 which uses ToRs, or virtual ToR-like abstractions (such as our DPDK software
@@ -1263,7 +1272,7 @@ does not bake reliable transport into the design and assumes that
 retransmissions of lost requests are handled by the application. To support
 reliable transmission such as TCP for \daronpon, it is required to track flow-level specific state in the network and ensure that once a replica is selected for a request, no further selections occur on that flow. This is interesting but also introduces additional complexity. It is left for future work.
 
-\paragraph{Failures:} Our approach does not explicit handle failures. If a
+\paragraph{Failures:} Our approach does not explicitly handle failures. If a
 server fails, \daronpon\ will automatically load balance around it, as requests
 issued to the failed server will not respond, and thus the queue will grow
 indefinitely. If a \daronpon\ ToR were to fail, that rack becomes partitioned.

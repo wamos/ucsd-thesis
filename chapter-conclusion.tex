@@ -1,7 +1,7 @@
 \chapter{Conclusion}
 \label{conclusion:chap}
 %
-The dissertation investigates the redundant communication between servers for large scale web and cache requests and redundant data movement between accelerators for compute-intensive applications.
+The dissertation investigates the redundant communication between servers for large-scale web and cache requests and redundant data movement between accelerators for compute-intensive applications.
 %
 The redundancy is an impending and critical issue for datacenters designed for hardware accelerators and disaggregated resources.
 % 
@@ -12,10 +12,9 @@ The first contribution of the dissertation is \daronpon.
 %
 \daronpon is a datacenter-wide, inter-rack distributed load-balancing system for replicated datacenter services.  
 %
-At its heart \daronpon is a highly efficient gossip protocol that ensures that requests originating at any point in the datacenter can be directed away from overloaded replicas at sub-RTT timescales.
+\daronpon, at its heart, is a highly efficient gossip protocol that ensures that requests originating at any point in the datacenter can be directed away from overloaded replicas at sub-RTT timescales.
 %
-Through a mixture of simulation and deployment within AWS's cloud network, we show that \daronpon cuts the 99th percentile of latency for common workloads by up to 2$\times$ while admitting 10\% more requests
-per unit time. 
+Through a mixture of simulation and deployment within AWS's cloud network, we show that \daronpon reduces the 99th percentile of latency for common workloads by up to 2$\times$ while admitting 10\% more requests per unit time. 
 
 The second contribution of the dissertation is \dmx. 
 %
@@ -25,11 +24,11 @@ The data restructuring and communication overhead of executing a single applicat
 %
 With the current paradigm of using accelerators, the data motion overhead is very likely to outweigh the benefits from all these chained heterogeneous accelerators.
 %
-In a stark contrast with previous works on accelerators that deal with accelerating solely compute kernels, \dmx focuses on accelerating data motion within a chain of heterogeneous accelerators in a multi-accelerator datacenter.
+In contrast to previous works on accelerators that deal with accelerating only compute kernels, \dmx focuses on accelerating data motion within a chain of heterogeneous accelerators in a multi-accelerator datacenter.
 %
 To that end, \dmx reduces data movement, accelerates data restructuring, and enables interoperability between heterogeneous accelerators from different domains through a cross-stack hardware-software solution. 
 %
-The results with five end-to-end applications show that utilizing \dmx offers up to 8.2$\times$, 13.6$\times$, and 5.2$\times$ improvement in latency, throughput, and energy efficiency in a multi-accelerator system, respectively.
+The results from five end-to-end applications show that utilizing \dmx offers up to 8.2$\times$, 13.6$\times$, and 5.2$\times$ improvement in latency, throughput, and energy efficiency in a multi-accelerator system, respectively.
 
 The third contribution of the dissertation is \aurelia. 
 %%%%%
@@ -39,14 +38,14 @@ Compute Express Link (CXL) has emerged as a frontier for disaggregation by provi
 %
 CXL externalizes the internal memory fabric of a server and blurs the notion of server for realistic disaggregation.
 %
-The key feature of enabling of CXL as a memory fabric is its support of multi-level switching up to 4096 endpoints.
+The key feature of enabling CXL as a memory fabric is its support of multi-level switching up to 4096 endpoints.
 %
 However, CXL's current multi-level switching poses challenges on scalability and latency. 
 %
 To cope with the expected scale of CXL fabric and take full advantage of disaggregation, we propose \aurelia.
 %
-\aurelia architects addressing, routing, and transport as networking layers, which are typical on host networking, for CXL fabric.
+\aurelia architects addressing, routing, and transport as networking layers, which are typical in host networking, for CXL fabric.
 %
-\aurelia uses existing CXL mechanism to realize the much-needed functionalities for a scalable fabric.
+\aurelia uses existing CXL mechanisms to realize the much-needed functionalities for a scalable fabric.
 %
-With these networking layers, \aurelia improves 27\% on throughput for large language model inference and up to 2.6 $\times$ for key-value stores on YCSB benchmarks.
+With these networking layers, \aurelia improves by 27\% on throughput for large language model inference and up to 2.6 $\times$ for key-value stores on YCSB benchmarks.

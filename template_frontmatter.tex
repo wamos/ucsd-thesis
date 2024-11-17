@@ -11,7 +11,7 @@
 
 % No symbols, formulas, superscripts, or Greek letters are allowed
 % in your title.
-\title{Accelerating Data Movement at Different Granularities in Data centers}
+\title{Accelerating Data Movement at Different Granularities in Datacenters}
 
 \author{Shu-Ting Wang}
 \degreeyear{\the\year}
@@ -31,9 +31,9 @@
 
 %  The rest of the committee members  must be alphabetized by last name.
 \othermembers{
+Professor George C. Papen\\
 Professor Geoffrey M. Voelker\\
 Professor Jishen Zhao\\
-Professor George C. Papen\\
 }
 \numberofmembers{4} % |chair| + |cochair| + |othermembers|
 
@@ -143,20 +143,19 @@ Prof. Alex Snoeren on all the critiques on my figures during weekly meetings,
 %
 and Prof. Jishen Zhao for being willing to serve on my committee.
 
-To Rajdeep, Yibo, Nishant, Stew, Audrey, Anil, Ariana, and all other tenants of room 3140, 
-thanks for hanging out with me and being my friends or at least making me think we are friends.
+To Rajdeep, Yibo, Nishant, Stew, Audrey, Anil, Ariana, Alex, and all other tenants of room 3140, thanks for hanging out with me and being my friends.
 %
 The camaraderie is invaluable, and I will bear that in mind when I embark on my next journey.
 
-To Rohan, Byung Hoon, Hanyang, Soroush, Amin and Chris, thanks for long talks and chats about research and the time of questioning of our life choices while still working on research.  
+To Rohan, Byung Hoon, and Amin, thanks for all the long talks and chats about research and the time of questioning of our life choices while still working on research. 
 
 To Pierre-Louis, Weitao, and Dan, thanks for sharing my research interest on CXL and other topics.
 %
 I really enjoy all the online chats and meetings and the idea of I am not in this alone pushes me to finish the last chapter of this dissertation.
 
-To Dr. Yiting Xia, Jialong, Yiming, and Federicom, thanks for hosting me at MPI-INF in Saarbr\"{u}cken while I am working on this dissertation. 
+To Dr. Yiting Xia, Jialong, Yiming, and Federico, thanks for hosting me at MPI-INF in Saarbr\"{u}cken while I am working on this dissertation. 
 
-To Fujimak, SmallGGRen, HakkaFish and StanfordSneaky, I really enjoy our time on Mario cart racing and chatting about lives and politics. I will keep your real name in private in case other people scoop you folks from me. 
+To \textit{Fujimak}, \textit{SmallGGRen}, \textit{HakkaFish} and \textit{StanfordSneaky}, I really enjoy our time on Mario cart racing and chatting about lives and politics. I will keep your real names in private in case other people scoop you folks from me. 
 
 I want to thank Yin Chin Foundation for their scholarship helping me for conference travel and supporting myself during finical instable times.
 
@@ -195,14 +194,14 @@ The dissertation author was the primary researcher and author of this material.
   \item[2015] M.~S. in Computer Science, National Tsing Hua University, Taiwan
   \item[2016] Information System Technician, Civil Service Training and Protection Commission, Taiwan 
   \item[2017] Research Assistant, National Taiwan University, Taiwan
-  \item[2021] Hardware Systems Foundation Engineer Intern, Meta (then Facebook)
-  \item[2024] Visiting Ph.~D. student, Max Planck Institute for Informatics
+  \item[2021] Hardware Systems Foundation Engineer Intern, Meta
+  \item[2024] Visiting Ph.~D. student, Max Planck Institute for Informatics, Germany
   \item[2017-2024] Ph.~D. in Computer Science, University of California San Diego
 \end{vita}
 \begin{publications}
   \item Rohan Mahapatra, Soroush Ghodrati, Byung Hoon Ahn, Sean Kinzer, \textbf{Shu-Ting Wang}, Hanyang Xu,  Lavanya Karthikeyan, Hardik Sharma,  Amir Yazdanbakhsh,  Mohammad Alian, Hadi Esmaeilzadeh, “In-Storage Domain-Specific Acceleration for Serverless Computing” in Proceedings of the 29th ACM International Conference on Architectural Support for Programming Languages and Operating Systems, Volume 2 (ASPLOS), 2024
   %
-  \item \textbf{Shu-Ting Wang}, Hanyang Xu, Amin Mamandipoor, Rohan Mahapatra, Byung Hoon Ahn, Soroush Ghodrati, Krishnan Kailas, Mohammad Alian, and Hadi Esmaeilzadeh, “Data Motion Acceleration for Heterogeneous Cross-Domain Accelerator Chaining” in Proceedings of 2024 IEEE International Symposium on High-Performance Computer Architecture (HPCA), 2024
+  \item \textbf{Shu-Ting Wang}, Hanyang Xu, Amin Mamandipoor, Rohan Mahapatra, Byung Hoon Ahn, Soroush Ghodrati, Krishnan Kailas, Mohammad Alian, and Hadi Esmaeilzadeh, “Data Motion Acceleration: Chaining Cross-Domain Multi Accelerators” in Proceedings of 2024 IEEE International Symposium on High-Performance Computer Architecture (HPCA), 2024
   %
   \item \textbf{Shu-Ting Wang} and Weitao Wang, “Aurelia: CXL Fabric with Tentacle,” in Proceedings of the 4th Workshop on Resource Disaggregation and Serverless (WORDS), 2023
   %
@@ -217,19 +216,15 @@ The dissertation author was the primary researcher and author of this material.
 %   The abstract may continue to a second page if necessary.
 %
 \begin{abstract}
-  The dissertation investigates the redundant communication between servers for large scale web and cache requests and redundant data movement between accelerators for compute-intensive applications.
+  The dissertation investigates redundant communication between servers for large-scale web and cache requests and redundant data movement between accelerators for compute-intensive applications. 
   %
-  The redundancy is an impending and critical issue for datacenters designed for hardware accelerators and disaggregated resources.
-  % 
-  The dissertation makes the following three contributions to address this.
+  Redundancy is an impending and critical issue for data centers designed for hardware accelerators and disaggregated resources. 
   %
-  The first contribution of the dissertation is \daronpon. 
+  The dissertation makes the following three contributions to address this. The first contribution of the dissertation is \daronpon. 
   %
-  \daronpon dynamically load balances and reroutes large scale requests of web and cache application on microsecond timescale. 
+  \daronpon dynamically load-balances and reroutes large-scale requests of web and cache applications on a microsecond timescale. 
   %
-  \daronpon prevents these requests stranded on busy servers with network congestion and long queuing delay to be processed.
-  %
-  \daronpon shows improvement on various service time characterizations of different applications 
+  \daronpon prevents these requests, stranded on busy servers with network congestion and long queuing delays, from being processed. Daronpon shows improvement in various service time characterizations of different applications.
   %
   The second contribution of the dissertation is \dmx. 
   %
@@ -237,13 +232,13 @@ The dissertation author was the primary researcher and author of this material.
   %
   \dmx accelerates the data restructuring needed between accelerators and saves the data movement between accelerators and CPUs for compute-intensive applications.
   %
-  \dmx shows improvement on a series of benchmarks involving different application domains.
+  \dmx shows improvement in a series of benchmarks involving different application domains.
   %
   The third contribution of the dissertation is \aurelia. 
   %
   \aurelia leverages the emerging interconnect of CXL to investigate the design of a scalable fabric for accelerators and fabric-attached memory expansion.
   %
-  \aurelia improves routing and transport based on current specification of CXL and shows performance improvement on machine learning and key-value store applications.
+  \aurelia improves routing and transport based on the current specification of CXL and shows performance improvement on machine learning and key-value store applications.
 \end{abstract}
 
 
