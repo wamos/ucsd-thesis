@@ -19,7 +19,7 @@
 
 With the effective end of Dennard Scaling~\cite{dennard_scaling}, the dark silicon~\cite{dark_silicon_isca2011, dark_silicon:babak} phenomenon has led to the development and adoption of Domain-Specific Architectures (DSA) or accelerators.
 %
-With the Cambrian explosion of accelerators~\cite{diannao:asplos:2014, dnnoptimizing:fpga:2015, pudiannao:asplos:2015, shidiannao:isca:2015, cambricon:isca:2016, cambricon-x:micro:2016, cbrain:dac:2016, dnnweaver:micro:2016, fusedlayercnn:micro:2016, tabla:hpca:2016, escher:fccm:2017, pipelayer:hpca:2017, scnn:isca:2017, tpu:isca:2017, yongming-isca17, maeri:asplos18, unpu:isscc:2018, eyerissv2:journal:2019, simba:micro:2019, tangram:asplos19, awb-gcn:micro:2020, hygcn:hpca:2020,planaria:micro:2020, sigma:hpca:2020, engn:toc:2021, gcnax:hpca:2021, graphicionado:micro:2016, extrav:pvldb:2017, accugraph:pact:2018, hats:micro:2018, graphp:hpca:2018, graphr:hpca:2018, minnow:asplos:2018, conda:isca:2019, phi:micro:2019, graphpulse:micro:2020, deepgraph:hpca:2021, jetstream:micro:2021, lccg:sc:2021, darwin:asplos:2018, genax:isca:2018, smem:fpl:2018, asap:toc:2019, gencache:micro:2019, medal:micro:2019, genasm:micro:2020, geniehd:date:2020, nest:iccad:2020, savi:iccad:2020, seedex:micro:2020, wfa:fpl:2021, genstore:asplos:2022, segram:isca:2022, meet-the-walker:micro:2013,murray:micro:2016,robox:isca:2018,pointacc:micro:2021,robomorphic:asplos:2021}, it is fitting to consider the current cadence of the architecture design as the golden age of accelerators.  
+With the Cambrian explosion of accelerators~\cite{diannao:asplos:2014, dnnoptimizing:fpga:2015, pudiannao:asplos:2015, shidiannao:isca:2015, cambricon:isca:2016, cambricon-x:micro:2016, cbrain:dac:2016, dnnweaver:micro:2016, fusedlayercnn:micro:2016, tabla:hpca:2016, escher:fccm:2017, pipelayer:hpca:2017, scnn:isca:2017, tpu:isca:2017, yongming-isca17, maeri:asplos18, unpu:isscc:2018, eyerissv2:journal:2019, simba:micro:2019, tangram:asplos19, awb-gcn:micro:2020, hygcn:hpca:2020,planaria:micro:2020, sigma:hpca:2020, engn:toc:2021, gcnax:hpca:2021, graphicionado:micro:2016, extrav:pvldb:2017, accugraph:pact:2018, hats:micro:2018, graphp:hpca:2018, graphr:hpca:2018, minnow:asplos:2018, conda:isca:2019, phi:micro:2019, graphpulse:micro:2020, deepgraph:hpca:2021, jetstream:micro:2021, lccg:sc:2021, darwin:asplos:2018, genax:isca:2018, smem:fpl:2018, asap:toc:2019, gencache:micro:2019, medal:micro:2019, genasm:micro:2020, geniehd:date:2020, nest:iccad:2020, savi:iccad:2020, seedex:micro:2020, wfa:fpl:2021, genstore:asplos:2022, segram:isca:2022, meet-the-walkers:isca:2013,murray:micro:2016,robox:isca:2018,pointacc:micro:2021,robomorphic:asplos:2021}, it is fitting to consider the current cadence of the architecture design as the golden age of accelerators.  
 %
 Amazon Web Service (AWS)~\cite{aws-inferentia:2019, aws-trainium:2022}, Microsoft Azure~\cite{catapult:isca:2014, cloud-scale-acc:micro:2016, brainwave:isca:2018, microsoft-azure:zipline:2019}, and Google Cloud Platform (GCP)~\cite{tpu:isca:2017,tpuv4i:isca:2021,google-vcu:asplos:2021} as the three providers of public cloud recently started offering accelerator equipped instances. 
 %
@@ -47,7 +47,7 @@ These applications would maximally benefit from the DSAs in the cloud only if al
     \label{fig:overview:dmx}
     \end{subfigure}
     %
-    \caption{Current multi-acceleration systems rely on CPU for accelerator chaining. (a) shows a system with four heterogeneous accelerator cards. The CPU needs to intervene in the communication between accelerator cards. This involves data copies from system memory to accelerator memory and non-trivial data transformations. (b) The proposed \dmx framework removes the CPU from the data path of multi-acceleration. \dmx delivers the performance of a monolithic accelerator while offering the composability and programmablity of the baseline system.}
+    \caption[Current multi-acceleration systems rely on CPU for accelerator chaining.]{Current multi-acceleration systems rely on CPU for accelerator chaining. (a) shows a system with four heterogeneous accelerator cards. The CPU needs to intervene in the communication between accelerator cards. This involves data copies from system memory to accelerator memory and non-trivial data transformations. (b) The proposed \dmx framework removes the CPU from the data path of multi-acceleration. \dmx delivers the performance of a monolithic accelerator while offering the composability and programmablity of the baseline system.}
     
 \label{fig:overview}
 \end{figure}
@@ -159,7 +159,7 @@ In the rest of this section, we motivate \dmx design by studying representative 
     }
     \end{subfigure}
     % \includegraphics[width=\columnwidth]{ASPLOS23/figures-resubmit/motivation_example_camera_ready.pdf }
-    \caption{ 
+    \caption[Data motion stands between two application kernels, i.e., Fast Fourier Transform and Support Vector Machine, of an end-to-end application.]{ 
     (a) Data motion stands between two application kernels, i.e., Fast Fourier Transform and Support Vector Machine, of an end-to-end application.  
     %
     (b) Data motion is on CPU and application kernels are on their corresponding accelerators 
@@ -668,7 +668,7 @@ If the arrival rate of interrupts exceeds a certain threshold, the drivers switc
 \begin{figure}[t!]
     \centering
     \includegraphics[width=0.9\columnwidth]{figure/fianchetto/data-queue-on-drx.pdf}
-    \caption{ 
+    \caption[RX/TX data queue pair architecture in Bump-in-the-Wire \drx.]{ 
     %\drx's memory space and RX/TX data queue pairs. \drx uses the data queue as a circular buffer with head and tail pointers. \textit{$RX_{i}$} receives data from other accelerators sending its data to ${Accelerator}_{i}$. \textit{$TX_{i}$} sends restructured data from \drx to ${Accelerator}_{i}$. \drx supports up to a total $n=40$ accelerators in the current design.
     RX/TX data queue pair architecture in Bump-in-the-Wire \drx. \drx uses the data queue as a circular buffer with head and tail pointers. The output of the accelerator that is destined for ${Accelerator}_{i}$ is enqueued in \textit{$RX_{i}$} before being restructured and stored in \textit{$TX_{i}$} for transmission to ${Accelerator}_{i}$. Current \drx implementation supports up to a total $n=40$ accelerators.
     }
@@ -678,7 +678,7 @@ If the arrival rate of interrupts exceeds a certain threshold, the drivers switc
 \begin{figure}[t!]
     \centering
     \includegraphics[width=\columnwidth]{figure/fianchetto/p2p_dma_workflow_camera_ready.pdf}
-    \caption{Point-to-point DMA workflow involves two accelerators and the sending side \drx. 
+    \caption[Point-to-point DMA workflow involves two accelerators and the sending side \drx.]{Point-to-point DMA workflow involves two accelerators and the sending side \drx. 
     %
     The DMA bypasses the receiving side \drx.
     %
@@ -712,16 +712,29 @@ GEM allocates and frees data buffers opaquely because it is agnostic to the data
 %
 The allocated data buffers are referred to by their handle, which is equivalent to a file descriptor. %in user space for applications. 
 
-%\noindent \textbf{Peer-to-peer DMA Among Accelerators and \drxs.}
-\begin{table*}[ht!]
-    \centering
-    \resizebox{\textwidth}{!}{%
-    \footnotesize{
-    \input{table/e2e-benchmarks}}}
-    \caption{End-to-end benchmarks}
-    %\rohan{Shu-Ting I think the data restructuring operation should be in between the kernel 1 and kernel 2}
+% A more reliable workaround involves explicitly placing the caption outside the table/table* environment. Here's a bulletproof way to achieve this. This approach decouples the caption placement from the table* environment, bypassing its floating behavior while keeping the appearance correct.
+
+\noindent\begin{minipage}{\textwidth}
+    \captionsetup{position=above}
+    \captionof{table}{End-to-end benchmarks.}
+    \centering    
+    \resizebox{\textwidth}{!}{
+    \input{table/e2e-benchmarks}
+    }      
     \label{table:benchmark}
-\end{table*}
+    \vspace{1.5em}
+\end{minipage}
+
+% This does not work
+% \begin{table*}[t]
+%     \captionsetup{position=above}
+%     \caption{End-to-end benchmarks}
+%     \centering    
+%     \resizebox{\textwidth}{!}{
+%     \input{table/e2e-benchmarks}
+%     }        
+%     \label{table:benchmark}
+% \end{table*}
 
 \noindent \textbf{End-to-end data motion acceleration.}
 Figure~\ref{fig:system:p2pdma} shows the interactions between accelerators, CPU, and Bump-in-the-Wire \drx when $Accelerator_{1}$ tries to communicate with $Accelerator_{2}$. Although Figure~\ref{fig:system:p2pdma} depicts the accelerator and its \drx as separate chips with separate DRAM modules, \drx can be integrated into the accelerator chip and share its physical DRAM modules. %Note that  to demonstrate how \drx can be easily integrated with existing accelerators.
@@ -917,7 +930,7 @@ Data movement is not the throughput bottleneck for the \emph{Multi-Axl} baseline
 \begin{figure}[t!]
     \centering
     \includegraphics[width=0.98\columnwidth]{figure/fianchetto/speedup-diff-drx-placements-pcie-switch.pdf}
-    \caption{Comparison of end-to-end latency speedup with different DRX placements: 
+    \caption[Comparison of end-to-end latency speedup with different DRX placements.]{Comparison of end-to-end latency speedup with different DRX placements. 
     %
     Integrated \drx integrates a shared \drx on the CPU. 
     %
@@ -988,7 +1001,7 @@ In other words, despite the luring benefits, the prohibitive level of engineerin
 \begin{figure}[t!]
     \centering
     \includegraphics[width=\linewidth]{figure/fianchetto/system-energy-reduction.pdf}
-    \caption{System-wide energy reduction, including host CPU cores, accelerators, and \drxs. 
+    \caption[System-wide energy reduction, including host CPU cores, accelerators, and \drxs.]{System-wide energy reduction, including host CPU cores, accelerators, and \drxs. 
     %
     Bump-in-the-Wire \drx achieves less reduction than Standalone \drx due to its internal PCIe multiplexer shown in Fig.~\ref{fig:drx-config-acc}.
     %
@@ -1287,7 +1300,7 @@ Second, the baselines are able to use more PCIe lanes to reduce bandwidth conten
 %
 Real-world applications span multiple domains, posing a challenge for end-to-end acceleration.
 %
-While the research community has explored accelerators across diverse domains~\cite{q100:asplos:2014, meet-the-walkers:isca:2013, doppiodb:fpl:2017,chiosa:pvldb:2022, acc-yolov3:iscas:2020, wfa:fpl:2021, genstore:asplos:2022, segram:isca:2022, meet-the-walker:micro:2013,murray:micro:2016,robox:isca:2018,pointacc:micro:2021,robomorphic:asplos:2021}, the adoption of these heterogeneous accelerator to accelerate a single end-to-end application is challenging.
+While the research community has explored accelerators across diverse domains~\cite{q100:asplos:2014, meet-the-walkers:isca:2013, doppiodb:fpl:2017,chiosa:pvldb:2022, acc-yolov3:iscas:2020, wfa:fpl:2021, genstore:asplos:2022, segram:isca:2022, meet-the-walkers:isca:2013,murray:micro:2016,robox:isca:2018,pointacc:micro:2021,robomorphic:asplos:2021}, the adoption of these heterogeneous accelerator to accelerate a single end-to-end application is challenging.
 %
 The challenge arises due to the diverse data formats generated and consumed by each accelerator.
 %

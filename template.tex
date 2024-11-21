@@ -121,6 +121,7 @@
 \usepackage{graphicx}
 \usepackage{subcaption}
 \usepackage{url}
+\Urlmuskip=0mu plus 1mu
 \usepackage{xspace}
 \usepackage{tikz}
 
@@ -169,10 +170,11 @@
 %   See: http://www.tex.ac.uk/cgi-bin/texfaq2html?label=hyperdupdest
 %   Note: This may not work correctly with all DVI viewers (i.e. Yap breaks).
 %   NOTE: hyperref will NOT work in draft mode, as noted above.
-% \usepackage[colorlinks=true, pdfstartview=FitV, 
-%             linkcolor=black, citecolor=black, 
-%             urlcolor=black, plainpages=false,
-%             pdfpagelabels]{hyperref}
+
+\usepackage[colorlinks=true, pdfstartview=FitV, 
+            linkcolor=black, citecolor=black, 
+            urlcolor=black, plainpages=false,
+            pdfpagelabels]{hyperref}
 % \hypersetup{ pdfauthor = {Your Name Here}, 
 %              pdftitle = {The Title of The Dissertation}, 
 %              pdfkeywords = {Keywords for Searching}, 
@@ -186,6 +188,7 @@
 % Sets citation format
 % and fixes up citations madness
 \usepackage{microtype}  % avoids citations that hang into the margin
+% \usepackage[numbers]{natbib}
 
 
 %% FOOTNOTE-MAGIC
@@ -321,6 +324,7 @@
 % \printindex %% Uncomment to display the index
 % \nocite{}  %% Put any references that you want to include in the bib 
 %               but haven't cited in the braces.
+%\bibliographystyle{plainnat}
 \bibliographystyle{alpha}  %% This is just my personal favorite style. 
 %                              There are many others.
 %\setlength{\bibleftmargin}{0.25in}  % indent each item
